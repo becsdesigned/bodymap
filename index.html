@@ -20,30 +20,28 @@
       z-index: 0;
     }
 
-    /* SVG overlay sits exactly over the photo */
-    #overlay {
+    /* ── dots ── */
+    .hotspot {
       position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .zone-shape {
-      pointer-events: all;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(180,180,180,0.6);
+      transform: translate(-50%, -50%);
       cursor: pointer;
-      fill: #0000ff;
-      fill-opacity: 0;
-      transition: fill-opacity 0.2s ease;
+      z-index: 20;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
     }
-
-    .zone-shape:hover {
-      fill-opacity: 0.12;
+    .hotspot:hover {
+      background: rgba(255,255,255,1);
+      border-color: rgba(100,100,100,0.8);
+      transform: translate(-50%, -50%) scale(1.5);
     }
-
-    .zone-shape.active {
-      fill-opacity: 0.18;
+    .hotspot.active {
+      background: #0000ff;
+      border-color: #0000ff;
+      transform: translate(-50%, -50%) scale(1.3);
     }
 
     /* ── top left panel ── */
@@ -201,36 +199,6 @@
 
   <img class="photo" src="https://i.imgur.com/0VYkGrB.png" alt="body map"/>
 
-  <!-- SVG overlay with clickable body region shapes -->
-  <!-- viewBox matches 1920x1080, shapes are drawn around subject position -->
-  <svg id="overlay" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-
-    <!-- scalp / hair: top of head -->
-    <ellipse class="zone-shape" data-zone="scalp"
-      cx="960" cy="108" rx="105" ry="95"/>
-
-    <!-- face -->
-    <ellipse class="zone-shape" data-zone="face"
-      cx="968" cy="230" rx="85" ry="95"/>
-
-    <!-- neck -->
-    <ellipse class="zone-shape" data-zone="neck"
-      cx="962" cy="360" rx="55" ry="55"/>
-
-    <!-- torso / gut: chest down to waist -->
-    <ellipse class="zone-shape" data-zone="torso"
-      cx="940" cy="530" rx="130" ry="150"/>
-
-    <!-- arms: right arm area (her left, our right in photo) -->
-    <ellipse class="zone-shape" data-zone="arms"
-      cx="1120" cy="460" rx="70" ry="130"/>
-
-    <!-- legs: lower half -->
-    <ellipse class="zone-shape" data-zone="legs"
-      cx="940" cy="830" rx="120" ry="180"/>
-
-  </svg>
-
   <div class="floating-panel">
     <div class="panel-title">Body Map.</div>
     <div class="panel-subtitle">a research index</div>
@@ -248,6 +216,13 @@
   <a class="floating-back" href="https://becsdesigned.com">← becs designed</a>
   <div class="floating-tr">click any point to explore</div>
   <div class="floating-br">broward, fl</div>
+
+  <div class="hotspot" data-zone="scalp"></div>
+  <div class="hotspot" data-zone="face"></div>
+  <div class="hotspot" data-zone="neck"></div>
+  <div class="hotspot" data-zone="torso"></div>
+  <div class="hotspot" data-zone="arms"></div>
+  <div class="hotspot" data-zone="legs"></div>
 
   <div class="card" id="card">
     <div class="card-label" id="card-label"></div>
@@ -292,38 +267,43 @@ const zones = {
     {name:'Vascular health',href:'#legs/vascular'}]}
 };
 
+const hotspotPositions = {
+  scalp: { x: 0.500, y: 0.10 },
+  face:  { x: 0.508, y: 0.19 },
+  neck:  { x: 0.503, y: 0.29 },
+  torso: { x: 0.485, y: 0.48 },
+  arms:  { x: 0.595, y: 0.38 },
+  legs:  { x: 0.485, y: 0.78 },
+};
+
 const card     = document.getElementById('card');
 const cardLine = document.getElementById('card-line');
 let activeZone = null;
 
-function getShapeCenter(shape) {
-  const svgEl = document.getElementById('overlay');
-  const rect  = svgEl.getBoundingClientRect();
-  const vbW = 1920, vbH = 1080;
-  // because preserveAspectRatio=xMidYMid slice, we need to find the actual scale
-  const scaleX = rect.width  / vbW;
-  const scaleY = rect.height / vbH;
-  const scale  = Math.max(scaleX, scaleY);
-  const offsetX = (rect.width  - vbW * scale) / 2;
-  const offsetY = (rect.height - vbH * scale) / 2;
-  const cx = parseFloat(shape.getAttribute('cx') || 0);
-  const cy = parseFloat(shape.getAttribute('cy') || 0);
-  return {
-    x: rect.left + offsetX + cx * scale,
-    y: rect.top  + offsetY + cy * scale
-  };
+function repositionHotspots() {
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+  document.querySelectorAll('.hotspot').forEach(dot => {
+    const p = hotspotPositions[dot.dataset.zone];
+    if (!p) return;
+    dot.style.left = (p.x * W) + 'px';
+    dot.style.top  = (p.y * H) + 'px';
+  });
 }
 
-function openCard(zone, shape) {
+window.addEventListener('resize', () => { repositionHotspots(); if (activeZone) closeCard(); });
+repositionHotspots();
+
+function openCard(zone, dot) {
   const z = zones[zone];
   document.getElementById('card-label').textContent = z.label;
   document.getElementById('card-title').textContent = z.title;
   document.getElementById('card-topics').innerHTML = z.topics
     .map(t => `<li class="topic-item"><a href="${t.href}">${t.name}</a></li>`).join('');
 
-  const center = getShapeCenter(shape);
-  const dotCX  = center.x;
-  const dotCY  = center.y;
+  const dotRect = dot.getBoundingClientRect();
+  const dotCX = dotRect.left + dotRect.width / 2;
+  const dotCY = dotRect.top  + dotRect.height / 2;
 
   card.style.visibility = 'hidden';
   card.style.display = 'block';
@@ -336,7 +316,7 @@ function openCard(zone, shape) {
   let cardLeft = dotCX - cardW / 2;
   let cardTop  = dotCY - cardH - gap;
   cardLeft = Math.max(8, Math.min(cardLeft, window.innerWidth - cardW - 8));
-  if (cardTop < 8) cardTop = dotCY + 30 + gap;
+  if (cardTop < 8) cardTop = dotCY + 20 + gap;
 
   card.style.left = cardLeft + 'px';
   card.style.top  = cardTop  + 'px';
@@ -353,41 +333,41 @@ function openCard(zone, shape) {
 function closeCard() {
   card.classList.remove('visible');
   cardLine.classList.remove('visible');
-  document.querySelectorAll('.zone-shape').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   activeZone = null;
 }
 
-document.querySelectorAll('.zone-shape').forEach(shape => {
-  shape.addEventListener('click', e => {
+document.querySelectorAll('.hotspot').forEach(dot => {
+  dot.addEventListener('click', e => {
     e.stopPropagation();
-    const zone = shape.dataset.zone;
+    const zone = dot.dataset.zone;
     if (activeZone === zone) { closeCard(); return; }
     activeZone = zone;
-    document.querySelectorAll('.zone-shape').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
     document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    shape.classList.add('active');
+    dot.classList.add('active');
     document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-    openCard(zone, shape);
+    openCard(zone, dot);
   });
 });
 
 document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', () => {
-    const zone  = item.dataset.zone;
-    const shape = document.querySelector(`.zone-shape[data-zone="${zone}"]`);
+    const zone = item.dataset.zone;
+    const dot  = document.querySelector(`.hotspot[data-zone="${zone}"]`);
     if (activeZone === zone) { closeCard(); return; }
     activeZone = zone;
-    document.querySelectorAll('.zone-shape').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
     document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    shape?.classList.add('active');
+    dot?.classList.add('active');
     item.classList.add('active');
-    if (shape) openCard(zone, shape);
+    if (dot) openCard(zone, dot);
   });
 });
 
 document.addEventListener('click', e => {
-  if (!e.target.closest('.zone-shape') && !e.target.closest('.card') && !e.target.closest('.zone-item')) closeCard();
+  if (!e.target.closest('.hotspot') && !e.target.closest('.card') && !e.target.closest('.zone-item')) closeCard();
 });
 card.addEventListener('click', e => e.stopPropagation());
 </script>
