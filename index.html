@@ -9,7 +9,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; background: #f0efeb; }
 
-    /* ── photo — shifts left when panel opens ── */
+    /* ── photo shifts left when panel opens ── */
     .photo {
       position: fixed;
       inset: 0;
@@ -19,13 +19,10 @@
       object-position: center center;
       display: block;
       z-index: 0;
-      transition: width 0.4s ease, left 0.4s ease;
+      transition: width 0.4s ease;
     }
-
     body.panel-open .photo {
       width: 52vw;
-      left: 0;
-      object-position: center center;
     }
 
     /* ── hotspots ── */
@@ -36,15 +33,9 @@
       transform: translate(-50%, -50%);
       cursor: crosshair;
       z-index: 20;
-      transition: left 0.4s ease;
     }
 
-    body.panel-open .hotspot {
-      /* scale hotspot x position to match photo shrink */
-      left: calc(var(--hx) * 0.52) !important;
-    }
-
-    /* ── floating left panel ── */
+    /* ── floating left nav ── */
     .floating-panel {
       position: fixed;
       left: 28px;
@@ -81,7 +72,6 @@
       font-family: 'Fragment Mono', monospace;
       font-size: 0.5rem;
       letter-spacing: 0.06em;
-      font-weight: 400;
       color: rgba(0,0,0,0.5);
       padding: 5px 0;
       border-bottom: 0.5px solid rgba(0,0,0,0.06);
@@ -116,7 +106,6 @@
       text-transform: uppercase;
       color: rgba(0,0,0,0.22);
       z-index: 30;
-      transition: right 0.4s ease;
     }
     .floating-tr {
       position: fixed;
@@ -128,77 +117,11 @@
       font-style: italic;
       color: rgba(0,0,0,0.28);
       z-index: 30;
+      transition: opacity 0.3s;
     }
+    body.panel-open .floating-tr { opacity: 0; pointer-events: none; }
 
-    /* ── zone card ── */
-    .card {
-      position: fixed;
-      right: 160px;
-      width: 220px;
-      background: #f5f2eb;
-      border: 1px solid rgba(255,0,0,0.15);
-      padding: 16px 18px 12px;
-      z-index: 200;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: all;
-    }
-    .card-line {
-      position: fixed;
-      height: 1.5px;
-      background: rgba(255,0,0,0.2);
-      pointer-events: none;
-      z-index: 99;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .card-line.visible { opacity: 1; }
-
-    .card-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #ff0000;
-      opacity: 0.6;
-      margin-bottom: 5px;
-    }
-    .card-title {
-      font-family: 'Cormorant', serif;
-      font-size: 1.25rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      margin-bottom: 12px;
-      line-height: 1.15;
-    }
-    .topic-list { list-style: none; }
-    .topic-item a {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.6);
-      text-decoration: none;
-      padding: 6px 0;
-      border-top: 0.5px solid rgba(0,0,0,0.07);
-      transition: color 0.15s, padding-left 0.15s;
-      cursor: pointer;
-    }
-    .topic-item:last-child a { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
-    .topic-item a:hover { color: #ff0000; padding-left: 5px; }
-    .topic-item a::before { content: '→'; opacity: 0.35; font-size: 0.5rem; }
-
-    /* ── full info panel ── */
+    /* ── sliding panel ── */
     .info-panel {
       position: fixed;
       top: 0;
@@ -207,113 +130,148 @@
       height: 100vh;
       background: #f5f2eb;
       border-left: 0.5px solid rgba(0,0,0,0.1);
-      z-index: 50;
+      z-index: 40;
       transform: translateX(100%);
       transition: transform 0.4s ease;
-      overflow-y: auto;
+      display: flex;
+    }
+    .info-panel.open { transform: translateX(0); }
+
+    /* left column: topic list */
+    .panel-topics {
+      width: 200px;
+      flex-shrink: 0;
+      border-right: 0.5px solid rgba(0,0,0,0.08);
+      padding: 28px 0;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
-    .info-panel::-webkit-scrollbar { width: 0; }
+    .panel-topics::-webkit-scrollbar { width: 0; }
 
-    .info-panel.open {
-      transform: translateX(0);
-    }
-
-    .info-panel-bar {
-      position: sticky;
-      top: 0;
-      background: #f5f2eb;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .info-panel-zone {
+    .panel-zone-label {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
       opacity: 0.6;
+      padding: 0 20px 16px;
+      display: block;
     }
 
-    .info-panel-close {
+    .panel-zone-title {
+      font-family: 'Cormorant', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #0a0a0a;
+      padding: 0 20px 20px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .panel-topic-list {
+      list-style: none;
+      padding-top: 8px;
+      flex: 1;
+    }
+
+    .panel-topic-item {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.46rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+      padding: 9px 20px;
+      cursor: pointer;
+      border-bottom: 0.5px solid rgba(0,0,0,0.05);
+      transition: color 0.15s, padding-left 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .panel-topic-item::before { content: '—'; opacity: 0.2; font-size: 0.4rem; flex-shrink: 0; }
+    .panel-topic-item:hover { color: #000; padding-left: 26px; }
+    .panel-topic-item.active {
+      color: #ff0000;
+      padding-left: 26px;
+    }
+    .panel-topic-item.active::before { opacity: 1; }
+
+    .panel-close-btn {
+      display: block;
+      margin: auto 20px 0;
+      padding-top: 24px;
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.35);
+      color: rgba(0,0,0,0.28);
       background: none;
       border: none;
       cursor: pointer;
+      text-align: left;
       transition: color 0.2s;
     }
-    .info-panel-close:hover { color: #000; }
+    .panel-close-btn:hover { color: #000; }
 
-    .info-panel-body {
-      padding: 40px 32px 60px;
+    /* right column: topic content */
+    .panel-content {
       flex: 1;
+      overflow-y: auto;
+      padding: 40px 36px 60px;
     }
+    .panel-content::-webkit-scrollbar { width: 0; }
 
-    .info-panel-title {
+    .content-title {
       font-family: 'Cormorant', serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
       line-height: 1.1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-
-    .info-panel-subtitle {
+    .content-label {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
+      color: rgba(0,0,0,0.28);
       margin-bottom: 36px;
+      display: block;
     }
-
-    .info-section {
-      margin-bottom: 36px;
-    }
-
-    .info-section-label {
+    .content-section { margin-bottom: 32px; }
+    .content-section-label {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
       opacity: 0.55;
-      margin-bottom: 12px;
       display: block;
+      margin-bottom: 10px;
     }
-
-    .info-section-text {
+    .content-text {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1rem;
       line-height: 1.85;
-      color: rgba(0,0,0,0.65);
+      color: rgba(0,0,0,0.62);
       font-weight: 300;
     }
-
-    .info-links {
-      list-style: none;
-      margin-top: 8px;
+    .content-divider {
+      border: none;
+      border-top: 0.5px solid rgba(0,0,0,0.08);
+      margin: 28px 0;
     }
-
-    .info-links li {
+    .content-links { list-style: none; }
+    .content-links li {
       border-top: 0.5px solid rgba(0,0,0,0.07);
     }
-    .info-links li:last-child {
-      border-bottom: 0.5px solid rgba(0,0,0,0.07);
-    }
-
-    .info-links a {
+    .content-links li:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
+    .content-links a {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -322,37 +280,19 @@
       font-size: 0.46rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.55);
+      color: rgba(0,0,0,0.5);
       text-decoration: none;
       transition: color 0.15s, padding-left 0.15s;
     }
-    .info-links a:hover { color: #ff0000; padding-left: 6px; }
-    .info-links a::after { content: '↗'; opacity: 0.4; font-size: 0.5rem; }
-
-    .info-divider {
-      border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.08);
-      margin: 32px 0;
+    .content-links a:hover { color: #ff0000; padding-left: 6px; }
+    .content-links a::after { content: '↗'; opacity: 0.4; }
+    .content-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: rgba(0,0,0,0.28);
+      font-style: italic;
     }
-
-    /* back to zone card link */
-    .info-back-zone {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.35);
-      cursor: pointer;
-      margin-bottom: 32px;
-      background: none;
-      border: none;
-      padding: 0;
-      transition: color 0.2s;
-    }
-    .info-back-zone:hover { color: #ff0000; }
   </style>
 </head>
 <body>
@@ -384,20 +324,17 @@
   <div class="hotspot" data-zone="arms"></div>
   <div class="hotspot" data-zone="legs"></div>
 
-  <div class="card" id="card">
-    <div class="card-label" id="card-label"></div>
-    <div class="card-title" id="card-title"></div>
-    <ul class="topic-list" id="card-topics"></ul>
-  </div>
-  <div class="card-line" id="card-line"></div>
-
-  <!-- full info panel -->
+  <!-- sliding panel -->
   <div class="info-panel" id="info-panel">
-    <div class="info-panel-bar">
-      <span class="info-panel-zone" id="info-panel-zone"></span>
-      <button class="info-panel-close" id="info-panel-close">close ×</button>
+    <!-- left: topic list -->
+    <div class="panel-topics">
+      <span class="panel-zone-label" id="panel-zone-label"></span>
+      <span class="panel-zone-title" id="panel-zone-title"></span>
+      <ul class="panel-topic-list" id="panel-topic-list"></ul>
+      <button class="panel-close-btn" id="panel-close-btn">← close</button>
     </div>
-    <div class="info-panel-body" id="info-panel-body"></div>
+    <!-- right: content -->
+    <div class="panel-content" id="panel-content"></div>
   </div>
 
 <script>
@@ -405,35 +342,22 @@ const zones = {
   scalp: { label:'01 — scalp', title:'Scalp & Hair', topics:[
     { name:'Trichology research', slug:'trichology',
       notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.',
-      links:[
-        {text:'Trichological Society',href:'https://www.trichological.com'},
-        {text:'Scalp health journal',href:'#'},
-        {text:'Specialist notes',href:'#'},
-      ]},
+      links:[{text:'Trichological Society',href:'https://www.trichological.com'},{text:'Scalp health journal',href:'#'},{text:'Specialist notes',href:'#'}]},
     { name:'Scalp photos & progress', slug:'photos',
       notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.',
       links:[]},
     { name:'Curly hair method', slug:'curly-method',
       notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.',
-      links:[
-        {text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'},
-        {text:'My curl profile',href:'#'},
-      ]},
+      links:[{text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'},{text:'My curl profile',href:'#'}]},
     { name:'Shampoo & co-wash', slug:'routine',
       notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.',
-      links:[
-        {text:'Current shampoo',href:'#'},
-        {text:'Co-wash notes',href:'#'},
-      ]},
+      links:[{text:'Current shampoo',href:'#'},{text:'Co-wash notes',href:'#'}]},
     { name:'Porosity & moisture', slug:'moisture',
       notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything about how you care for it.',
       links:[]},
     { name:'Products', slug:'products',
       notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.',
-      links:[
-        {text:'Current routine products',href:'#'},
-        {text:'Ingredient checker',href:'https://www.cosdna.com'},
-      ]},
+      links:[{text:'Current routine products',href:'#'},{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
   ]},
   face: { label:'02 — face', title:'Face & Skin', topics:[
     { name:'AM routine', slug:'am',
@@ -444,18 +368,13 @@ const zones = {
       links:[]},
     { name:'Active ingredients', slug:'actives',
       notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide. What they do, how to layer them, and what to avoid combining.',
-      links:[
-        {text:'INCIDecoder — ingredient lookup',href:'https://incidecoder.com'},
-        {text:'Paula\'s Choice ingredient dictionary',href:'https://www.paulaschoice.com/ingredient-dictionary'},
-      ]},
+      links:[{text:'INCIDecoder',href:'https://incidecoder.com'},{text:'Paula\'s Choice ingredient dictionary',href:'https://www.paulaschoice.com/ingredient-dictionary'}]},
     { name:'SPF research', slug:'spf',
       notes:'SPF research, what you\'ve tested, and what works for your skin tone. Notes on UVA/UVB protection, reapplication habits, and formulas that don\'t pill.',
       links:[]},
     { name:'Hyperpigmentation', slug:'pigmentation',
       notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t, timelines, and ingredients specifically helpful for melanin-rich skin.',
-      links:[
-        {text:'Hyperpigmentation research',href:'#'},
-      ]},
+      links:[{text:'Hyperpigmentation research',href:'#'}]},
   ]},
   neck: { label:'03 — neck', title:'Neck & Posture', topics:[
     { name:'Posture research', slug:'posture',
@@ -471,9 +390,7 @@ const zones = {
   torso: { label:'04 — gut', title:'Gut & Digestion', topics:[
     { name:'Microbiome research', slug:'microbiome',
       notes:'Research on gut microbiome health — diversity, prebiotics vs probiotics, and what you\'ve learned about how your gut affects skin, mood, and immunity.',
-      links:[
-        {text:'Zoe Science & Nutrition',href:'https://joinzoe.com'},
-      ]},
+      links:[{text:'Zoe Science & Nutrition',href:'https://joinzoe.com'}]},
     { name:'Food sensitivities', slug:'sensitivities',
       notes:'Personal food sensitivity notes — what you\'ve tested, eliminated, reintroduced, and how your body responded. Include any formal testing results.',
       links:[]},
@@ -523,12 +440,13 @@ const hotspotPositions = {
   legs:  { x: 0.485, y: 0.78 },
 };
 
-const card       = document.getElementById('card');
-const cardLine   = document.getElementById('card-line');
-const infoPanel  = document.getElementById('info-panel');
-const infoPanelZone = document.getElementById('info-panel-zone');
-const infoPanelBody = document.getElementById('info-panel-body');
-let activeZone   = null;
+const infoPanel     = document.getElementById('info-panel');
+const panelZoneLabel = document.getElementById('panel-zone-label');
+const panelZoneTitle = document.getElementById('panel-zone-title');
+const panelTopicList = document.getElementById('panel-topic-list');
+const panelContent   = document.getElementById('panel-content');
+let activeZone = null;
+let activeTopic = null;
 
 function repositionHotspots() {
   const W = window.innerWidth;
@@ -536,165 +454,120 @@ function repositionHotspots() {
   document.querySelectorAll('.hotspot').forEach(dot => {
     const p = hotspotPositions[dot.dataset.zone];
     if (!p) return;
-    const px = p.x * W;
-    dot.style.left = px + 'px';
-    dot.style.setProperty('--hx', p.x);
+    dot.style.left = (p.x * W) + 'px';
     dot.style.top  = (p.y * H) + 'px';
   });
 }
-
-window.addEventListener('resize', () => { repositionHotspots(); if (activeZone) closeCard(); });
+window.addEventListener('resize', repositionHotspots);
 repositionHotspots();
 
-function openCard(zone, dot) {
+function openZone(zone) {
   const z = zones[zone];
-  document.getElementById('card-label').textContent = z.label;
-  document.getElementById('card-title').textContent = z.title;
-  document.getElementById('card-topics').innerHTML = z.topics
-    .map(t => `<li class="topic-item"><a data-zone="${zone}" data-slug="${t.slug}" href="#" class="topic-link">${t.name}</a></li>`).join('');
+  activeZone = zone;
+  activeTopic = z.topics[0].slug;
+
+  // update left sidebar zone list
+  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
+  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
+  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+  document.querySelector(`.hotspot[data-zone="${zone}"]`)?.classList.add('active');
+
+  // populate panel topic list
+  panelZoneLabel.textContent = z.label;
+  panelZoneTitle.textContent = z.title;
+  panelTopicList.innerHTML = z.topics.map(t =>
+    `<li class="panel-topic-item${t.slug === activeTopic ? ' active' : ''}" data-slug="${t.slug}">${t.name}</li>`
+  ).join('');
 
   // attach topic click handlers
-  document.querySelectorAll('#card-topics a').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      openInfoPanel(a.dataset.zone, a.dataset.slug);
-    });
+  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item => {
+    item.addEventListener('click', () => loadTopic(zone, item.dataset.slug));
   });
 
-  const dotRect = dot.getBoundingClientRect();
-  const dotCY   = dotRect.top + dotRect.height / 2;
-  const dotRight = dotRect.right;
+  // open panel & shift photo
+  infoPanel.classList.add('open');
+  document.body.classList.add('panel-open');
 
-  card.style.visibility = 'hidden';
-  card.style.display = 'block';
-  const cardH = card.offsetHeight;
-  const cardW = card.offsetWidth;
-  card.style.visibility = '';
-  card.style.display = '';
-
-  let cardTop = dotCY - cardH / 2;
-  cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cardH - 16));
-  card.style.top = cardTop + 'px';
-
-  const cardLeft  = window.innerWidth - 160 - cardW;
-  const lineLeft  = dotRight + 8;
-  const lineWidth = Math.max(0, cardLeft - dotRight - 8);
-
-  cardLine.style.top    = dotCY + 'px';
-  cardLine.style.left   = lineLeft + 'px';
-  cardLine.style.width  = lineWidth + 'px';
-
-  card.classList.add('visible');
-  cardLine.classList.add('visible');
+  // load first topic
+  loadTopic(zone, activeTopic, false);
 }
 
-function closeCard() {
-  card.classList.remove('visible');
-  cardLine.classList.remove('visible');
-  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  activeZone = null;
-}
-
-function openInfoPanel(zone, slug) {
+function loadTopic(zone, slug, scrollTop = true) {
   const z = zones[zone];
   const topic = z.topics.find(t => t.slug === slug);
   if (!topic) return;
+  activeTopic = slug;
 
-  // highlight active topic in card
-  document.querySelectorAll('.topic-link').forEach(a => {
-    a.style.color = a.dataset.slug === slug ? '#ff0000' : '';
+  // highlight active topic
+  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.slug === slug);
   });
 
-  infoPanelZone.textContent = z.label + ' — ' + topic.name;
-
   const linksHTML = topic.links.length > 0
-    ? `<ul class="info-links">${topic.links.map(l =>
+    ? `<ul class="content-links">${topic.links.map(l =>
         `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`
       ).join('')}</ul>`
     : '';
 
-  infoPanelBody.innerHTML = `
-    <div class="info-panel-title">${topic.name}</div>
-    <div class="info-panel-subtitle">${z.label}</div>
+  panelContent.innerHTML = `
+    <div class="content-title">${topic.name}</div>
+    <span class="content-label">${z.label}</span>
 
-    <div class="info-section">
-      <span class="info-section-label">Notes</span>
-      <p class="info-section-text">${topic.notes}</p>
+    <div class="content-section">
+      <span class="content-section-label">Notes</span>
+      <p class="content-text">${topic.notes}</p>
     </div>
 
     ${topic.links.length > 0 ? `
-    <hr class="info-divider"/>
-    <div class="info-section">
-      <span class="info-section-label">Links &amp; resources</span>
-      ${linksHTML}
-    </div>` : ''}
+      <hr class="content-divider"/>
+      <div class="content-section">
+        <span class="content-section-label">Links &amp; resources</span>
+        ${linksHTML}
+      </div>` : ''}
 
-    <hr class="info-divider"/>
-    <div class="info-section">
-      <span class="info-section-label">Add your content here</span>
-      <p class="info-section-text" style="opacity:0.4;">Photos, videos, product lists, journal entries, and links will live in this section once you build out the individual topic pages.</p>
+    <hr class="content-divider"/>
+    <div class="content-section">
+      <span class="content-section-label">Your content</span>
+      <p class="content-placeholder">Photos, videos, product lists, journal entries, and links will live here as you build out this section.</p>
     </div>
   `;
 
-  infoPanel.classList.add('open');
-  document.body.classList.add('panel-open');
-  // scroll panel back to top on swap
-  infoPanel.scrollTop = 0;
+  if (scrollTop) panelContent.scrollTop = 0;
 }
 
-function closeInfoPanel() {
+function closePanel() {
   infoPanel.classList.remove('open');
   document.body.classList.remove('panel-open');
+  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
+  activeZone = null;
+  activeTopic = null;
 }
 
-document.getElementById('info-panel-close').addEventListener('click', () => {
-  closeInfoPanel();
-  closeCard();
-});
+document.getElementById('panel-close-btn').addEventListener('click', closePanel);
 
 document.querySelectorAll('.hotspot').forEach(dot => {
   dot.addEventListener('click', e => {
     e.stopPropagation();
-    // close info panel if open
-    if (document.body.classList.contains('panel-open')) {
-      closeInfoPanel();
-    }
     const zone = dot.dataset.zone;
-    if (activeZone === zone) { closeCard(); return; }
-    activeZone = zone;
-    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    dot.classList.add('active');
-    document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-    openCard(zone, dot);
+    if (activeZone === zone) { closePanel(); return; }
+    openZone(zone);
   });
 });
 
 document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', () => {
-    if (document.body.classList.contains('panel-open')) closeInfoPanel();
     const zone = item.dataset.zone;
-    const dot  = document.querySelector(`.hotspot[data-zone="${zone}"]`);
-    if (activeZone === zone) { closeCard(); return; }
-    activeZone = zone;
-    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    dot?.classList.add('active');
-    item.classList.add('active');
-    if (dot) openCard(zone, dot);
+    if (activeZone === zone) { closePanel(); return; }
+    openZone(zone);
   });
 });
 
 document.addEventListener('click', e => {
-  if (!e.target.closest('.hotspot') && !e.target.closest('.card') &&
-      !e.target.closest('.zone-item') && !e.target.closest('.info-panel')) {
-    closeCard();
-    closeInfoPanel();
+  if (!e.target.closest('.hotspot') && !e.target.closest('.info-panel') && !e.target.closest('.zone-item') && !e.target.closest('.floating-panel')) {
+    closePanel();
   }
 });
-card.addEventListener('click', e => e.stopPropagation());
 </script>
 </body>
 </html>
