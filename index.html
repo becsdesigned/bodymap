@@ -116,7 +116,7 @@
     /* card always on the right, slides in horizontally */
     .card {
       position: fixed;
-      right: 40px;
+      right: 160px;
       width: 220px;
       background: #f5f2eb;
       border: 1px solid rgba(255,0,0,0.15);
@@ -136,7 +136,7 @@
     /* horizontal connector line */
     .card-line {
       position: fixed;
-      height: 0.5px;
+      height: 1.5px;
       background: rgba(255,0,0,0.2);
       pointer-events: none;
       z-index: 99;
@@ -307,7 +307,7 @@ function openCard(zone, dot) {
   card.style.top = cardTop + 'px';
 
   // horizontal connector: from right of hotspot to left edge of card
-  const cardLeft = window.innerWidth - 40 - cardW;
+  const cardLeft = window.innerWidth - 160 - cardW;
   const lineLeft  = dotRight + 8;
   const lineWidth = Math.max(0, cardLeft - dotRight - 8);
   const lineY     = dotCY;
