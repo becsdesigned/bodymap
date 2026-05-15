@@ -9,7 +9,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; background: #f0efeb; }
 
-    /* ── photo shifts left when panel opens ── */
+    /* ── photo ── */
     .photo {
       position: fixed;
       inset: 0;
@@ -19,117 +19,118 @@
       object-position: center center;
       display: block;
       z-index: 0;
-      transition: width 0.4s ease;
+      transition: width 0.45s ease, left 0.45s ease;
     }
-    body.panel-open .photo { width: 50vw; }
-
-    /* ── hotspots ── */
-    .hotspot {
-      position: fixed;
-      width: 40px;
-      height: 40px;
-      transform: translate(-50%, -50%);
-      cursor: crosshair;
-      z-index: 20;
+    body.panel-open .photo {
+      width: 55vw;
     }
 
-    /* ── floating top-left nav ── */
-    .floating-panel {
+    /* ── SVG line layer ── */
+    #line-svg {
       position: fixed;
-      left: 28px;
-      top: 28px;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .connector-line {
+      stroke: rgba(255,0,0,0.35);
+      stroke-width: 1;
+      fill: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .connector-line.visible { opacity: 1; }
+
+    /* ── left column ── */
+    .left-col {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 160px;
       z-index: 30;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 20px 24px;
     }
-    .panel-title {
+
+    .col-title {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 400;
       letter-spacing: 0.08em;
-      line-height: 1.15;
       color: #1a1a1a;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
-    .panel-subtitle {
+    .col-subtitle {
       font-family: 'Cormorant', serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 300;
       font-style: italic;
-      color: rgba(0,0,0,0.38);
-      margin-bottom: 20px;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 28px;
     }
-    .panel-section {
+    .col-section {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
-      letter-spacing: 0.18em;
+      font-size: 0.38rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
+      color: rgba(0,0,0,0.28);
       margin-bottom: 8px;
     }
-    .zone-list { list-style: none; }
+
+    .zone-list { list-style: none; flex: 1; }
     .zone-item {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.5rem;
-      letter-spacing: 0.06em;
-      color: rgba(0,0,0,0.5);
-      padding: 5px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.06);
+      font-size: 0.48rem;
+      letter-spacing: 0.05em;
+      color: rgba(0,0,0,0.45);
+      padding: 6px 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.05);
       cursor: pointer;
-      transition: color 0.15s, padding-left 0.15s;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
     }
-    .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.06); }
-    .zone-item:hover { color: #000; padding-left: 4px; }
+    .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
+    .zone-item:hover { color: #000; }
     .zone-item.active { color: #ff0000; }
+    .zone-item .zone-arrow {
+      font-size: 0.4rem;
+      opacity: 0;
+      transition: opacity 0.15s;
+      color: #ff0000;
+    }
+    .zone-item.active .zone-arrow { opacity: 1; }
 
-    /* ── corner labels ── */
-    .floating-back {
-      position: fixed;
-      left: 28px;
-      bottom: 24px;
+    .col-back {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.28);
+      color: rgba(0,0,0,0.22);
       text-decoration: none;
-      z-index: 30;
+      margin-top: auto;
+      padding-top: 20px;
       transition: color 0.2s;
     }
-    .floating-back:hover { color: rgba(0,0,0,0.6); }
-    .floating-br {
-      position: fixed;
-      right: 28px;
-      bottom: 24px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.22);
-      z-index: 30;
-    }
-    .floating-tr {
-      position: fixed;
-      right: 28px;
-      top: 24px;
-      font-family: 'Cormorant', serif;
-      font-size: 0.85rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(0,0,0,0.28);
-      z-index: 30;
-      transition: opacity 0.3s;
-    }
-    body.panel-open .floating-tr { opacity: 0; pointer-events: none; }
+    .col-back:hover { color: rgba(0,0,0,0.55); }
 
-    /* ── card: transparent, floats on left side of photo ── */
+    /* ── floating card — between line and hotspot ── */
     .card {
       position: fixed;
-      left: 28px;
-      width: 200px;
-      z-index: 100;
+      width: 180px;
+      z-index: 50;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(6px);
+      transform: translateY(4px);
       transition: opacity 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
     }
     .card.visible {
       opacity: 1;
@@ -140,63 +141,59 @@
 
     .card-label {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
-      opacity: 0.7;
-      margin-bottom: 4px;
+      opacity: 0.65;
+      margin-bottom: 3px;
     }
     .card-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
       margin-bottom: 10px;
       line-height: 1.1;
     }
-    .topic-list { list-style: none; }
-    .topic-item a {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .card-open-hint {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.06em;
+      font-size: 0.38rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.55);
-      text-decoration: none;
-      padding: 5px 0;
-      border-top: 0.5px solid rgba(0,0,0,0.07);
-      transition: color 0.15s, padding-left 0.15s;
-      cursor: pointer;
+      color: rgba(0,0,0,0.3);
+      transition: color 0.15s;
     }
-    .topic-item:last-child a { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
-    .topic-item a:hover { color: #ff0000; padding-left: 5px; }
-    .topic-item a::before { content: '→'; opacity: 0.3; font-size: 0.45rem; }
+    .card:hover .card-open-hint { color: #ff0000; }
+    .card-topic-count {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.38rem;
+      letter-spacing: 0.1em;
+      color: rgba(0,0,0,0.3);
+      margin-bottom: 6px;
+    }
 
-    /* ── sliding panel: transparent overlay on right half ── */
+    /* ── right panel ── */
     .info-panel {
       position: fixed;
       top: 0;
       right: 0;
-      width: 50vw;
+      width: 45vw;
       height: 100vh;
       z-index: 40;
       transform: translateX(100%);
       transition: transform 0.4s ease;
       display: flex;
       overflow: hidden;
-      /* no background — fully transparent */
     }
     .info-panel.open { transform: translateX(0); }
 
-    /* left col: topic list — transparent */
+    /* topic list col */
     .panel-topics {
-      width: 180px;
+      width: 175px;
       flex-shrink: 0;
-      padding: 32px 0 32px 28px;
+      padding: 32px 0 32px 24px;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -205,39 +202,36 @@
 
     .panel-zone-label {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
       opacity: 0.6;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       display: block;
     }
     .panel-zone-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: block;
       line-height: 1.2;
-      border-bottom: 0.5px solid rgba(0,0,0,0.1);
-      padding-bottom: 16px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+      padding-bottom: 14px;
     }
 
-    /* body zone navigation inside panel */
-    .panel-body-nav {
-      list-style: none;
-      margin-bottom: 24px;
-    }
+    /* body nav in panel */
+    .panel-body-nav { list-style: none; margin-bottom: 16px; }
     .panel-body-nav-item {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.44rem;
+      font-size: 0.4rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
-      padding: 4px 0;
+      color: rgba(0,0,0,0.28);
+      padding: 3px 0;
       cursor: pointer;
       transition: color 0.15s;
     }
@@ -246,56 +240,53 @@
 
     .panel-nav-divider {
       border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.08);
-      margin-bottom: 16px;
+      border-top: 0.5px solid rgba(0,0,0,0.07);
+      margin-bottom: 14px;
     }
 
-    .panel-topic-list {
-      list-style: none;
-      flex: 1;
-    }
+    .panel-topic-list { list-style: none; flex: 1; }
     .panel-topic-item {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.06em;
+      font-size: 0.44rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.45);
+      color: rgba(0,0,0,0.4);
       padding: 7px 0;
       cursor: pointer;
       border-bottom: 0.5px solid rgba(0,0,0,0.05);
       transition: color 0.15s, padding-left 0.15s;
     }
-    .panel-topic-item:hover { color: #000; padding-left: 6px; }
-    .panel-topic-item.active { color: #ff0000; padding-left: 6px; }
+    .panel-topic-item:hover { color: #000; padding-left: 5px; }
+    .panel-topic-item.active { color: #ff0000; padding-left: 5px; }
 
     .panel-close-btn {
       display: block;
       margin-top: 24px;
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
+      color: rgba(0,0,0,0.22);
       background: none;
       border: none;
       cursor: pointer;
-      text-align: left;
       padding: 0;
       transition: color 0.2s;
+      text-align: left;
     }
     .panel-close-btn:hover { color: #000; }
 
-    /* right col: content — transparent */
+    /* content col */
     .panel-content {
       flex: 1;
       overflow-y: auto;
-      padding: 32px 32px 60px 24px;
+      padding: 32px 28px 60px 20px;
     }
     .panel-content::-webkit-scrollbar { width: 0; }
 
     .content-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
@@ -304,139 +295,162 @@
     }
     .content-label {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
-      margin-bottom: 32px;
+      color: rgba(0,0,0,0.22);
+      margin-bottom: 28px;
       display: block;
     }
-    .content-section { margin-bottom: 28px; }
+    .content-section { margin-bottom: 26px; }
     .content-section-label {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
+      font-size: 0.38rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
-      opacity: 0.55;
+      opacity: 0.5;
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .content-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.85;
-      color: rgba(0,0,0,0.6);
+      color: rgba(0,0,0,0.58);
       font-weight: 300;
     }
     .content-divider {
       border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.08);
-      margin: 24px 0;
+      border-top: 0.5px solid rgba(0,0,0,0.07);
+      margin: 22px 0;
     }
     .content-links { list-style: none; }
-    .content-links li { border-top: 0.5px solid rgba(0,0,0,0.07); }
-    .content-links li:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
+    .content-links li { border-top: 0.5px solid rgba(0,0,0,0.06); }
+    .content-links li:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.06); }
     .content-links a {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 9px 0;
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.06em;
+      font-size: 0.42rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.45);
+      color: rgba(0,0,0,0.42);
       text-decoration: none;
       transition: color 0.15s, padding-left 0.15s;
     }
-    .content-links a:hover { color: #ff0000; padding-left: 6px; }
+    .content-links a:hover { color: #ff0000; padding-left: 5px; }
     .content-links a::after { content: '↗'; opacity: 0.35; }
     .content-placeholder {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.85;
-      color: rgba(0,0,0,0.25);
+      color: rgba(0,0,0,0.22);
       font-style: italic;
     }
+
+    /* ── bottom corners ── */
+    .floating-br {
+      position: fixed;
+      right: 28px;
+      bottom: 24px;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.38rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.18);
+      z-index: 30;
+    }
+    .floating-tr {
+      position: fixed;
+      right: 28px;
+      top: 24px;
+      font-family: 'Cormorant', serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(0,0,0,0.22);
+      z-index: 30;
+      transition: opacity 0.3s;
+    }
+    body.panel-open .floating-tr { opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
 
   <img class="photo" src="https://i.imgur.com/0VYkGrB.png" alt="body map"/>
 
-  <div class="floating-panel">
-    <div class="panel-title">Body Map.</div>
-    <div class="panel-subtitle">a research index</div>
-    <div class="panel-section">Zones</div>
+  <!-- SVG line layer -->
+  <svg id="line-svg" xmlns="http://www.w3.org/2000/svg">
+    <line id="connector-line" class="connector-line" x1="0" y1="0" x2="0" y2="0"/>
+  </svg>
+
+  <!-- left column -->
+  <div class="left-col">
+    <div class="col-title">Body Map.</div>
+    <div class="col-subtitle">a research index</div>
+    <div class="col-section">Zones</div>
     <ul class="zone-list" id="zone-list">
-      <li class="zone-item" data-zone="scalp">Scalp &amp; Hair</li>
-      <li class="zone-item" data-zone="face">Face &amp; Skin</li>
-      <li class="zone-item" data-zone="neck">Neck &amp; Posture</li>
-      <li class="zone-item" data-zone="torso">Gut &amp; Digestion</li>
-      <li class="zone-item" data-zone="arms">Arms &amp; Hands</li>
-      <li class="zone-item" data-zone="legs">Legs &amp; Feet</li>
+      <li class="zone-item" data-zone="scalp">Scalp &amp; Hair<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="face">Face &amp; Skin<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="neck">Neck &amp; Posture<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="torso">Gut &amp; Digestion<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="arms">Arms &amp; Hands<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="legs">Legs &amp; Feet<span class="zone-arrow">—</span></li>
     </ul>
+    <a class="col-back" href="https://becsdesigned.com">← becs designed</a>
   </div>
 
-  <a class="floating-back" href="https://becsdesigned.com">← becs designed</a>
-  <div class="floating-tr">click any point to explore</div>
-  <div class="floating-br">broward, fl</div>
-
-  <div class="hotspot" data-zone="scalp"></div>
-  <div class="hotspot" data-zone="face"></div>
-  <div class="hotspot" data-zone="neck"></div>
-  <div class="hotspot" data-zone="torso"></div>
-  <div class="hotspot" data-zone="arms"></div>
-  <div class="hotspot" data-zone="legs"></div>
-
-  <!-- step 1: card -->
+  <!-- floating card -->
   <div class="card" id="card">
     <div class="card-label" id="card-label"></div>
     <div class="card-title" id="card-title"></div>
-    <ul class="topic-list" id="card-topics"></ul>
+    <div class="card-topic-count" id="card-topic-count"></div>
+    <div class="card-open-hint">click to explore →</div>
   </div>
 
-  <!-- step 2+: panel -->
+  <!-- hotspot targets (invisible) -->
+  <div class="hotspot" data-zone="scalp"  style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+  <div class="hotspot" data-zone="face"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+  <div class="hotspot" data-zone="neck"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+  <div class="hotspot" data-zone="torso"  style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+  <div class="hotspot" data-zone="arms"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+  <div class="hotspot" data-zone="legs"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
+
+  <!-- right panel -->
   <div class="info-panel" id="info-panel">
     <div class="panel-topics">
       <span class="panel-zone-label" id="panel-zone-label"></span>
       <span class="panel-zone-title" id="panel-zone-title"></span>
-
-      <!-- body zone nav -->
       <ul class="panel-body-nav" id="panel-body-nav"></ul>
       <hr class="panel-nav-divider"/>
-
-      <!-- topic list -->
       <ul class="panel-topic-list" id="panel-topic-list"></ul>
       <button class="panel-close-btn" id="panel-close-btn">← close</button>
     </div>
     <div class="panel-content" id="panel-content"></div>
   </div>
 
+  <div class="floating-tr">click any zone to explore</div>
+  <div class="floating-br">broward, fl</div>
+
 <script>
 const zones = {
   scalp: { label:'01 — scalp', title:'Scalp & Hair', topics:[
-    { name:'Trichology research', slug:'trichology',
-      notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.',
-      links:[{text:'Trichological Society',href:'https://www.trichological.com'},{text:'Scalp health journal',href:'#'},{text:'Specialist notes',href:'#'}]},
+    { name:'Trichology research', slug:'trichology', notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.', links:[{text:'Trichological Society',href:'https://www.trichological.com'},{text:'Scalp health journal',href:'#'}]},
     { name:'Scalp photos & progress', slug:'photos', notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.', links:[]},
-    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.',
-      links:[{text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'},{text:'My curl profile',href:'#'}]},
-    { name:'Shampoo & co-wash', slug:'routine', notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.',
-      links:[{text:'Current shampoo',href:'#'},{text:'Co-wash notes',href:'#'}]},
-    { name:'Porosity & moisture', slug:'moisture', notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything about how you care for it.', links:[]},
-    { name:'Products', slug:'products', notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.',
-      links:[{text:'Current routine products',href:'#'},{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
+    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.', links:[{text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'}]},
+    { name:'Shampoo & co-wash', slug:'routine', notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.', links:[]},
+    { name:'Porosity & moisture', slug:'moisture', notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything.', links:[]},
+    { name:'Products', slug:'products', notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.', links:[{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
   ]},
   face: { label:'02 — face', title:'Face & Skin', topics:[
     { name:'AM routine', slug:'am', notes:'Your morning skincare routine — every step, product, and why it\'s there. Note actives, SPF, and anything you apply before makeup.', links:[]},
     { name:'PM routine', slug:'pm', notes:'Evening routine — cleansing, treatments, actives, and overnight products. Note the order of application and how your skin feels each morning.', links:[]},
-    { name:'Active ingredients', slug:'actives', notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide. What they do, how to layer them, and what to avoid combining.',
-      links:[{text:'INCIDecoder',href:'https://incidecoder.com'},{text:'Paula\'s Choice ingredient dictionary',href:'https://www.paulaschoice.com/ingredient-dictionary'}]},
-    { name:'SPF research', slug:'spf', notes:'SPF research, what you\'ve tested, and what works for your skin tone. Notes on UVA/UVB protection, reapplication habits, and formulas that don\'t pill.', links:[]},
-    { name:'Hyperpigmentation', slug:'pigmentation', notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t, timelines, and ingredients specifically helpful for melanin-rich skin.',
-      links:[{text:'Hyperpigmentation research',href:'#'}]},
+    { name:'Active ingredients', slug:'actives', notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide. What they do, how to layer them, and what to avoid combining.', links:[{text:'INCIDecoder',href:'https://incidecoder.com'},{text:'Paula\'s Choice dictionary',href:'https://www.paulaschoice.com/ingredient-dictionary'}]},
+    { name:'SPF research', slug:'spf', notes:'SPF research, what you\'ve tested, and what works for your skin tone. Notes on UVA/UVB protection and formulas that don\'t pill.', links:[]},
+    { name:'Hyperpigmentation', slug:'pigmentation', notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t, and ingredients helpful for melanin-rich skin.', links:[]},
   ]},
   neck: { label:'03 — neck', title:'Neck & Posture', topics:[
     { name:'Posture research', slug:'posture', notes:'Posture research, assessments, and personal notes. What you\'ve noticed, exercises you\'ve tried, and how posture affects other areas of your health.', links:[]},
@@ -444,12 +458,11 @@ const zones = {
     { name:'Stretching routine', slug:'stretch', notes:'Neck and upper back stretching routine — what you do, how often, and how it affects tension, headaches, and general comfort.', links:[]},
   ]},
   torso: { label:'04 — gut', title:'Gut & Digestion', topics:[
-    { name:'Microbiome research', slug:'microbiome', notes:'Research on gut microbiome health — diversity, prebiotics vs probiotics, and what you\'ve learned about how your gut affects skin, mood, and immunity.',
-      links:[{text:'Zoe Science & Nutrition',href:'https://joinzoe.com'}]},
-    { name:'Food sensitivities', slug:'sensitivities', notes:'Personal food sensitivity notes — what you\'ve tested, eliminated, reintroduced, and how your body responded. Include any formal testing results.', links:[]},
+    { name:'Microbiome research', slug:'microbiome', notes:'Research on gut microbiome health — diversity, prebiotics vs probiotics, and what you\'ve learned about how your gut affects skin, mood, and immunity.', links:[{text:'Zoe Science & Nutrition',href:'https://joinzoe.com'}]},
+    { name:'Food sensitivities', slug:'sensitivities', notes:'Personal food sensitivity notes — what you\'ve tested, eliminated, reintroduced, and how your body responded.', links:[]},
     { name:'Supplement stack', slug:'supplements', notes:'Current supplements, why you take them, dosages, and observations. Note any changes when you start or stop something.', links:[]},
-    { name:'Nutrition protocols', slug:'nutrition', notes:'Eating protocols you\'ve researched or tried — anti-inflammatory, Mediterranean, intuitive eating, or other approaches. What resonates and why.', links:[]},
-    { name:'Probiotics & enzymes', slug:'probiotics', notes:'Probiotic strains researched, digestive enzymes tried, and your observations on how they affect digestion, bloating, and overall gut comfort.', links:[]},
+    { name:'Nutrition protocols', slug:'nutrition', notes:'Eating protocols you\'ve researched or tried — anti-inflammatory, Mediterranean, intuitive eating, or other approaches.', links:[]},
+    { name:'Probiotics & enzymes', slug:'probiotics', notes:'Probiotic strains researched, digestive enzymes tried, and your observations on how they affect digestion and gut comfort.', links:[]},
   ]},
   arms: { label:'05 — arms', title:'Arms & Hands', topics:[
     { name:'Hand & nail care', slug:'nails', notes:'Nail health research, cuticle care, products used, and any issues like peeling, breakage, or slow growth. What\'s helped.', links:[]},
@@ -458,7 +471,7 @@ const zones = {
   ]},
   legs: { label:'06 — legs', title:'Legs & Feet', topics:[
     { name:'Mobility & stretching', slug:'mobility', notes:'Lower body mobility research — hip flexors, hamstrings, glutes. Stretches and routines that\'ve helped with tightness, pain, or range of motion.', links:[]},
-    { name:'Foot care routine', slug:'feet', notes:'Foot care — exfoliation, moisturising, nail care, and any issues like calluses, dryness, or ingrown nails. Products and routines that work.', links:[]},
+    { name:'Foot care routine', slug:'feet', notes:'Foot care — exfoliation, moisturising, nail care, and any issues like calluses, dryness, or ingrown nails.', links:[]},
     { name:'Workout & recovery', slug:'workout', notes:'Leg day workouts, recovery protocols, and notes on soreness, progression, and what your lower body responds to best.', links:[]},
     { name:'Vascular health', slug:'vascular', notes:'Research on vascular health — circulation, spider veins, varicose veins, and how movement, compression, and nutrition affect your legs.', links:[]},
   ]},
@@ -476,6 +489,7 @@ const hotspotPositions = {
 };
 
 const card           = document.getElementById('card');
+const connectorLine  = document.getElementById('connector-line');
 const infoPanel      = document.getElementById('info-panel');
 const panelZoneLabel = document.getElementById('panel-zone-label');
 const panelZoneTitle = document.getElementById('panel-zone-title');
@@ -483,68 +497,95 @@ const panelBodyNav   = document.getElementById('panel-body-nav');
 const panelTopicList = document.getElementById('panel-topic-list');
 const panelContent   = document.getElementById('panel-content');
 let activeZone  = null;
-let activeTopic = null;
+
+/* ── hotspot positions ── */
+function getHotspotPos(zone) {
+  const p = hotspotPositions[zone];
+  return { x: p.x * window.innerWidth, y: p.y * window.innerHeight };
+}
 
 function repositionHotspots() {
-  const W = window.innerWidth;
-  const H = window.innerHeight;
   document.querySelectorAll('.hotspot').forEach(dot => {
     const p = hotspotPositions[dot.dataset.zone];
     if (!p) return;
-    dot.style.left = (p.x * W) + 'px';
-    dot.style.top  = (p.y * H) + 'px';
+    dot.style.left = (p.x * window.innerWidth) + 'px';
+    dot.style.top  = (p.y * window.innerHeight) + 'px';
   });
 }
-window.addEventListener('resize', repositionHotspots);
+window.addEventListener('resize', () => { repositionHotspots(); if (activeZone) drawLine(activeZone); });
 repositionHotspots();
 
-// ── step 1: show card on left, vertically aligned to hotspot ──
-function openCard(zone, dot) {
-  const z = zones[zone];
-  document.getElementById('card-label').textContent = z.label;
-  document.getElementById('card-title').textContent = z.title;
-  document.getElementById('card-topics').innerHTML = z.topics
-    .map(t => `<li class="topic-item"><a href="#" data-zone="${zone}" data-slug="${t.slug}">${t.name}</a></li>`).join('');
+/* ── get the right edge midpoint of a zone-item ── */
+function getZoneItemAnchor(zone) {
+  const el = document.querySelector(`.zone-item[data-zone="${zone}"]`);
+  if (!el) return { x: 160, y: 0 };
+  const r = el.getBoundingClientRect();
+  return { x: r.right, y: r.top + r.height / 2 };
+}
 
-  document.querySelectorAll('#card-topics a').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      openPanel(a.dataset.zone, a.dataset.slug);
-    });
-  });
+/* ── draw line: left col → card → hotspot ── */
+function drawLine(zone) {
+  const anchor   = getZoneItemAnchor(zone);
+  const hotspot  = getHotspotPos(zone);
 
-  // vertically align card to hotspot
-  const dotRect = dot.getBoundingClientRect();
-  const dotCY   = dotRect.top + dotRect.height / 2;
+  // line goes from left col right edge → hotspot
+  connectorLine.setAttribute('x1', anchor.x);
+  connectorLine.setAttribute('y1', anchor.y);
+  connectorLine.setAttribute('x2', hotspot.x);
+  connectorLine.setAttribute('y2', hotspot.y);
+  connectorLine.classList.add('visible');
+
+  // position card midway along the line
+  const midX = (anchor.x + hotspot.x) / 2;
+  const midY = (anchor.y + hotspot.y) / 2;
 
   card.style.visibility = 'hidden';
   card.style.display = 'block';
-  const cardH = card.offsetHeight;
+  const cW = card.offsetWidth;
+  const cH = card.offsetHeight;
   card.style.visibility = '';
   card.style.display = '';
 
-  let cardTop = dotCY - cardH / 2;
-  cardTop = Math.max(80, Math.min(cardTop, window.innerHeight - cardH - 24));
-  card.style.top = cardTop + 'px';
+  let cx = midX - cW / 2;
+  let cy = midY - cH / 2;
+  cx = Math.max(170, Math.min(cx, window.innerWidth - cW - 20));
+  cy = Math.max(16,  Math.min(cy, window.innerHeight - cH - 16));
 
+  card.style.left = cx + 'px';
+  card.style.top  = cy + 'px';
+}
+
+/* ── select a zone ── */
+function selectZone(zone) {
+  if (activeZone === zone && !document.body.classList.contains('panel-open')) {
+    clearAll(); return;
+  }
+  activeZone = zone;
+
+  // update left col
+  document.querySelectorAll('.zone-item').forEach(z => z.classList.remove('active'));
+  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
+
+  // fill card
+  const z = zones[zone];
+  document.getElementById('card-label').textContent = z.label;
+  document.getElementById('card-title').textContent = z.title;
+  document.getElementById('card-topic-count').textContent = z.topics.length + ' topics';
+
+  // draw line & position card
+  drawLine(zone);
   card.classList.add('visible');
 }
 
-function closeCard() {
-  card.classList.remove('visible');
-}
-
-// ── step 2+: open panel ──
-function openPanel(zone, slug) {
-  activeZone = zone;
+/* ── open panel ── */
+function openPanel(zone) {
   const z = zones[zone];
+  activeZone = zone;
 
-  // zone label + title
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
 
-  // body zone nav — all zones, active one highlighted
+  // body nav
   panelBodyNav.innerHTML = zoneOrder.map(zk =>
     `<li class="panel-body-nav-item${zk === zone ? ' active' : ''}" data-zone="${zk}">${zones[zk].title}</li>`
   ).join('');
@@ -552,58 +593,46 @@ function openPanel(zone, slug) {
     item.addEventListener('click', () => switchZone(item.dataset.zone));
   });
 
-  // topic list
-  buildTopicList(zone, slug);
+  buildTopicList(zone, z.topics[0].slug);
+  loadTopic(zone, z.topics[0].slug);
 
   infoPanel.classList.add('open');
   document.body.classList.add('panel-open');
-  loadTopic(zone, slug);
 }
 
+/* ── switch zone inside panel ── */
 function switchZone(zone) {
   activeZone = zone;
   const z = zones[zone];
+
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
 
-  // update body nav active state
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item => {
-    item.classList.toggle('active', item.dataset.zone === zone);
-  });
+  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
+    item.classList.toggle('active', item.dataset.zone === zone));
 
-  // update left sidebar
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
 
-  // update hotspot
-  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-  document.querySelector(`.hotspot[data-zone="${zone}"]`)?.classList.add('active');
-
-  // load first topic of new zone
-  const firstSlug = z.topics[0].slug;
-  buildTopicList(zone, firstSlug);
-  loadTopic(zone, firstSlug);
+  buildTopicList(zone, z.topics[0].slug);
+  loadTopic(zone, z.topics[0].slug);
 }
 
 function buildTopicList(zone, activeSlug) {
-  const z = zones[zone];
-  panelTopicList.innerHTML = z.topics.map(t =>
+  panelTopicList.innerHTML = zones[zone].topics.map(t =>
     `<li class="panel-topic-item${t.slug === activeSlug ? ' active' : ''}" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`
   ).join('');
-  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item => {
-    item.addEventListener('click', () => loadTopic(item.dataset.zone, item.dataset.slug));
-  });
+  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item =>
+    item.addEventListener('click', () => loadTopic(item.dataset.zone, item.dataset.slug)));
 }
 
 function loadTopic(zone, slug) {
   const z     = zones[zone];
   const topic = z.topics.find(t => t.slug === slug);
   if (!topic) return;
-  activeTopic = slug;
 
-  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item => {
-    item.classList.toggle('active', item.dataset.slug === slug);
-  });
+  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item =>
+    item.classList.toggle('active', item.dataset.slug === slug));
 
   const linksHTML = topic.links.length > 0
     ? `<ul class="content-links">${topic.links.map(l =>
@@ -620,74 +649,65 @@ function loadTopic(zone, slug) {
     ${topic.links.length > 0 ? `
       <hr class="content-divider"/>
       <div class="content-section">
-        <span class="content-section-label">Links &amp; resources</span>
-        ${linksHTML}
+        <span class="content-section-label">Links &amp; resources</span>${linksHTML}
       </div>` : ''}
     <hr class="content-divider"/>
     <div class="content-section">
       <span class="content-section-label">Your content</span>
       <p class="content-placeholder">Photos, videos, product lists, journal entries, and links will live here as you build out this section.</p>
-    </div>
-  `;
+    </div>`;
   panelContent.scrollTop = 0;
 }
 
-function closeAll() {
-  closeCard();
+function clearAll() {
+  card.classList.remove('visible');
+  connectorLine.classList.remove('visible');
   infoPanel.classList.remove('open');
   document.body.classList.remove('panel-open');
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-  activeZone  = null;
-  activeTopic = null;
+  activeZone = null;
 }
 
-document.getElementById('panel-close-btn').addEventListener('click', closeAll);
+/* ── card click → open panel ── */
+card.addEventListener('click', e => {
+  e.stopPropagation();
+  if (activeZone) openPanel(activeZone);
+});
 
+/* ── zone item clicks ── */
+document.querySelectorAll('.zone-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.stopPropagation();
+    const zone = item.dataset.zone;
+    if (document.body.classList.contains('panel-open')) {
+      switchZone(zone); return;
+    }
+    selectZone(zone);
+  });
+});
+
+/* ── hotspot clicks (same as zone item) ── */
 document.querySelectorAll('.hotspot').forEach(dot => {
   dot.addEventListener('click', e => {
     e.stopPropagation();
     const zone = dot.dataset.zone;
     if (document.body.classList.contains('panel-open')) {
-      if (activeZone === zone) { closeAll(); return; }
-      switchZone(zone);
-      return;
+      switchZone(zone); return;
     }
-    closeCard();
-    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    dot.classList.add('active');
-    document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-    openCard(zone, dot);
+    selectZone(zone);
   });
 });
 
-document.querySelectorAll('.zone-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const zone = item.dataset.zone;
-    if (document.body.classList.contains('panel-open')) {
-      if (activeZone === zone) { closeAll(); return; }
-      switchZone(zone);
-      return;
-    }
-    closeCard();
-    const dot = document.querySelector(`.hotspot[data-zone="${zone}"]`);
-    document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-    dot?.classList.add('active');
-    item.classList.add('active');
-    if (dot) openCard(zone, dot);
-  });
-});
+/* ── close panel button ── */
+document.getElementById('panel-close-btn').addEventListener('click', clearAll);
 
+/* ── click outside ── */
 document.addEventListener('click', e => {
-  if (!e.target.closest('.hotspot') && !e.target.closest('.card') &&
-      !e.target.closest('.info-panel') && !e.target.closest('.zone-item') &&
-      !e.target.closest('.floating-panel')) {
-    closeAll();
+  if (!e.target.closest('.left-col') && !e.target.closest('.card') &&
+      !e.target.closest('.info-panel') && !e.target.closest('.hotspot')) {
+    clearAll();
   }
 });
-card.addEventListener('click', e => e.stopPropagation());
 </script>
 </body>
 </html>
