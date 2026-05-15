@@ -9,6 +9,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; background: #f0efeb; }
 
+    /* ── photo — shifts left when panel opens ── */
     .photo {
       position: fixed;
       inset: 0;
@@ -18,8 +19,16 @@
       object-position: center center;
       display: block;
       z-index: 0;
+      transition: width 0.4s ease, left 0.4s ease;
     }
 
+    body.panel-open .photo {
+      width: 52vw;
+      left: 0;
+      object-position: center center;
+    }
+
+    /* ── hotspots ── */
     .hotspot {
       position: fixed;
       width: 40px;
@@ -27,13 +36,20 @@
       transform: translate(-50%, -50%);
       cursor: crosshair;
       z-index: 20;
+      transition: left 0.4s ease;
     }
 
+    body.panel-open .hotspot {
+      /* scale hotspot x position to match photo shrink */
+      left: calc(var(--hx) * 0.52) !important;
+    }
+
+    /* ── floating left panel ── */
     .floating-panel {
       position: fixed;
       left: 28px;
       top: 28px;
-      z-index: 10;
+      z-index: 30;
     }
     .panel-title {
       font-family: 'Fragment Mono', monospace;
@@ -86,7 +102,7 @@
       text-transform: uppercase;
       color: rgba(0,0,0,0.28);
       text-decoration: none;
-      z-index: 10;
+      z-index: 30;
       transition: color 0.2s;
     }
     .floating-back:hover { color: rgba(0,0,0,0.6); }
@@ -99,7 +115,8 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: rgba(0,0,0,0.22);
-      z-index: 10;
+      z-index: 30;
+      transition: right 0.4s ease;
     }
     .floating-tr {
       position: fixed;
@@ -110,10 +127,10 @@
       font-weight: 300;
       font-style: italic;
       color: rgba(0,0,0,0.28);
-      z-index: 10;
+      z-index: 30;
     }
 
-    /* card always on the right, slides in horizontally */
+    /* ── zone card ── */
     .card {
       position: fixed;
       right: 160px;
@@ -132,8 +149,11 @@
       transform: translateX(0);
       pointer-events: all;
     }
+    body.panel-open .card {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-    /* horizontal connector line */
     .card-line {
       position: fixed;
       height: 1.5px;
@@ -144,6 +164,7 @@
       transition: opacity 0.2s;
     }
     .card-line.visible { opacity: 1; }
+    body.panel-open .card-line { opacity: 0; }
 
     .card-label {
       font-family: 'Fragment Mono', monospace;
@@ -177,10 +198,167 @@
       padding: 6px 0;
       border-top: 0.5px solid rgba(0,0,0,0.07);
       transition: color 0.15s, padding-left 0.15s;
+      cursor: pointer;
     }
     .topic-item:last-child a { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
     .topic-item a:hover { color: #ff0000; padding-left: 5px; }
     .topic-item a::before { content: '→'; opacity: 0.35; font-size: 0.5rem; }
+
+    /* ── full info panel ── */
+    .info-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 48vw;
+      height: 100vh;
+      background: #f5f2eb;
+      border-left: 0.5px solid rgba(0,0,0,0.1);
+      z-index: 50;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .info-panel::-webkit-scrollbar { width: 0; }
+
+    .info-panel.open {
+      transform: translateX(0);
+    }
+
+    .info-panel-bar {
+      position: sticky;
+      top: 0;
+      background: #f5f2eb;
+      border-bottom: 0.5px solid rgba(0,0,0,0.08);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .info-panel-zone {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ff0000;
+      opacity: 0.6;
+    }
+
+    .info-panel-close {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .info-panel-close:hover { color: #000; }
+
+    .info-panel-body {
+      padding: 40px 32px 60px;
+      flex: 1;
+    }
+
+    .info-panel-title {
+      font-family: 'Cormorant', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #0a0a0a;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .info-panel-subtitle {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.3);
+      margin-bottom: 36px;
+    }
+
+    .info-section {
+      margin-bottom: 36px;
+    }
+
+    .info-section-label {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ff0000;
+      opacity: 0.55;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .info-section-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(0,0,0,0.65);
+      font-weight: 300;
+    }
+
+    .info-links {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .info-links li {
+      border-top: 0.5px solid rgba(0,0,0,0.07);
+    }
+    .info-links li:last-child {
+      border-bottom: 0.5px solid rgba(0,0,0,0.07);
+    }
+
+    .info-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.46rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.55);
+      text-decoration: none;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+    .info-links a:hover { color: #ff0000; padding-left: 6px; }
+    .info-links a::after { content: '↗'; opacity: 0.4; font-size: 0.5rem; }
+
+    .info-divider {
+      border: none;
+      border-top: 0.5px solid rgba(0,0,0,0.08);
+      margin: 32px 0;
+    }
+
+    /* back to zone card link */
+    .info-back-zone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      cursor: pointer;
+      margin-bottom: 32px;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .info-back-zone:hover { color: #ff0000; }
   </style>
 </head>
 <body>
@@ -219,40 +397,127 @@
   </div>
   <div class="card-line" id="card-line"></div>
 
+  <!-- full info panel -->
+  <div class="info-panel" id="info-panel">
+    <div class="info-panel-bar">
+      <span class="info-panel-zone" id="info-panel-zone"></span>
+      <button class="info-panel-close" id="info-panel-close">close ×</button>
+    </div>
+    <div class="info-panel-body" id="info-panel-body"></div>
+  </div>
+
 <script>
 const zones = {
   scalp: { label:'01 — scalp', title:'Scalp & Hair', topics:[
-    {name:'Trichology research',href:'#scalp/trichology'},
-    {name:'Scalp photos & progress',href:'#scalp/photos'},
-    {name:'Curly hair method',href:'#scalp/curly-method'},
-    {name:'Shampoo & co-wash',href:'#scalp/routine'},
-    {name:'Porosity & moisture',href:'#scalp/moisture'},
-    {name:'Products',href:'#scalp/products'}]},
+    { name:'Trichology research', slug:'trichology',
+      notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.',
+      links:[
+        {text:'Trichological Society',href:'https://www.trichological.com'},
+        {text:'Scalp health journal',href:'#'},
+        {text:'Specialist notes',href:'#'},
+      ]},
+    { name:'Scalp photos & progress', slug:'photos',
+      notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.',
+      links:[]},
+    { name:'Curly hair method', slug:'curly-method',
+      notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.',
+      links:[
+        {text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'},
+        {text:'My curl profile',href:'#'},
+      ]},
+    { name:'Shampoo & co-wash', slug:'routine',
+      notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.',
+      links:[
+        {text:'Current shampoo',href:'#'},
+        {text:'Co-wash notes',href:'#'},
+      ]},
+    { name:'Porosity & moisture', slug:'moisture',
+      notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything about how you care for it.',
+      links:[]},
+    { name:'Products', slug:'products',
+      notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.',
+      links:[
+        {text:'Current routine products',href:'#'},
+        {text:'Ingredient checker',href:'https://www.cosdna.com'},
+      ]},
+  ]},
   face: { label:'02 — face', title:'Face & Skin', topics:[
-    {name:'AM routine',href:'#face/am'},
-    {name:'PM routine',href:'#face/pm'},
-    {name:'Active ingredients',href:'#face/actives'},
-    {name:'SPF research',href:'#face/spf'},
-    {name:'Hyperpigmentation',href:'#face/pigmentation'}]},
+    { name:'AM routine', slug:'am',
+      notes:'Your morning skincare routine — every step, product, and why it\'s there. Note actives, SPF, and anything you apply before makeup.',
+      links:[]},
+    { name:'PM routine', slug:'pm',
+      notes:'Evening routine — cleansing, treatments, actives, and overnight products. Note the order of application and how your skin feels each morning.',
+      links:[]},
+    { name:'Active ingredients', slug:'actives',
+      notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide. What they do, how to layer them, and what to avoid combining.',
+      links:[
+        {text:'INCIDecoder — ingredient lookup',href:'https://incidecoder.com'},
+        {text:'Paula\'s Choice ingredient dictionary',href:'https://www.paulaschoice.com/ingredient-dictionary'},
+      ]},
+    { name:'SPF research', slug:'spf',
+      notes:'SPF research, what you\'ve tested, and what works for your skin tone. Notes on UVA/UVB protection, reapplication habits, and formulas that don\'t pill.',
+      links:[]},
+    { name:'Hyperpigmentation', slug:'pigmentation',
+      notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t, timelines, and ingredients specifically helpful for melanin-rich skin.',
+      links:[
+        {text:'Hyperpigmentation research',href:'#'},
+      ]},
+  ]},
   neck: { label:'03 — neck', title:'Neck & Posture', topics:[
-    {name:'Posture research',href:'#neck/posture'},
-    {name:'Neck skincare',href:'#neck/skincare'},
-    {name:'Stretching routine',href:'#neck/stretch'}]},
+    { name:'Posture research', slug:'posture',
+      notes:'Posture research, assessments, and personal notes. What you\'ve noticed, exercises you\'ve tried, and how posture affects other areas of your health.',
+      links:[]},
+    { name:'Neck skincare', slug:'skincare',
+      notes:'The neck is often neglected. Notes on extending your skincare routine downward, specific products, and any concerns like tech neck or texture.',
+      links:[]},
+    { name:'Stretching routine', slug:'stretch',
+      notes:'Neck and upper back stretching routine — what you do, how often, and how it affects tension, headaches, and general comfort.',
+      links:[]},
+  ]},
   torso: { label:'04 — gut', title:'Gut & Digestion', topics:[
-    {name:'Microbiome research',href:'#gut/microbiome'},
-    {name:'Food sensitivities',href:'#gut/sensitivities'},
-    {name:'Supplement stack',href:'#gut/supplements'},
-    {name:'Nutrition protocols',href:'#gut/nutrition'},
-    {name:'Probiotics & enzymes',href:'#gut/probiotics'}]},
+    { name:'Microbiome research', slug:'microbiome',
+      notes:'Research on gut microbiome health — diversity, prebiotics vs probiotics, and what you\'ve learned about how your gut affects skin, mood, and immunity.',
+      links:[
+        {text:'Zoe Science & Nutrition',href:'https://joinzoe.com'},
+      ]},
+    { name:'Food sensitivities', slug:'sensitivities',
+      notes:'Personal food sensitivity notes — what you\'ve tested, eliminated, reintroduced, and how your body responded. Include any formal testing results.',
+      links:[]},
+    { name:'Supplement stack', slug:'supplements',
+      notes:'Current supplements, why you take them, dosages, and observations. Note any changes when you start or stop something.',
+      links:[]},
+    { name:'Nutrition protocols', slug:'nutrition',
+      notes:'Eating protocols you\'ve researched or tried — anti-inflammatory, Mediterranean, intuitive eating, or other approaches. What resonates and why.',
+      links:[]},
+    { name:'Probiotics & enzymes', slug:'probiotics',
+      notes:'Probiotic strains researched, digestive enzymes tried, and your observations on how they affect digestion, bloating, and overall gut comfort.',
+      links:[]},
+  ]},
   arms: { label:'05 — arms', title:'Arms & Hands', topics:[
-    {name:'Hand & nail care',href:'#arms/nails'},
-    {name:'Strength training',href:'#arms/training'},
-    {name:'Skin texture research',href:'#arms/skin'}]},
+    { name:'Hand & nail care', slug:'nails',
+      notes:'Nail health research, cuticle care, products used, and any issues like peeling, breakage, or slow growth. What\'s helped.',
+      links:[]},
+    { name:'Strength training', slug:'training',
+      notes:'Upper body and arm training notes — exercises, progression, and how your arms feel and look with different training approaches.',
+      links:[]},
+    { name:'Skin texture research', slug:'skin',
+      notes:'Notes on keratosis pilaris, dry skin, body acne, or other texture concerns on arms. What treatments you\'ve researched and tried.',
+      links:[]},
+  ]},
   legs: { label:'06 — legs', title:'Legs & Feet', topics:[
-    {name:'Mobility & stretching',href:'#legs/mobility'},
-    {name:'Foot care routine',href:'#legs/feet'},
-    {name:'Workout & recovery',href:'#legs/workout'},
-    {name:'Vascular health',href:'#legs/vascular'}]}
+    { name:'Mobility & stretching', slug:'mobility',
+      notes:'Lower body mobility research — hip flexors, hamstrings, glutes. Stretches and routines that\'ve helped with tightness, pain, or range of motion.',
+      links:[]},
+    { name:'Foot care routine', slug:'feet',
+      notes:'Foot care — exfoliation, moisturising, nail care, and any issues like calluses, dryness, or ingrown nails. Products and routines that work.',
+      links:[]},
+    { name:'Workout & recovery', slug:'workout',
+      notes:'Leg day workouts, recovery protocols, and notes on soreness, progression, and what your lower body responds to best.',
+      links:[]},
+    { name:'Vascular health', slug:'vascular',
+      notes:'Research on vascular health — circulation, spider veins, varicose veins, and how movement, compression, and nutrition affect your legs.',
+      links:[]},
+  ]},
 };
 
 const hotspotPositions = {
@@ -264,9 +529,12 @@ const hotspotPositions = {
   legs:  { x: 0.485, y: 0.78 },
 };
 
-const card     = document.getElementById('card');
-const cardLine = document.getElementById('card-line');
-let activeZone = null;
+const card       = document.getElementById('card');
+const cardLine   = document.getElementById('card-line');
+const infoPanel  = document.getElementById('info-panel');
+const infoPanelZone = document.getElementById('info-panel-zone');
+const infoPanelBody = document.getElementById('info-panel-body');
+let activeZone   = null;
 
 function repositionHotspots() {
   const W = window.innerWidth;
@@ -274,7 +542,9 @@ function repositionHotspots() {
   document.querySelectorAll('.hotspot').forEach(dot => {
     const p = hotspotPositions[dot.dataset.zone];
     if (!p) return;
-    dot.style.left = (p.x * W) + 'px';
+    const px = p.x * W;
+    dot.style.left = px + 'px';
+    dot.style.setProperty('--hx', p.x);
     dot.style.top  = (p.y * H) + 'px';
   });
 }
@@ -287,13 +557,20 @@ function openCard(zone, dot) {
   document.getElementById('card-label').textContent = z.label;
   document.getElementById('card-title').textContent = z.title;
   document.getElementById('card-topics').innerHTML = z.topics
-    .map(t => `<li class="topic-item"><a href="${t.href}">${t.name}</a></li>`).join('');
+    .map(t => `<li class="topic-item"><a data-zone="${zone}" data-slug="${t.slug}" href="#">${t.name}</a></li>`).join('');
+
+  // attach topic click handlers
+  document.querySelectorAll('#card-topics a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      openInfoPanel(a.dataset.zone, a.dataset.slug);
+    });
+  });
 
   const dotRect = dot.getBoundingClientRect();
   const dotCY   = dotRect.top + dotRect.height / 2;
   const dotRight = dotRect.right;
 
-  // measure card height
   card.style.visibility = 'hidden';
   card.style.display = 'block';
   const cardH = card.offsetHeight;
@@ -301,18 +578,15 @@ function openCard(zone, dot) {
   card.style.visibility = '';
   card.style.display = '';
 
-  // vertically center card on the dot, clamp within viewport
   let cardTop = dotCY - cardH / 2;
   cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cardH - 16));
   card.style.top = cardTop + 'px';
 
-  // horizontal connector: from right of hotspot to left edge of card
-  const cardLeft = window.innerWidth - 160 - cardW;
+  const cardLeft  = window.innerWidth - 160 - cardW;
   const lineLeft  = dotRight + 8;
   const lineWidth = Math.max(0, cardLeft - dotRight - 8);
-  const lineY     = dotCY;
 
-  cardLine.style.top    = lineY + 'px';
+  cardLine.style.top    = dotCY + 'px';
   cardLine.style.left   = lineLeft + 'px';
   cardLine.style.width  = lineWidth + 'px';
 
@@ -328,9 +602,68 @@ function closeCard() {
   activeZone = null;
 }
 
+function openInfoPanel(zone, slug) {
+  const z = zones[zone];
+  const topic = z.topics.find(t => t.slug === slug);
+  if (!topic) return;
+
+  infoPanelZone.textContent = z.label + ' — ' + topic.name;
+
+  const linksHTML = topic.links.length > 0
+    ? `<ul class="info-links">${topic.links.map(l =>
+        `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`
+      ).join('')}</ul>`
+    : '';
+
+  infoPanelBody.innerHTML = `
+    <button class="info-back-zone" id="back-to-zone">← back to ${z.title}</button>
+    <div class="info-panel-title">${topic.name}</div>
+    <div class="info-panel-subtitle">${z.label}</div>
+
+    <div class="info-section">
+      <span class="info-section-label">Notes</span>
+      <p class="info-section-text">${topic.notes}</p>
+    </div>
+
+    ${topic.links.length > 0 ? `
+    <hr class="info-divider"/>
+    <div class="info-section">
+      <span class="info-section-label">Links &amp; resources</span>
+      ${linksHTML}
+    </div>` : ''}
+
+    <hr class="info-divider"/>
+    <div class="info-section">
+      <span class="info-section-label">Add your content here</span>
+      <p class="info-section-text" style="opacity:0.4;">Photos, videos, product lists, journal entries, and links will live in this section once you build out the individual topic pages.</p>
+    </div>
+  `;
+
+  document.getElementById('back-to-zone').addEventListener('click', () => {
+    closeInfoPanel();
+  });
+
+  infoPanel.classList.add('open');
+  document.body.classList.add('panel-open');
+}
+
+function closeInfoPanel() {
+  infoPanel.classList.remove('open');
+  document.body.classList.remove('panel-open');
+}
+
+document.getElementById('info-panel-close').addEventListener('click', () => {
+  closeInfoPanel();
+  closeCard();
+});
+
 document.querySelectorAll('.hotspot').forEach(dot => {
   dot.addEventListener('click', e => {
     e.stopPropagation();
+    // close info panel if open
+    if (document.body.classList.contains('panel-open')) {
+      closeInfoPanel();
+    }
     const zone = dot.dataset.zone;
     if (activeZone === zone) { closeCard(); return; }
     activeZone = zone;
@@ -344,6 +677,7 @@ document.querySelectorAll('.hotspot').forEach(dot => {
 
 document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', () => {
+    if (document.body.classList.contains('panel-open')) closeInfoPanel();
     const zone = item.dataset.zone;
     const dot  = document.querySelector(`.hotspot[data-zone="${zone}"]`);
     if (activeZone === zone) { closeCard(); return; }
@@ -357,7 +691,11 @@ document.querySelectorAll('.zone-item').forEach(item => {
 });
 
 document.addEventListener('click', e => {
-  if (!e.target.closest('.hotspot') && !e.target.closest('.card') && !e.target.closest('.zone-item')) closeCard();
+  if (!e.target.closest('.hotspot') && !e.target.closest('.card') &&
+      !e.target.closest('.zone-item') && !e.target.closest('.info-panel')) {
+    closeCard();
+    closeInfoPanel();
+  }
 });
 card.addEventListener('click', e => e.stopPropagation());
 </script>
