@@ -113,33 +113,38 @@
       z-index: 10;
     }
 
+    /* card always on the right, slides in horizontally */
     .card {
       position: fixed;
-      width: 210px;
+      right: 40px;
+      width: 220px;
       background: #f5f2eb;
       border: 1px solid rgba(255,0,0,0.15);
       padding: 16px 18px 12px;
       z-index: 100;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateX(8px);
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .card.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
       pointer-events: all;
     }
+
+    /* horizontal connector line */
     .card-line {
       position: fixed;
-      width: 0.5px;
-      background: rgba(255,0,0,0.25);
+      height: 0.5px;
+      background: rgba(255,0,0,0.2);
       pointer-events: none;
       z-index: 99;
       opacity: 0;
       transition: opacity 0.2s;
     }
     .card-line.visible { opacity: 1; }
+
     .card-label {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
@@ -285,29 +290,31 @@ function openCard(zone, dot) {
     .map(t => `<li class="topic-item"><a href="${t.href}">${t.name}</a></li>`).join('');
 
   const dotRect = dot.getBoundingClientRect();
-  const dotCX = dotRect.left + dotRect.width / 2;
-  const dotCY = dotRect.top  + dotRect.height / 2;
+  const dotCY   = dotRect.top + dotRect.height / 2;
+  const dotRight = dotRect.right;
 
+  // measure card height
   card.style.visibility = 'hidden';
   card.style.display = 'block';
-  const cardW = card.offsetWidth;
   const cardH = card.offsetHeight;
+  const cardW = card.offsetWidth;
   card.style.visibility = '';
   card.style.display = '';
 
-  const gap = 14;
-  let cardLeft = dotCX - cardW / 2;
-  let cardTop  = dotCY - cardH - gap;
-  cardLeft = Math.max(8, Math.min(cardLeft, window.innerWidth - cardW - 8));
-  if (cardTop < 8) cardTop = dotCY + 20 + gap;
+  // vertically center card on the dot, clamp within viewport
+  let cardTop = dotCY - cardH / 2;
+  cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cardH - 16));
+  card.style.top = cardTop + 'px';
 
-  card.style.left = cardLeft + 'px';
-  card.style.top  = cardTop  + 'px';
+  // horizontal connector: from right of hotspot to left edge of card
+  const cardLeft = window.innerWidth - 40 - cardW;
+  const lineLeft  = dotRight + 8;
+  const lineWidth = Math.max(0, cardLeft - dotRight - 8);
+  const lineY     = dotCY;
 
-  const lineH = dotCY - (cardTop + cardH);
-  cardLine.style.left   = dotCX + 'px';
-  cardLine.style.top    = (cardTop + cardH) + 'px';
-  cardLine.style.height = Math.max(0, lineH) + 'px';
+  cardLine.style.top    = lineY + 'px';
+  cardLine.style.left   = lineLeft + 'px';
+  cardLine.style.width  = lineWidth + 'px';
 
   card.classList.add('visible');
   cardLine.classList.add('visible');
