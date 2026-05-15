@@ -138,7 +138,7 @@
       background: #f5f2eb;
       border: 1px solid rgba(255,0,0,0.15);
       padding: 16px 18px 12px;
-      z-index: 100;
+      z-index: 200;
       pointer-events: none;
       opacity: 0;
       transform: translateX(8px);
@@ -149,11 +149,6 @@
       transform: translateX(0);
       pointer-events: all;
     }
-    body.panel-open .card {
-      opacity: 0;
-      pointer-events: none;
-    }
-
     .card-line {
       position: fixed;
       height: 1.5px;
@@ -164,7 +159,6 @@
       transition: opacity 0.2s;
     }
     .card-line.visible { opacity: 1; }
-    body.panel-open .card-line { opacity: 0; }
 
     .card-label {
       font-family: 'Fragment Mono', monospace;
@@ -557,12 +551,13 @@ function openCard(zone, dot) {
   document.getElementById('card-label').textContent = z.label;
   document.getElementById('card-title').textContent = z.title;
   document.getElementById('card-topics').innerHTML = z.topics
-    .map(t => `<li class="topic-item"><a data-zone="${zone}" data-slug="${t.slug}" href="#">${t.name}</a></li>`).join('');
+    .map(t => `<li class="topic-item"><a data-zone="${zone}" data-slug="${t.slug}" href="#" class="topic-link">${t.name}</a></li>`).join('');
 
   // attach topic click handlers
   document.querySelectorAll('#card-topics a').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
+      e.stopPropagation();
       openInfoPanel(a.dataset.zone, a.dataset.slug);
     });
   });
@@ -607,6 +602,11 @@ function openInfoPanel(zone, slug) {
   const topic = z.topics.find(t => t.slug === slug);
   if (!topic) return;
 
+  // highlight active topic in card
+  document.querySelectorAll('.topic-link').forEach(a => {
+    a.style.color = a.dataset.slug === slug ? '#ff0000' : '';
+  });
+
   infoPanelZone.textContent = z.label + ' — ' + topic.name;
 
   const linksHTML = topic.links.length > 0
@@ -616,7 +616,6 @@ function openInfoPanel(zone, slug) {
     : '';
 
   infoPanelBody.innerHTML = `
-    <button class="info-back-zone" id="back-to-zone">← back to ${z.title}</button>
     <div class="info-panel-title">${topic.name}</div>
     <div class="info-panel-subtitle">${z.label}</div>
 
@@ -639,12 +638,10 @@ function openInfoPanel(zone, slug) {
     </div>
   `;
 
-  document.getElementById('back-to-zone').addEventListener('click', () => {
-    closeInfoPanel();
-  });
-
   infoPanel.classList.add('open');
   document.body.classList.add('panel-open');
+  // scroll panel back to top on swap
+  infoPanel.scrollTop = 0;
 }
 
 function closeInfoPanel() {
