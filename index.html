@@ -9,7 +9,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; background: #f0efeb; }
 
-    /* ── photo ── */
     .photo {
       position: fixed;
       inset: 0;
@@ -19,11 +18,9 @@
       object-position: center center;
       display: block;
       z-index: 0;
-      transition: width 0.45s ease, left 0.45s ease;
+      transition: width 0.45s ease;
     }
-    body.panel-open .photo {
-      width: 55vw;
-    }
+    body.panel-open .photo { width: 50vw; }
 
     /* ── SVG line layer ── */
     #line-svg {
@@ -33,16 +30,16 @@
       height: 100vh;
       z-index: 10;
       pointer-events: none;
-      overflow: visible;
     }
     .connector-line {
-      stroke: rgba(255,0,0,0.35);
-      stroke-width: 1;
+      stroke: rgba(255,0,0,0.3);
+      stroke-width: 1.5;
       fill: none;
       opacity: 0;
       transition: opacity 0.25s ease;
     }
     .connector-line.visible { opacity: 1; }
+    body.panel-open .connector-line { opacity: 0; }
 
     /* ── left column ── */
     .left-col {
@@ -56,7 +53,6 @@
       flex-direction: column;
       padding: 28px 20px 24px;
     }
-
     .col-title {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.7rem;
@@ -81,7 +77,6 @@
       color: rgba(0,0,0,0.28);
       margin-bottom: 8px;
     }
-
     .zone-list { list-style: none; flex: 1; }
     .zone-item {
       font-family: 'Fragment Mono', monospace;
@@ -92,22 +87,11 @@
       border-bottom: 0.5px solid rgba(0,0,0,0.05);
       cursor: pointer;
       transition: color 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       user-select: none;
     }
     .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
     .zone-item:hover { color: #000; }
     .zone-item.active { color: #ff0000; }
-    .zone-item .zone-arrow {
-      font-size: 0.4rem;
-      opacity: 0;
-      transition: opacity 0.15s;
-      color: #ff0000;
-    }
-    .zone-item.active .zone-arrow { opacity: 1; }
-
     .col-back {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.38rem;
@@ -121,20 +105,31 @@
     }
     .col-back:hover { color: rgba(0,0,0,0.55); }
 
-    /* ── floating card — between line and hotspot ── */
+    /* ── hotspots (invisible) ── */
+    .hotspot {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      cursor: crosshair;
+      z-index: 20;
+    }
+
+    /* ── card — right anchored, transparent ── */
     .card {
       position: fixed;
-      width: 180px;
-      z-index: 50;
+      right: 40px;
+      width: 220px;
+      z-index: 100;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(4px);
+      transform: translateX(6px);
       transition: opacity 0.2s ease, transform 0.2s ease;
       cursor: pointer;
     }
     .card.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
       pointer-events: all;
     }
     body.panel-open .card { opacity: 0; pointer-events: none; }
@@ -145,55 +140,60 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
-      opacity: 0.65;
+      opacity: 0.7;
       margin-bottom: 3px;
     }
     .card-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       line-height: 1.1;
     }
-    .card-open-hint {
+    .card-topics-preview {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+    .card-topics-preview li {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.38rem;
+      font-size: 0.42rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+      padding: 4px 0;
+      border-top: 0.5px solid rgba(0,0,0,0.07);
+    }
+    .card-topics-preview li:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
+    .card-hint {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.36rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
+      color: rgba(0,0,0,0.25);
+      margin-top: 8px;
       transition: color 0.15s;
     }
-    .card:hover .card-open-hint { color: #ff0000; }
-    .card-topic-count {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.38rem;
-      letter-spacing: 0.1em;
-      color: rgba(0,0,0,0.3);
-      margin-bottom: 6px;
-    }
+    .card:hover .card-hint { color: #ff0000; }
 
     /* ── right panel ── */
     .info-panel {
       position: fixed;
-      top: 0;
-      right: 0;
-      width: 45vw;
+      top: 0; right: 0;
+      width: 50vw;
       height: 100vh;
       z-index: 40;
       transform: translateX(100%);
       transition: transform 0.4s ease;
       display: flex;
-      overflow: hidden;
     }
     .info-panel.open { transform: translateX(0); }
 
-    /* topic list col */
     .panel-topics {
-      width: 175px;
+      width: 185px;
       flex-shrink: 0;
-      padding: 32px 0 32px 24px;
+      padding: 32px 0 32px 28px;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -223,12 +223,12 @@
       padding-bottom: 14px;
     }
 
-    /* body nav in panel */
-    .panel-body-nav { list-style: none; margin-bottom: 16px; }
+    /* body nav inside panel */
+    .panel-body-nav { list-style: none; margin-bottom: 14px; }
     .panel-body-nav-item {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.4rem;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       color: rgba(0,0,0,0.28);
       padding: 3px 0;
@@ -241,7 +241,7 @@
     .panel-nav-divider {
       border: none;
       border-top: 0.5px solid rgba(0,0,0,0.07);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .panel-topic-list { list-style: none; flex: 1; }
@@ -276,7 +276,6 @@
     }
     .panel-close-btn:hover { color: #000; }
 
-    /* content col */
     .panel-content {
       flex: 1;
       overflow-y: auto;
@@ -351,7 +350,6 @@
       font-style: italic;
     }
 
-    /* ── bottom corners ── */
     .floating-br {
       position: fixed;
       right: 28px;
@@ -382,44 +380,39 @@
 
   <img class="photo" src="https://i.imgur.com/0VYkGrB.png" alt="body map"/>
 
-  <!-- SVG line layer -->
   <svg id="line-svg" xmlns="http://www.w3.org/2000/svg">
     <line id="connector-line" class="connector-line" x1="0" y1="0" x2="0" y2="0"/>
   </svg>
 
-  <!-- left column -->
   <div class="left-col">
     <div class="col-title">Body Map.</div>
     <div class="col-subtitle">a research index</div>
     <div class="col-section">Zones</div>
     <ul class="zone-list" id="zone-list">
-      <li class="zone-item" data-zone="scalp">Scalp &amp; Hair<span class="zone-arrow">—</span></li>
-      <li class="zone-item" data-zone="face">Face &amp; Skin<span class="zone-arrow">—</span></li>
-      <li class="zone-item" data-zone="neck">Neck &amp; Posture<span class="zone-arrow">—</span></li>
-      <li class="zone-item" data-zone="torso">Gut &amp; Digestion<span class="zone-arrow">—</span></li>
-      <li class="zone-item" data-zone="arms">Arms &amp; Hands<span class="zone-arrow">—</span></li>
-      <li class="zone-item" data-zone="legs">Legs &amp; Feet<span class="zone-arrow">—</span></li>
+      <li class="zone-item" data-zone="scalp">Scalp &amp; Hair</li>
+      <li class="zone-item" data-zone="face">Face &amp; Skin</li>
+      <li class="zone-item" data-zone="neck">Neck &amp; Posture</li>
+      <li class="zone-item" data-zone="torso">Gut &amp; Digestion</li>
+      <li class="zone-item" data-zone="arms">Arms &amp; Hands</li>
+      <li class="zone-item" data-zone="legs">Legs &amp; Feet</li>
     </ul>
     <a class="col-back" href="https://becsdesigned.com">← becs designed</a>
   </div>
 
-  <!-- floating card -->
+  <div class="hotspot" data-zone="scalp"></div>
+  <div class="hotspot" data-zone="face"></div>
+  <div class="hotspot" data-zone="neck"></div>
+  <div class="hotspot" data-zone="torso"></div>
+  <div class="hotspot" data-zone="arms"></div>
+  <div class="hotspot" data-zone="legs"></div>
+
   <div class="card" id="card">
     <div class="card-label" id="card-label"></div>
     <div class="card-title" id="card-title"></div>
-    <div class="card-topic-count" id="card-topic-count"></div>
-    <div class="card-open-hint">click to explore →</div>
+    <ul class="card-topics-preview" id="card-topics-preview"></ul>
+    <div class="card-hint">click to explore →</div>
   </div>
 
-  <!-- hotspot targets (invisible) -->
-  <div class="hotspot" data-zone="scalp"  style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-  <div class="hotspot" data-zone="face"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-  <div class="hotspot" data-zone="neck"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-  <div class="hotspot" data-zone="torso"  style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-  <div class="hotspot" data-zone="arms"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-  <div class="hotspot" data-zone="legs"   style="position:fixed;width:40px;height:40px;transform:translate(-50%,-50%);cursor:crosshair;z-index:20;"></div>
-
-  <!-- right panel -->
   <div class="info-panel" id="info-panel">
     <div class="panel-topics">
       <span class="panel-zone-label" id="panel-zone-label"></span>
@@ -440,7 +433,7 @@ const zones = {
   scalp: { label:'01 — scalp', title:'Scalp & Hair', topics:[
     { name:'Trichology research', slug:'trichology', notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.', links:[{text:'Trichological Society',href:'https://www.trichological.com'},{text:'Scalp health journal',href:'#'}]},
     { name:'Scalp photos & progress', slug:'photos', notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.', links:[]},
-    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.', links:[{text:'Curly Girl Method overview',href:'https://www.naturallycurly.com'}]},
+    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.', links:[{text:'Curly Girl Method',href:'https://www.naturallycurly.com'}]},
     { name:'Shampoo & co-wash', slug:'routine', notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.', links:[]},
     { name:'Porosity & moisture', slug:'moisture', notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything.', links:[]},
     { name:'Products', slug:'products', notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.', links:[{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
@@ -465,7 +458,7 @@ const zones = {
     { name:'Probiotics & enzymes', slug:'probiotics', notes:'Probiotic strains researched, digestive enzymes tried, and your observations on how they affect digestion and gut comfort.', links:[]},
   ]},
   arms: { label:'05 — arms', title:'Arms & Hands', topics:[
-    { name:'Hand & nail care', slug:'nails', notes:'Nail health research, cuticle care, products used, and any issues like peeling, breakage, or slow growth. What\'s helped.', links:[]},
+    { name:'Hand & nail care', slug:'nails', notes:'Nail health research, cuticle care, products used, and any issues like peeling, breakage, or slow growth.', links:[]},
     { name:'Strength training', slug:'training', notes:'Upper body and arm training notes — exercises, progression, and how your arms feel and look with different training approaches.', links:[]},
     { name:'Skin texture research', slug:'skin', notes:'Notes on keratosis pilaris, dry skin, body acne, or other texture concerns on arms. What treatments you\'ve researched and tried.', links:[]},
   ]},
@@ -496,49 +489,27 @@ const panelZoneTitle = document.getElementById('panel-zone-title');
 const panelBodyNav   = document.getElementById('panel-body-nav');
 const panelTopicList = document.getElementById('panel-topic-list');
 const panelContent   = document.getElementById('panel-content');
-let activeZone  = null;
-
-/* ── hotspot positions ── */
-function getHotspotPos(zone) {
-  const p = hotspotPositions[zone];
-  return { x: p.x * window.innerWidth, y: p.y * window.innerHeight };
-}
+let activeZone = null;
 
 function repositionHotspots() {
   document.querySelectorAll('.hotspot').forEach(dot => {
     const p = hotspotPositions[dot.dataset.zone];
-    if (!p) return;
     dot.style.left = (p.x * window.innerWidth) + 'px';
     dot.style.top  = (p.y * window.innerHeight) + 'px';
   });
 }
-window.addEventListener('resize', () => { repositionHotspots(); if (activeZone) drawLine(activeZone); });
+window.addEventListener('resize', () => { repositionHotspots(); if (activeZone) showCard(activeZone); });
 repositionHotspots();
 
-/* ── get the right edge midpoint of a zone-item ── */
-function getZoneItemAnchor(zone) {
-  const el = document.querySelector(`.zone-item[data-zone="${zone}"]`);
-  if (!el) return { x: 160, y: 0 };
-  const r = el.getBoundingClientRect();
-  return { x: r.right, y: r.top + r.height / 2 };
-}
+/* ── show card anchored to right, line from hotspot to card left edge ── */
+function showCard(zone) {
+  const z = zones[zone];
+  document.getElementById('card-label').textContent = z.label;
+  document.getElementById('card-title').textContent = z.title;
+  document.getElementById('card-topics-preview').innerHTML = z.topics
+    .map(t => `<li>${t.name}</li>`).join('');
 
-/* ── draw line: left col → card → hotspot ── */
-function drawLine(zone) {
-  const anchor   = getZoneItemAnchor(zone);
-  const hotspot  = getHotspotPos(zone);
-
-  // line goes from left col right edge → hotspot
-  connectorLine.setAttribute('x1', anchor.x);
-  connectorLine.setAttribute('y1', anchor.y);
-  connectorLine.setAttribute('x2', hotspot.x);
-  connectorLine.setAttribute('y2', hotspot.y);
-  connectorLine.classList.add('visible');
-
-  // position card midway along the line
-  const midX = (anchor.x + hotspot.x) / 2;
-  const midY = (anchor.y + hotspot.y) / 2;
-
+  // measure card
   card.style.visibility = 'hidden';
   card.style.display = 'block';
   const cW = card.offsetWidth;
@@ -546,52 +517,45 @@ function drawLine(zone) {
   card.style.visibility = '';
   card.style.display = '';
 
-  let cx = midX - cW / 2;
-  let cy = midY - cH / 2;
-  cx = Math.max(170, Math.min(cx, window.innerWidth - cW - 20));
-  cy = Math.max(16,  Math.min(cy, window.innerHeight - cH - 16));
+  // hotspot position
+  const p    = hotspotPositions[zone];
+  const dotX = p.x * window.innerWidth;
+  const dotY = p.y * window.innerHeight;
 
-  card.style.left = cx + 'px';
-  card.style.top  = cy + 'px';
+  // card vertically centered on hotspot, anchored right: 40px
+  let cardTop = dotY - cH / 2;
+  cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cH - 16));
+  card.style.top = cardTop + 'px';
+
+  // horizontal line from hotspot right → card left edge
+  const cardLeft = window.innerWidth - 40 - cW;
+  connectorLine.setAttribute('x1', dotX);
+  connectorLine.setAttribute('y1', dotY);
+  connectorLine.setAttribute('x2', cardLeft);
+  connectorLine.setAttribute('y2', dotY); // same Y = perfectly horizontal
+  connectorLine.classList.add('visible');
+
+  card.classList.add('visible');
 }
 
-/* ── select a zone ── */
-function selectZone(zone) {
-  if (activeZone === zone && !document.body.classList.contains('panel-open')) {
-    clearAll(); return;
-  }
-  activeZone = zone;
-
-  // update left col
-  document.querySelectorAll('.zone-item').forEach(z => z.classList.remove('active'));
-  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-
-  // fill card
-  const z = zones[zone];
-  document.getElementById('card-label').textContent = z.label;
-  document.getElementById('card-title').textContent = z.title;
-  document.getElementById('card-topic-count').textContent = z.topics.length + ' topics';
-
-  // draw line & position card
-  drawLine(zone);
-  card.classList.add('visible');
+function clearCard() {
+  card.classList.remove('visible');
+  connectorLine.classList.remove('visible');
 }
 
 /* ── open panel ── */
 function openPanel(zone) {
-  const z = zones[zone];
   activeZone = zone;
+  const z = zones[zone];
 
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
 
-  // body nav
   panelBodyNav.innerHTML = zoneOrder.map(zk =>
     `<li class="panel-body-nav-item${zk === zone ? ' active' : ''}" data-zone="${zk}">${zones[zk].title}</li>`
   ).join('');
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item => {
-    item.addEventListener('click', () => switchZone(item.dataset.zone));
-  });
+  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
+    item.addEventListener('click', () => switchZone(item.dataset.zone)));
 
   buildTopicList(zone, z.topics[0].slug);
   loadTopic(zone, z.topics[0].slug);
@@ -600,17 +564,14 @@ function openPanel(zone) {
   document.body.classList.add('panel-open');
 }
 
-/* ── switch zone inside panel ── */
 function switchZone(zone) {
   activeZone = zone;
   const z = zones[zone];
-
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
 
   panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
     item.classList.toggle('active', item.dataset.zone === zone));
-
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
 
@@ -660,48 +621,49 @@ function loadTopic(zone, slug) {
 }
 
 function clearAll() {
-  card.classList.remove('visible');
-  connectorLine.classList.remove('visible');
+  clearCard();
   infoPanel.classList.remove('open');
   document.body.classList.remove('panel-open');
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   activeZone = null;
 }
 
-/* ── card click → open panel ── */
+/* ── card click → panel ── */
 card.addEventListener('click', e => {
   e.stopPropagation();
   if (activeZone) openPanel(activeZone);
 });
 
-/* ── zone item clicks ── */
+/* ── zone item click ── */
 document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', e => {
     e.stopPropagation();
     const zone = item.dataset.zone;
-    if (document.body.classList.contains('panel-open')) {
-      switchZone(zone); return;
-    }
-    selectZone(zone);
+    if (document.body.classList.contains('panel-open')) { switchZone(zone); return; }
+    if (activeZone === zone) { clearAll(); return; }
+    activeZone = zone;
+    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
+    item.classList.add('active');
+    showCard(zone);
   });
 });
 
-/* ── hotspot clicks (same as zone item) ── */
+/* ── hotspot click ── */
 document.querySelectorAll('.hotspot').forEach(dot => {
   dot.addEventListener('click', e => {
     e.stopPropagation();
     const zone = dot.dataset.zone;
-    if (document.body.classList.contains('panel-open')) {
-      switchZone(zone); return;
-    }
-    selectZone(zone);
+    if (document.body.classList.contains('panel-open')) { switchZone(zone); return; }
+    if (activeZone === zone) { clearAll(); return; }
+    activeZone = zone;
+    document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
+    document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
+    showCard(zone);
   });
 });
 
-/* ── close panel button ── */
 document.getElementById('panel-close-btn').addEventListener('click', clearAll);
 
-/* ── click outside ── */
 document.addEventListener('click', e => {
   if (!e.target.closest('.left-col') && !e.target.closest('.card') &&
       !e.target.closest('.info-panel') && !e.target.closest('.hotspot')) {
