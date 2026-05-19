@@ -39,20 +39,12 @@
       cursor: pointer;
       transition: fill-opacity 0.2s;
     }
-    .body-region:hover { fill-opacity: 0.08; }
-    .body-region.active { fill-opacity: 0.12; }
+    .body-region:hover { fill-opacity: 0; }
+    .body-region.active { fill-opacity: 0; }
     body.panel-open .body-region { pointer-events: none; }
 
     /* connector line */
-    .connector-line {
-      stroke: rgba(255,0,0,0.3);
-      stroke-width: 1.5;
-      fill: none;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    .connector-line.visible { opacity: 1; }
-    body.panel-open .connector-line { opacity: 0; }
+    .connector-line { display: none; }
 
     /* ── left column ── */
     .left-col {
@@ -119,7 +111,7 @@
     /* ── card — right anchored, original style ── */
     .card {
       position: fixed;
-      right: 40px;
+      left: 55%;
       width: 210px;
       background: #f5f2eb;
       border: 1px solid rgba(255,0,0,0.15);
@@ -499,7 +491,7 @@ function vbToScreen(vx, vy) {
   return { x: offsetX + vx * scale, y: offsetY + vy * scale };
 }
 
-/* show card + horizontal line */
+/* show card + no line */
 function showCard(zone) {
   const z = zones[zone];
   document.getElementById('card-label').textContent = z.label;
@@ -508,7 +500,6 @@ function showCard(zone) {
     `<li class="card-topic-item" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`
   ).join('');
 
-  // topic click → open panel on that topic
   document.querySelectorAll('.card-topic-item').forEach(item => {
     item.addEventListener('click', e => {
       e.stopPropagation();
@@ -516,37 +507,25 @@ function showCard(zone) {
     });
   });
 
-  // measure card
+  // get region center in screen coords for vertical alignment
+  const c  = regionCenters[zone];
+  const sc = vbToScreen(c.vx, c.vy);
+
   card.style.visibility = 'hidden';
   card.style.display = 'block';
-  const cW = card.offsetWidth;
   const cH = card.offsetHeight;
   card.style.visibility = '';
   card.style.display = '';
 
-  // get region center in screen coords
-  const c = regionCenters[zone];
-  const sc = vbToScreen(c.vx, c.vy);
-
-  // card top: vertically centered on region
   let cardTop = sc.y - cH / 2;
   cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cH - 16));
   card.style.top = cardTop + 'px';
-
-  // horizontal line from region center → card left edge (right: 40 means left = W - 40 - cW)
-  const cardLeftEdge = window.innerWidth - 40 - cW;
-  connectorLine.setAttribute('x1', sc.x);
-  connectorLine.setAttribute('y1', sc.y);
-  connectorLine.setAttribute('x2', cardLeftEdge);
-  connectorLine.setAttribute('y2', sc.y);
-  connectorLine.classList.add('visible');
 
   card.classList.add('visible');
 }
 
 function clearCard() {
   card.classList.remove('visible');
-  connectorLine.classList.remove('visible');
   document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
 }
 
