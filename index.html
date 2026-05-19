@@ -116,15 +116,18 @@
     }
     .col-back:hover { color: rgba(0,0,0,0.55); }
 
-    /* ── card — right anchored, transparent, full topic list ── */
+    /* ── card — right anchored, original style ── */
     .card {
       position: fixed;
       right: 40px;
-      width: 220px;
+      width: 210px;
+      background: #f5f2eb;
+      border: 1px solid rgba(255,0,0,0.15);
+      padding: 16px 18px 12px;
       z-index: 100;
       pointer-events: none;
       opacity: 0;
-      transform: translateX(6px);
+      transform: translateX(8px);
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .card.visible {
@@ -136,40 +139,40 @@
 
     .card-label {
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.38rem;
+      font-size: 0.42rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #ff0000;
-      opacity: 0.7;
-      margin-bottom: 3px;
+      opacity: 0.6;
+      margin-bottom: 5px;
     }
     .card-title {
       font-family: 'Cormorant', serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
-      margin-bottom: 10px;
-      line-height: 1.1;
+      margin-bottom: 12px;
+      line-height: 1.15;
     }
     .card-topic-list { list-style: none; }
     .card-topic-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       font-family: 'Fragment Mono', monospace;
-      font-size: 0.44rem;
-      letter-spacing: 0.05em;
+      font-size: 0.46rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
-      padding: 7px 0;
+      color: rgba(0,0,0,0.6);
+      padding: 6px 0;
       border-top: 0.5px solid rgba(0,0,0,0.07);
       cursor: pointer;
       transition: color 0.15s, padding-left 0.15s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
     .card-topic-item:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
-    .card-topic-item::before { content: '→'; opacity: 0.25; font-size: 0.4rem; flex-shrink: 0; }
-    .card-topic-item:hover { color: #ff0000; padding-left: 6px; }
+    .card-topic-item::before { content: '→'; opacity: 0.35; font-size: 0.5rem; flex-shrink: 0; }
+    .card-topic-item:hover { color: #ff0000; padding-left: 5px; }
 
     /* ── right panel ── */
     .info-panel {
