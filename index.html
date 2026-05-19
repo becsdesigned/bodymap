@@ -334,192 +334,70 @@
       font-style: italic;
     }
 
-    /* ── symptom search trigger ── */
-    .col-search-btn {
+    /* ── inline symptom search ── */
+    .col-search { margin-bottom: 4px; }
+    .col-search-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 12px;
-      padding: 8px 0;
-      background: none;
-      border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.08);
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.38rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.35);
-      cursor: pointer;
-      width: 100%;
-      transition: color 0.2s;
+      gap: 6px;
+      border-bottom: 0.5px solid rgba(0,0,0,0.12);
+      margin-bottom: 10px;
     }
-    .col-search-btn:hover { color: #ff0000; }
-    .search-icon { font-size: 0.55rem; transition: transform 0.2s; }
-    .col-search-btn:hover .search-icon { transform: translateY(-2px); }
-
-    /* ── symptom panel ── */
-    .symptom-panel {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 60vh;
-      background: #f5f2eb;
-      border-top: 0.5px solid rgba(0,0,0,0.1);
-      z-index: 200;
-      transform: translateY(100%);
-      transition: transform 0.4s ease;
-    }
-    .symptom-panel.open { transform: translateY(0); }
-    .symptom-panel-inner {
-      height: 100%;
-      padding: 32px 40px 32px 200px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      overflow: hidden;
-    }
-    .symptom-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-shrink: 0;
-    }
-    .symptom-title {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: #1a1a1a;
-      margin-bottom: 3px;
-    }
-    .symptom-subtitle {
-      font-family: 'Cormorant', serif;
-      font-size: 0.78rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(0,0,0,0.35);
-    }
-    .symptom-close {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.38rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    .symptom-close:hover { color: #000; }
-    .symptom-input-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .symptom-input {
+    .col-search-input {
       flex: 1;
       background: transparent;
       border: none;
-      border-bottom: 1px solid rgba(0,0,0,0.15);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 300;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.44rem;
+      letter-spacing: 0.04em;
       color: #0a0a0a;
-      padding: 8px 0;
+      padding: 6px 0;
       outline: none;
-      transition: border-color 0.2s;
+      min-width: 0;
     }
-    .symptom-input::placeholder { color: rgba(0,0,0,0.25); }
-    .symptom-input:focus { border-color: #ff0000; }
-    .symptom-submit {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.42rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: #ff0000;
-      color: #fff;
+    .col-search-input::placeholder { color: rgba(0,0,0,0.25); }
+    .col-search-go {
+      background: none;
       border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      flex-shrink: 0;
-    }
-    .symptom-submit:hover { opacity: 0.85; }
-    .symptom-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-    .symptom-results {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .symptom-results::-webkit-scrollbar { width: 0; }
-    .symptom-loading {
-      font-family: 'Cormorant', serif;
-      font-size: 0.9rem;
-      font-style: italic;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.5rem;
       color: rgba(0,0,0,0.3);
-      padding: 8px 0;
-    }
-    .symptom-intro {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: rgba(0,0,0,0.5);
-      font-style: italic;
-      padding: 4px 0 12px;
-      border-bottom: 0.5px solid rgba(0,0,0,0.07);
-    }
-    .result-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .result-card {
-      background: #fff;
-      border: 1px solid rgba(255,0,0,0.12);
-      padding: 14px 16px 12px;
-      width: 190px;
       cursor: pointer;
-      transition: border-color 0.15s, transform 0.15s;
+      padding: 4px 0;
+      flex-shrink: 0;
+      transition: color 0.15s;
     }
-    .result-card:hover { border-color: rgba(255,0,0,0.45); transform: translateY(-2px); }
-    .result-card-zone {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.36rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #ff0000;
-      opacity: 0.6;
-      margin-bottom: 4px;
-    }
-    .result-card-topic {
-      font-family: 'Cormorant', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      margin-bottom: 6px;
-      line-height: 1.2;
-    }
-    .result-card-reason {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.36rem;
-      letter-spacing: 0.03em;
-      color: rgba(0,0,0,0.4);
-      line-height: 1.6;
-    }
-    .result-card-arrow {
-      font-size: 0.4rem;
-      color: rgba(255,0,0,0.4);
-      margin-top: 8px;
-      display: block;
-    }
-    .symptom-error {
+    .col-search-go:hover { color: #ff0000; }
+
+    /* result items in left col */
+    .col-result-item {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.42rem;
-      letter-spacing: 0.06em;
-      color: rgba(255,0,0,0.5);
-      padding: 8px 0;
+      letter-spacing: 0.04em;
+      color: rgba(0,0,0,0.45);
+      padding: 5px 0;
+      border-bottom: 0.5px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: color 0.15s, padding-left 0.15s;
+      line-height: 1.5;
+    }
+    .col-result-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
+    .col-result-item:hover { color: #ff0000; padding-left: 4px; }
+    .col-result-zone {
+      font-size: 0.34rem;
+      color: #ff0000;
+      opacity: 0.55;
+      display: block;
+      margin-bottom: 1px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .col-no-results {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.38rem;
+      color: rgba(0,0,0,0.28);
+      padding: 6px 0;
+      line-height: 1.6;
     }
 
     .floating-br {
@@ -579,11 +457,16 @@
       <li class="zone-item" data-zone="arms">Arms &amp; Hands</li>
       <li class="zone-item" data-zone="legs">Legs &amp; Feet</li>
     </ul>
+    <div class="col-search">
+      <div class="col-section" style="margin-top:20px;">Symptom Search</div>
+      <div class="col-search-row">
+        <input class="col-search-input" id="symptom-input" type="text" placeholder="e.g. itchy scalp…"/>
+        <button class="col-search-go" id="symptom-submit">→</button>
+      </div>
+      <div id="symptom-results-inline"></div>
+    </div>
+
     <a class="col-back" href="https://becsdesigned.com">← becs designed</a>
-    <button class="col-search-btn" id="col-search-btn">
-      <span>symptom search</span>
-      <span class="search-icon">↑</span>
-    </button>
   </div>
 
   <!-- card with full topic list -->
@@ -606,28 +489,8 @@
     <div class="panel-content" id="panel-content"></div>
   </div>
 
-  <!-- symptom search panel -->
-  <div class="symptom-panel" id="symptom-panel">
-    <div class="symptom-panel-inner">
-      <div class="symptom-header">
-        <div>
-          <div class="symptom-title">Symptom Search</div>
-          <div class="symptom-subtitle">describe what you're experiencing</div>
-        </div>
-        <button class="symptom-close" id="symptom-close">× close</button>
-      </div>
-
-      <div class="symptom-input-row">
-        <input class="symptom-input" id="symptom-input" type="text"
-          placeholder="e.g. itchy scalp, bloating after eating, dry skin..."/>
-        <button class="symptom-submit" id="symptom-submit">search →</button>
-      </div>
-
-      <div class="symptom-results" id="symptom-results"></div>
-    </div>
-  </div>
-
-
+  <div class="floating-tr">click any zone to explore</div>
+  <div class="floating-br">broward, fl</div>
 
 <script>
 const zones = {
@@ -853,72 +716,55 @@ document.addEventListener('click', e => {
 card.addEventListener('click', e => e.stopPropagation());
 window.addEventListener('resize', () => { if (activeZone && !document.body.classList.contains('panel-open')) showCard(activeZone); });
 
-/* ── symptom search — static keyword map ── */
-const symptomPanel   = document.getElementById('symptom-panel');
+/* ── symptom search — inline in left column ── */
 const symptomInput   = document.getElementById('symptom-input');
 const symptomSubmit  = document.getElementById('symptom-submit');
-const symptomResults = document.getElementById('symptom-results');
+const symptomResults = document.getElementById('symptom-results-inline');
 
-// format: 'keyword': [['zone/slug', 'why it's relevant'], ...]
-// add as many symptoms as you like — partial matches work too
 const symptomMap = {
-  'itchy scalp':     [['scalp/trichology','trichologist findings on scalp irritation'],['scalp/moisture','porosity & dryness can cause itch'],['scalp/routine','shampoo & co-wash routine may be the cause'],['torso/supplements','vitamin D deficiency linked to scalp itch']],
-  'itchy':           [['scalp/trichology','trichologist findings on scalp irritation'],['face/actives','active ingredients can cause sensitivity'],['scalp/moisture','moisture imbalance causes itch']],
-  'dry scalp':       [['scalp/moisture','moisture & porosity research'],['scalp/routine','shampoo routine may be stripping scalp'],['scalp/products','product recommendations for dry scalp'],['torso/supplements','omega-3 & vitamin D for scalp health']],
-  'hair loss':       [['scalp/trichology','trichology research covers hair loss'],['torso/supplements','supplement stack for hair growth'],['torso/nutrition','nutrition protocols affecting hair']],
-  'hair breakage':   [['scalp/moisture','protein-moisture balance causes breakage'],['scalp/trichology','trichologist notes on breakage'],['scalp/products','products that reduce breakage']],
-  'frizz':           [['scalp/curly-method','curly method for frizz control'],['scalp/moisture','humidity & porosity cause frizz'],['scalp/routine','wash day routine for frizz']],
-  'dandruff':        [['scalp/trichology','trichology research covers dandruff'],['scalp/routine','shampoo routine for dandruff'],['torso/microbiome','gut-skin axis may affect dandruff']],
-  'curl definition': [['scalp/curly-method','curl method for definition'],['scalp/moisture','moisture balance for curl pattern'],['scalp/products','styling products for curl definition']],
-  'bloating':        [['torso/microbiome','microbiome imbalance causes bloating'],['torso/probiotics','probiotics & enzymes for bloating'],['torso/sensitivities','food sensitivities cause bloating'],['torso/nutrition','nutrition protocols to reduce bloating']],
-  'gut':             [['torso/microbiome','microbiome research'],['torso/probiotics','probiotics & digestive enzymes'],['torso/nutrition','nutrition protocols']],
-  'digestion':       [['torso/probiotics','digestive enzymes research'],['torso/microbiome','microbiome & gut health'],['torso/sensitivities','food sensitivity testing']],
-  'food sensitivity':[['torso/sensitivities','food sensitivity elimination notes'],['torso/microbiome','gut microbiome & food reactions'],['torso/nutrition','nutrition protocols for sensitivities']],
-  'acne':            [['face/actives','active ingredients targeting acne'],['face/pm','PM routine for acne-prone skin'],['torso/nutrition','diet & breakout connections'],['torso/microbiome','gut-skin axis & acne']],
-  'breakouts':       [['face/actives','actives for blemish control'],['face/pm','evening routine for breakouts'],['torso/nutrition','nutrition & skin connection'],['torso/sensitivities','food sensitivities triggering breakouts']],
-  'dark spots':      [['face/pigmentation','hyperpigmentation research & treatments'],['face/spf','SPF to prevent & treat dark spots'],['face/actives','active ingredients for pigmentation']],
-  'hyperpigmentation':[['face/pigmentation','dedicated hyperpigmentation research'],['face/spf','sun protection for pigmentation'],['face/actives','actives like vitamin C & AHAs']],
-  'dry skin':        [['face/am','AM moisturising routine'],['face/pm','PM repair routine for dry skin'],['arms/skin','dry skin & texture on arms'],['legs/feet','foot dryness care']],
-  'oily skin':       [['face/am','AM routine for oily skin'],['face/actives','ingredients balancing oil production'],['face/pm','PM routine for oil control']],
-  'sunscreen':       [['face/spf','SPF research & recommendations'],['face/am','AM routine with SPF']],
-  'spf':             [['face/spf','SPF research — UVA/UVB & formulas'],['face/am','daily SPF application routine']],
-  'wrinkles':        [['face/actives','retinoids & anti-aging actives'],['face/pm','PM repair routine'],['neck/skincare','neck & décolletage skincare']],
-  'neck':            [['neck/skincare','neck skincare routine'],['neck/posture','posture affecting neck'],['neck/stretch','stretching for neck tension']],
-  'posture':         [['neck/posture','posture research & assessments'],['neck/stretch','stretching routine for posture']],
-  'tension':         [['neck/stretch','stretching routine for tension'],['neck/posture','posture & tension connection']],
-  'tight muscles':   [['neck/stretch','neck & upper back stretches'],['legs/mobility','lower body mobility work']],
-  'nail breakage':   [['arms/nails','nail health & breakage research'],['torso/supplements','biotin & supplement stack for nails']],
-  'nails':           [['arms/nails','hand & nail care research'],['torso/supplements','supplements for nail growth']],
-  'keratosis pilaris':[['arms/skin','KP texture research on arms'],['face/actives','exfoliating actives for texture']],
-  'bumps':           [['arms/skin','skin texture research'],['face/actives','chemical exfoliants for bumps']],
-  'sore legs':       [['legs/workout','workout & recovery notes'],['legs/mobility','mobility & stretching for soreness']],
-  'leg pain':        [['legs/vascular','vascular health research'],['legs/mobility','mobility work for leg pain']],
-  'circulation':     [['legs/vascular','vascular & circulation research'],['legs/mobility','movement & circulation']],
-  'stiff':           [['legs/mobility','mobility & stretching research'],['neck/stretch','stretching routines']],
-  'supplements':     [['torso/supplements','full supplement stack research'],['scalp/trichology','supplements for hair & scalp'],['arms/nails','supplements for nails']],
-  'vitamin d':       [['torso/supplements','vitamin D in supplement stack'],['scalp/trichology','vitamin D & scalp/hair health']],
-  'probiotics':      [['torso/probiotics','probiotic strain research'],['torso/microbiome','microbiome & probiotic connection']],
-  'diet':            [['torso/nutrition','nutrition protocols research'],['torso/sensitivities','food sensitivity findings'],['face/pigmentation','diet & skin pigmentation']],
+  'itchy scalp':     [['scalp/trichology','trichologist findings'],['scalp/moisture','dryness causes itch'],['scalp/routine','shampoo may be cause'],['torso/supplements','vitamin D deficiency']],
+  'itchy':           [['scalp/trichology','scalp irritation research'],['face/actives','actives cause sensitivity'],['scalp/moisture','moisture imbalance']],
+  'dry scalp':       [['scalp/moisture','moisture & porosity research'],['scalp/routine','shampoo stripping scalp'],['scalp/products','product recs'],['torso/supplements','omega-3 & vitamin D']],
+  'hair loss':       [['scalp/trichology','trichology covers hair loss'],['torso/supplements','supplement stack for hair'],['torso/nutrition','nutrition & hair growth']],
+  'hair breakage':   [['scalp/moisture','protein-moisture balance'],['scalp/trichology','trichologist notes'],['scalp/products','products that reduce breakage']],
+  'frizz':           [['scalp/curly-method','curly method for frizz'],['scalp/moisture','porosity causes frizz'],['scalp/routine','wash day routine']],
+  'dandruff':        [['scalp/trichology','trichology covers dandruff'],['scalp/routine','shampoo for dandruff'],['torso/microbiome','gut-skin axis']],
+  'curl':            [['scalp/curly-method','curl method & techniques'],['scalp/moisture','moisture for curl pattern'],['scalp/products','styling product recs']],
+  'bloating':        [['torso/microbiome','microbiome imbalance'],['torso/probiotics','probiotics & enzymes'],['torso/sensitivities','food sensitivities'],['torso/nutrition','nutrition protocols']],
+  'gut':             [['torso/microbiome','microbiome research'],['torso/probiotics','probiotics & enzymes'],['torso/nutrition','nutrition protocols']],
+  'digestion':       [['torso/probiotics','digestive enzymes research'],['torso/microbiome','gut health'],['torso/sensitivities','food sensitivity testing']],
+  'food sensitivity':[['torso/sensitivities','elimination diet notes'],['torso/microbiome','gut & food reactions'],['torso/nutrition','nutrition protocols']],
+  'acne':            [['face/actives','actives targeting acne'],['face/pm','PM routine for acne'],['torso/nutrition','diet & breakouts'],['torso/microbiome','gut-skin axis']],
+  'breakout':        [['face/actives','blemish-control actives'],['face/pm','evening routine'],['torso/nutrition','nutrition & skin'],['torso/sensitivities','food triggers']],
+  'dark spots':      [['face/pigmentation','hyperpigmentation research'],['face/spf','SPF for dark spots'],['face/actives','vitamin C & AHAs']],
+  'pigmentation':    [['face/pigmentation','dedicated research'],['face/spf','sun protection'],['face/actives','brightening actives']],
+  'dry skin':        [['face/am','AM moisturising routine'],['face/pm','PM repair routine'],['arms/skin','dry skin on arms'],['legs/feet','foot dryness']],
+  'oily':            [['face/am','AM for oily skin'],['face/actives','oil-balancing ingredients'],['face/pm','PM routine']],
+  'sunscreen':       [['face/spf','SPF research & recs'],['face/am','daily SPF routine']],
+  'spf':             [['face/spf','UVA/UVB protection research'],['face/am','SPF in AM routine']],
+  'wrinkles':        [['face/actives','retinoids & anti-aging'],['face/pm','PM repair routine'],['neck/skincare','neck & decolletage']],
+  'neck':            [['neck/skincare','neck skincare'],['neck/posture','posture & neck'],['neck/stretch','neck stretches']],
+  'posture':         [['neck/posture','posture research'],['neck/stretch','stretching for posture']],
+  'tension':         [['neck/stretch','stretching for tension'],['neck/posture','posture & tension']],
+  'stiff':           [['neck/stretch','neck & upper back stretches'],['legs/mobility','lower body mobility']],
+  'nails':           [['arms/nails','nail health research'],['torso/supplements','biotin & supplements']],
+  'bumps':           [['arms/skin','skin texture research'],['face/actives','exfoliants for texture']],
+  'sore':            [['legs/workout','workout & recovery'],['legs/mobility','mobility & stretching']],
+  'circulation':     [['legs/vascular','vascular & circulation'],['legs/mobility','movement & circulation']],
+  'supplements':     [['torso/supplements','full supplement stack'],['scalp/trichology','supplements for hair'],['arms/nails','nail supplements']],
+  'vitamin d':       [['torso/supplements','vitamin D in stack'],['scalp/trichology','vitamin D & scalp health']],
+  'probiotics':      [['torso/probiotics','probiotic strain research'],['torso/microbiome','microbiome connection']],
+  'diet':            [['torso/nutrition','nutrition protocols'],['torso/sensitivities','food sensitivity findings'],['face/pigmentation','diet & skin']],
 };
 
-document.getElementById('col-search-btn').addEventListener('click', () => {
-  symptomPanel.classList.add('open');
-  setTimeout(() => symptomInput.focus(), 400);
-});
-document.getElementById('symptom-close').addEventListener('click', () => {
-  symptomPanel.classList.remove('open');
-  symptomResults.innerHTML = '';
-  symptomInput.value = '';
-});
 symptomInput.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
 symptomSubmit.addEventListener('click', runSearch);
 
 function runSearch() {
   const query = symptomInput.value.trim().toLowerCase();
-  if (!query) return;
+  if (!query) { symptomResults.innerHTML = ''; return; }
 
-  // find all matching entries — partial match on keyword
-  const matched = new Map(); // slug → {topic, reason}
+  const matched = new Map();
   Object.entries(symptomMap).forEach(([keyword, results]) => {
     if (query.includes(keyword) || keyword.includes(query) ||
         keyword.split(' ').some(w => query.includes(w) && w.length > 3)) {
@@ -934,41 +780,27 @@ function runSearch() {
   });
 
   if (!matched.size) {
-    symptomResults.innerHTML = `
-      <div class="symptom-error">no results for "${query}" — try different terms or add this symptom to your map</div>`;
+    symptomResults.innerHTML = '<div class="col-no-results">no results — try different terms</div>';
     return;
   }
 
-  const intro = document.createElement('div');
-  intro.className = 'symptom-intro';
-  intro.textContent = `${matched.size} research area${matched.size > 1 ? 's' : ''} related to "${query}"`;
-
-  const cards = document.createElement('div');
-  cards.className = 'result-cards';
-
+  symptomResults.innerHTML = '';
   matched.forEach(({ zoneKey, zone, topic, reason }) => {
     const el = document.createElement('div');
-    el.className = 'result-card';
-    el.innerHTML = `
-      <div class="result-card-zone">${zone.label} — ${zone.title}</div>
-      <div class="result-card-topic">${topic.name}</div>
-      <div class="result-card-reason">${reason}</div>
-      <span class="result-card-arrow">→ view research</span>
-    `;
+    el.className = 'col-result-item';
+    el.innerHTML = '<span class="col-result-zone">' + zone.title + '</span>' + topic.name;
+    el.title = reason;
     el.addEventListener('click', () => {
-      symptomPanel.classList.remove('open');
       clearAll();
+      symptomInput.value = '';
+      symptomResults.innerHTML = '';
       setTimeout(() => {
         selectZone(zoneKey);
         setTimeout(() => openPanel(zoneKey, topic.slug), 300);
       }, 100);
     });
-    cards.appendChild(el);
+    symptomResults.appendChild(el);
   });
-
-  symptomResults.innerHTML = '';
-  symptomResults.appendChild(intro);
-  symptomResults.appendChild(cards);
 }
 </script>
 </body>
