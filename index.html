@@ -747,6 +747,14 @@
       letter-spacing: 0.03em;
       color: rgba(0,0,0,0.6);
     }
+    .pdf-dl-hint {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: rgba(0,0,0,0.35);
+      margin-top: 8px;
+    }
 
     /* htma / omega lab panels */
     .htma-panel { margin-bottom: 18px; }
@@ -934,6 +942,8 @@
     <ellipse class="body-region" data-zone="oral"     cx="968"  cy="300"  rx="62"  ry="42"/>
     <!-- labs region — lower abdomen, below the adrenal area -->
     <ellipse class="body-region" data-zone="labs"     cx="942"  cy="640"  rx="95"  ry="58"/>
+    <!-- omega-3 region — chest / heart -->
+    <ellipse class="body-region" data-zone="omega3"   cx="905"  cy="430"  rx="60"  ry="48"/>
     <line id="connector-line" class="connector-line" x1="0" y1="0" x2="0" y2="0"/>
   </svg>
 
@@ -947,7 +957,8 @@
       <li class="zone-item" data-zone="legs">Legs &amp; Feet</li>
       <li class="zone-item" data-zone="adrenal">Adrenal Health</li>
       <li class="zone-item" data-zone="oral">Oral Health</li>
-      <li class="zone-item" data-zone="labs">Minerals &amp; Labs</li>
+      <li class="zone-item" data-zone="labs">Minerals &amp; Metals</li>
+      <li class="zone-item" data-zone="omega3">Omega-3 &amp; Inflammation</li>
     </ul>
     <div class="col-search">
       <div class="col-section" style="margin-top:14px;">Symptom Search</div>
@@ -1242,9 +1253,9 @@ const zones = {
     ]
   },
   labs: {
-    label: '09 — labs',
-    title: 'Minerals & Labs',
-    summary: 'HTMA (hair mineral analysis) + Omega-3 test. Slow oxidizer, mineral imbalances, elevated heavy metals, low omega-3.',
+    label: '09 — minerals',
+    title: 'Minerals & Metals',
+    summary: 'HTMA hair mineral analysis. Slow oxidizer, mineral imbalances, elevated heavy metals (mercury, aluminum).',
     topics: [
       {
         name: 'HTMA — hair mineral analysis',
@@ -1316,6 +1327,13 @@ const zones = {
         notes: 'My mineral-balancing protocol will live here. Add when ready — the supplements, dosages, and timing your practitioner recommends (e.g. Cal-Mag, Balanced Zinc, heavy metal detox), plus how I respond over time and retest comparisons.',
         links: [],
       },
+    ]
+  },
+  omega3: {
+    label: '10 — omega-3',
+    title: 'Omega-3 & Inflammation',
+    summary: 'Omega-3 blood test. Low omega-3 across the board, high omega-6:3 ratio — an inflammatory tilt.',
+    topics: [
       {
         name: 'Omega-3 test',
         slug: 'omega3-results',
@@ -1345,12 +1363,18 @@ const zones = {
           { text:'Omega-3 Test', href:'https://equi.life/products/omega-3-test' },
         ],
       },
+      {
+        name: 'Supplementation & retest',
+        slug: 'omega3-notes',
+        notes: 'My omega-3 plan and tracking. Add the EPA/DHA dose I take (target ~1000–2000mg combined daily), the fish-oil or algae brand, dietary changes (more fatty fish + greens, fewer omega-6 oils like soybean/corn/safflower), and how the numbers move when I retest.',
+        links: [],
+      },
     ]
   },
 
 };
 
-const zoneOrder = ['scalp','face','legs','adrenal','oral','labs'];
+const zoneOrder = ['scalp','face','legs','adrenal','oral','labs','omega3'];
 
 const regionCenters = {
   scalp:   { vx: 960,  vy: 112 },
@@ -1359,6 +1383,7 @@ const regionCenters = {
   adrenal: { vx: 942,  vy: 490 },
   oral:    { vx: 968,  vy: 300 },
   labs:    { vx: 942,  vy: 640 },
+  omega3:  { vx: 905,  vy: 430 },
 };
 
 const card           = document.getElementById('card');
@@ -1424,27 +1449,39 @@ function pdfDownloadHTML(topic) {
     <div class="content-section">
       <span class="content-section-label">Document</span>
       <button class="pdf-dl" onclick="downloadPdf('${topic.pdf.key}','${topic.pdf.filename.replace(/'/g, "\\'")}')">
-        <span class="pdf-dl-icon">↓</span>
+        <span class="pdf-dl-icon">↗</span>
         <span class="pdf-dl-name">${topic.pdf.filename}</span>
       </button>
+      <p class="pdf-dl-hint">Opens the PDF in a new tab. If nothing happens in the in-app preview, open the saved body-map file in your browser.</p>
     </div>`;
 }
 
 function downloadPdf(key, filename) {
   const b64 = (window.PDF_DATA || {})[key];
   if (!b64) { alert('PDF not available.'); return; }
-  const bin = atob(b64);
-  const bytes = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  let url;
+  try {
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    url = URL.createObjectURL(blob);
+  } catch (e) {
+    alert('Could not read the PDF data.');
+    return;
+  }
+  // Preferred: open inline in a new tab
+  const w = window.open(url, '_blank');
+  if (!w) {
+    // Fallback: trigger a download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
 function renderCortisolTopic(topic, z) {
@@ -1988,10 +2025,10 @@ const symptomMap = {
   'aluminum':        [['labs/htma-results','elevated aluminum'],['labs/htma-protocol','metal detox']],
   'detox':           [['labs/htma-results','heavy metals to clear'],['labs/htma-protocol','detox protocol']],
   'oxidizer':        [['labs/htma-results','slow oxidizer status']],
-  'omega':           [['labs/omega3-results','omega-3 test results']],
-  'omega 3':         [['labs/omega3-results','omega-3 status & index']],
-  'inflammation':    [['labs/omega3-results','omega-6:3 ratio & inflammation'],['adrenal/lab-findings','cortisol & inflammation']],
-  'fish oil':        [['labs/omega3-results','EPA/DHA targets']],
+  'omega':           [['omega3/omega3-results','omega-3 test results']],
+  'omega 3':         [['omega3/omega3-results','omega-3 status & index']],
+  'inflammation':    [['omega3/omega3-results','omega-6:3 ratio & inflammation'],['adrenal/lab-findings','cortisol & inflammation']],
+  'fish oil':        [['omega3/omega3-results','EPA/DHA targets']],
   'thyroid':         [['labs/htma-results','minerals affecting thyroid'],['adrenal/lab-findings','cortisol & thyroid notes']],
   'blood sugar':     [['labs/htma-results','chromium & blood sugar'],['adrenal/lab-findings','cortisol & blood sugar']],
   'grinding':        [['oral/grinding','teeth grinding & TMJ'],['oral/palate','palate expansion to stop grinding'],['oral/myology','myology for bruxism']],
