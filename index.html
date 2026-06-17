@@ -1765,6 +1765,7 @@ function renderOmega3Topic(topic, z) {
 }
 
 function renderRetestTopic(topic, z) {
+  const cols = topic.tests.map(t => `
     <div class="retest-col">
       <span class="retest-col-label">${t.label}</span>
       <span class="retest-col-date">${t.date}</span>
