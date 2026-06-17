@@ -55,9 +55,10 @@
     }
     .col-title {
       font-family: 'Fragment Mono', monospace;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 400;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
       color: #1a1a1a;
       margin-bottom: 3px;
     }
@@ -107,29 +108,42 @@
 
     .card {
       position: fixed;
-      right: 28px;
-      bottom: 28px;
-      left: auto;
-      top: auto;
-      width: 250px;
-      max-height: calc(100vh - 56px);
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 190px;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 20px 24px;
+      background: transparent;
+      border: none;
       overflow-y: auto;
-      background: #f5f2eb;
-      border: 1px solid rgba(var(--accent-rgb),0.15);
-      padding: 18px 20px 14px;
-      z-index: 100;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.2s ease;
     }
     .card::-webkit-scrollbar { width: 0; }
     .card.visible {
       opacity: 1;
-      transform: translateY(0);
       pointer-events: all;
     }
     body.panel-open .card { opacity: 0; pointer-events: none; }
+    .card-placeholder {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: rgba(0,0,0,0.32);
+      line-height: 1.6;
+    }
+    .col-foot {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.18);
+      margin-top: auto;
+      padding-top: 20px;
+    }
+    #card-eyebrow { display: none; }
 
     .card-label {
       display: none;
@@ -1005,10 +1019,13 @@
   </div>
 
   <div class="card" id="card">
+    <div class="col-section" id="card-eyebrow">Selected</div>
     <div class="card-label" id="card-label"></div>
     <div class="card-title" id="card-title"></div>
     <div class="card-summary" id="card-summary"></div>
     <ul class="card-topic-list" id="card-topic-list"></ul>
+    <div class="card-placeholder" id="card-placeholder">click any zone to explore</div>
+    <div class="col-foot">broward, fl</div>
   </div>
 
   <div class="info-panel" id="info-panel">
@@ -1023,9 +1040,6 @@
     </div>
     <div class="panel-content" id="panel-content"></div>
   </div>
-
-  <div class="floating-tr">click any zone to explore</div>
-  <div class="floating-br">broward, fl</div>
 
 <script>
 const zones = {
@@ -1474,12 +1488,19 @@ function showCard(zone) {
       openPanel(item.dataset.zone, item.dataset.slug);
     });
   });
+  document.getElementById('card-eyebrow').style.display = 'block';
+  document.getElementById('card-placeholder').style.display = 'none';
   document.body.classList.add('zone-active');
   card.classList.add('visible');
 }
 
 function clearCard() {
-  card.classList.remove('visible');
+  document.getElementById('card-title').textContent = '';
+  document.getElementById('card-summary').textContent = '';
+  document.getElementById('card-summary').style.display = 'none';
+  document.getElementById('card-topic-list').innerHTML = '';
+  document.getElementById('card-eyebrow').style.display = 'none';
+  document.getElementById('card-placeholder').style.display = 'block';
   document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
 }
 
