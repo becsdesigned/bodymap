@@ -4,9 +4,10 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Body Map — becs designed</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent: #b8443c; --accent-rgb: 184,68,60; }
     html, body { height: 100%; overflow: hidden; background: #f0efeb; }
 
     .photo {
@@ -32,7 +33,7 @@
     }
 
     .body-region {
-      fill: #ff0000;
+      fill: var(--accent);
       fill-opacity: 0;
       cursor: pointer;
       transition: fill-opacity 0.2s;
@@ -61,7 +62,7 @@
       margin-bottom: 3px;
     }
     .col-subtitle {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       font-weight: 300;
       font-style: italic;
@@ -90,7 +91,7 @@
     }
     .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
     .zone-item:hover { color: #000; }
-    .zone-item.active { color: #ff0000; }
+    .zone-item.active { color: var(--accent); }
     .col-back {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
@@ -106,10 +107,10 @@
 
     .card {
       position: fixed;
-      left: 55%;
+      left: 66%;
       width: 210px;
       background: #f5f2eb;
-      border: 1px solid rgba(255,0,0,0.15);
+      border: 1px solid rgba(var(--accent-rgb),0.15);
       padding: 16px 18px 12px;
       z-index: 100;
       pointer-events: none;
@@ -129,12 +130,12 @@
       font-size: 0.60rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.6;
       margin-bottom: 5px;
     }
     .card-title {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.55rem;
       font-weight: 300;
       font-style: italic;
@@ -143,7 +144,7 @@
       line-height: 1.15;
     }
     .card-summary {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(0,0,0,0.45);
@@ -168,7 +169,7 @@
     }
     .card-topic-item:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
     .card-topic-item::before { content: '→'; opacity: 0.35; font-size: 1.5rem; flex-shrink: 0; }
-    .card-topic-item:hover { color: #ff0000; padding-left: 5px; }
+    .card-topic-item:hover { color: var(--accent); padding-left: 5px; }
 
     .info-panel {
       position: fixed;
@@ -197,13 +198,13 @@
       font-size: 0.56rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.6;
       margin-bottom: 4px;
       display: block;
     }
     .panel-zone-title {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.5rem;
       font-weight: 300;
       font-style: italic;
@@ -226,7 +227,7 @@
       transition: color 0.15s;
     }
     .panel-body-nav-item:hover { color: #000; }
-    .panel-body-nav-item.active { color: #ff0000; }
+    .panel-body-nav-item.active { color: var(--accent); }
     .panel-nav-divider {
       border: none;
       border-top: 0.5px solid rgba(0,0,0,0.07);
@@ -245,7 +246,28 @@
       transition: color 0.15s, padding-left 0.15s;
     }
     .panel-topic-item:hover { color: #000; padding-left: 5px; }
-    .panel-topic-item.active { color: #ff0000; padding-left: 5px; }
+    .panel-topic-item.active { color: var(--accent); padding-left: 5px; }
+    .panel-x {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      z-index: 50;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f2eb;
+      border: 0.5px solid rgba(var(--accent-rgb),0.3);
+      color: var(--accent);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .panel-x:hover { background: var(--accent); color: #f5f2eb; transform: rotate(90deg); }
     .panel-close-btn {
       display: block;
       margin-top: 24px;
@@ -271,7 +293,7 @@
     .panel-content::-webkit-scrollbar { width: 0; }
 
     .content-title {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 2.4rem;
       font-weight: 300;
       font-style: italic;
@@ -294,13 +316,13 @@
       font-size: 0.56rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.5;
       display: block;
       margin-bottom: 8px;
     }
     .content-text {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.5rem;
       line-height: 1.85;
       color: rgba(0,0,0,0.58);
@@ -327,10 +349,10 @@
       text-decoration: none;
       transition: color 0.15s, padding-left 0.15s;
     }
-    .content-links a:hover { color: #ff0000; padding-left: 5px; }
+    .content-links a:hover { color: var(--accent); padding-left: 5px; }
     .content-links a::after { content: '↗'; opacity: 0.35; }
     .content-placeholder {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.15rem;
       line-height: 1.85;
       color: rgba(0,0,0,0.22);
@@ -363,7 +385,7 @@
     }
     .cortisol-table td.time { color: rgba(0,0,0,0.35); }
     .cortisol-table td.value { font-weight: 400; }
-    .cortisol-table td.value.low { color: #ff0000; }
+    .cortisol-table td.value.low { color: var(--accent); }
     .cortisol-table td.value.normal { color: #2a6e3f; }
     .cortisol-table td.range { color: rgba(0,0,0,0.28); font-size: 0.52rem; }
     .result-badge {
@@ -376,7 +398,7 @@
       margin-left: 5px;
       vertical-align: middle;
     }
-    .result-badge.low { background: rgba(255,0,0,0.07); color: #ff0000; }
+    .result-badge.low { background: rgba(var(--accent-rgb),0.07); color: var(--accent); }
     .result-badge.normal { background: rgba(42,110,63,0.08); color: #2a6e3f; }
 
     /* retest tracker */
@@ -412,10 +434,10 @@
       color: rgba(0,0,0,0.35);
       line-height: 2;
     }
-    .retest-mini-val span.low { color: #ff0000; }
+    .retest-mini-val span.low { color: var(--accent); }
     .retest-mini-val span.normal { color: #2a6e3f; }
     .retest-pending {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1rem;
       color: rgba(0,0,0,0.2);
       font-style: italic;
@@ -442,7 +464,7 @@
     }
     .protocol-stage.transition .protocol-stage-head { margin-bottom: 0; }
     .protocol-stage-name {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
@@ -455,7 +477,7 @@
       text-transform: uppercase;
       padding: 3px 7px;
     }
-    .protocol-stage-state.tone-high { background: rgba(255,0,0,0.07); color: #ff0000; }
+    .protocol-stage-state.tone-high { background: rgba(var(--accent-rgb),0.07); color: var(--accent); }
     .protocol-stage-state.tone-low  { background: rgba(42,110,63,0.08); color: #2a6e3f; }
     .protocol-stage-state.tone-mid  { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.4); }
     .protocol-items { display: flex; flex-direction: column; }
@@ -475,7 +497,7 @@
       color: rgba(0,0,0,0.6);
     }
     .protocol-item-dose {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.5);
       line-height: 1.4;
@@ -486,7 +508,7 @@
       font-size: 0.46rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.55;
       margin-top: 2px;
     }
@@ -501,7 +523,7 @@
       flex: 1;
       border: 0.5px solid rgba(0,0,0,0.08);
       padding: 10px 12px;
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.55);
     }
@@ -528,7 +550,7 @@
       flex-wrap: wrap;
     }
     .frp-phase-name {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
@@ -557,7 +579,7 @@
       font-size: 0.46rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.55;
       margin-bottom: 2px;
     }
@@ -568,7 +590,7 @@
       color: rgba(0,0,0,0.55);
     }
     .frp-checkpoint {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.95rem;
       font-style: italic;
       color: rgba(0,0,0,0.4);
@@ -577,7 +599,7 @@
     }
     .frp-includes { list-style: none; }
     .frp-inc-item {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.1rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
@@ -589,7 +611,7 @@
       content: '—';
       position: absolute;
       left: 0;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.4;
     }
 
@@ -600,7 +622,7 @@
       font-size: 0.46rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.5;
       margin-bottom: 4px;
     }
@@ -616,7 +638,7 @@
       margin-bottom: 14px;
     }
     .notox-ing {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.55);
       padding-left: 12px;
@@ -626,7 +648,7 @@
       content: '·';
       position: absolute;
       left: 0;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.5;
     }
     .notox-steps {
@@ -635,14 +657,14 @@
       margin-bottom: 14px;
     }
     .notox-step {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
       padding: 2px 0;
     }
     .notox-elixir-notes {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(0,0,0,0.4);
@@ -652,7 +674,7 @@
       margin-bottom: 12px;
     }
     .notox-elixir-ben {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1rem;
       line-height: 1.55;
       color: rgba(0,0,0,0.5);
@@ -669,8 +691,8 @@
       flex-shrink: 0;
       width: 22px;
       height: 22px;
-      border: 0.5px solid rgba(255,0,0,0.3);
-      color: #ff0000;
+      border: 0.5px solid rgba(var(--accent-rgb),0.3);
+      color: var(--accent);
       opacity: 0.7;
       font-family: 'Fragment Mono', monospace;
       font-size: 0.6rem;
@@ -688,7 +710,7 @@
       margin-bottom: 3px;
     }
     .notox-fstep-desc {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       line-height: 1.45;
       color: rgba(0,0,0,0.5);
@@ -708,7 +730,7 @@
       padding: 5px 9px;
     }
     .notox-routine {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.05rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
@@ -722,20 +744,20 @@
       gap: 12px;
       width: 100%;
       background: #f5f2eb;
-      border: 0.5px solid rgba(255,0,0,0.18);
+      border: 0.5px solid rgba(var(--accent-rgb),0.18);
       padding: 12px 14px;
       cursor: pointer;
       text-align: left;
       text-decoration: none;
       transition: border-color 0.15s, padding-left 0.15s;
     }
-    .pdf-dl:hover { border-color: rgba(255,0,0,0.4); padding-left: 18px; }
+    .pdf-dl:hover { border-color: rgba(var(--accent-rgb),0.4); padding-left: 18px; }
     .pdf-dl-icon {
       flex-shrink: 0;
       width: 26px;
       height: 26px;
-      border: 0.5px solid rgba(255,0,0,0.3);
-      color: #ff0000;
+      border: 0.5px solid rgba(var(--accent-rgb),0.3);
+      color: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -749,7 +771,7 @@
       color: rgba(0,0,0,0.6);
     }
     .pdf-dl-hint {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.95rem;
       font-style: italic;
       line-height: 1.5;
@@ -774,7 +796,7 @@
       color: rgba(0,0,0,0.6);
     }
     .htma-panel-note {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.95rem;
       font-style: italic;
       color: rgba(0,0,0,0.35);
@@ -799,17 +821,17 @@
       width: 26%;
       white-space: nowrap;
     }
-    .htma-v.low { color: #ff0000; }
-    .htma-v.high { color: #ff0000; }
+    .htma-v.low { color: var(--accent); }
+    .htma-v.high { color: var(--accent); }
     .htma-v.ok { color: #2a6e3f; }
     .htma-n {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1rem;
       line-height: 1.4;
       color: rgba(0,0,0,0.45);
     }
     .htma-oxidizer {
-      border: 0.5px solid rgba(255,0,0,0.18);
+      border: 0.5px solid rgba(var(--accent-rgb),0.18);
       padding: 12px 14px;
       margin-top: 6px;
     }
@@ -819,12 +841,12 @@
       font-size: 0.46rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.5;
       margin-bottom: 4px;
     }
     .htma-ox-val {
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.5rem;
       font-weight: 300;
       font-style: italic;
@@ -833,7 +855,7 @@
       margin-bottom: 6px;
     }
     .htma-ox-note {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.5);
@@ -872,7 +894,7 @@
       flex-shrink: 0;
       transition: color 0.15s;
     }
-    .col-search-go:hover { color: #ff0000; }
+    .col-search-go:hover { color: var(--accent); }
     .col-result-item {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.60rem;
@@ -885,10 +907,10 @@
       line-height: 1.5;
     }
     .col-result-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
-    .col-result-item:hover { color: #ff0000; padding-left: 4px; }
+    .col-result-item:hover { color: var(--accent); padding-left: 4px; }
     .col-result-zone {
       font-size: 0.34rem;
-      color: #ff0000;
+      color: var(--accent);
       opacity: 0.55;
       display: block;
       margin-bottom: 1px;
@@ -918,7 +940,7 @@
       position: fixed;
       right: 28px;
       top: 24px;
-      font-family: 'Cormorant', serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
@@ -980,6 +1002,7 @@
   </div>
 
   <div class="info-panel" id="info-panel">
+    <button class="panel-x" id="panel-x" aria-label="Close">×</button>
     <div class="panel-topics">
       <span class="panel-zone-label" id="panel-zone-label"></span>
       <span class="panel-zone-title" id="panel-zone-title"></span>
@@ -1389,6 +1412,28 @@ const panelTopicList = document.getElementById('panel-topic-list');
 const panelContent   = document.getElementById('panel-content');
 let activeZone = null;
 
+// per-zone accent colors
+const zoneAccents = {
+  scalp:   { hex:'#b8443c', rgb:'184,68,60'  },
+  face:    { hex:'#c0497a', rgb:'192,73,122' },
+  legs:    { hex:'#3f7d5c', rgb:'63,125,92'  },
+  adrenal: { hex:'#c2762f', rgb:'194,118,47' },
+  oral:    { hex:'#7b5ea7', rgb:'123,94,167' },
+  labs:    { hex:'#3a6ea5', rgb:'58,110,165' },
+  omega3:  { hex:'#2f8f8a', rgb:'47,143,138' },
+};
+const DEFAULT_ACCENT = { hex:'#b8443c', rgb:'184,68,60' };
+
+function applyAccent(zone) {
+  const a = zoneAccents[zone] || DEFAULT_ACCENT;
+  document.documentElement.style.setProperty('--accent', a.hex);
+  document.documentElement.style.setProperty('--accent-rgb', a.rgb);
+}
+function resetAccent() {
+  document.documentElement.style.setProperty('--accent', DEFAULT_ACCENT.hex);
+  document.documentElement.style.setProperty('--accent-rgb', DEFAULT_ACCENT.rgb);
+}
+
 function vbToScreen(vx, vy) {
   const W = window.innerWidth, H = window.innerHeight;
   const vbW = 1920, vbH = 1080;
@@ -1400,6 +1445,7 @@ function vbToScreen(vx, vy) {
 
 function showCard(zone) {
   const z = zones[zone];
+  applyAccent(zone);
   document.getElementById('card-label').textContent = z.label;
   document.getElementById('card-title').textContent = z.title;
   const summaryEl = document.getElementById('card-summary');
@@ -1851,6 +1897,7 @@ function loadTopic(zone, slug) {
 
 function openPanel(zone, slug) {
   activeZone = zone;
+  applyAccent(zone);
   const z = zones[zone];
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
@@ -1867,6 +1914,7 @@ function openPanel(zone, slug) {
 
 function switchZone(zone) {
   activeZone = zone;
+  applyAccent(zone);
   const z = zones[zone];
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
@@ -1888,6 +1936,7 @@ function buildTopicList(zone, activeSlug) {
 
 function clearAll() {
   clearCard();
+  resetAccent();
   infoPanel.classList.remove('open');
   document.body.classList.remove('panel-open');
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
@@ -1912,6 +1961,7 @@ document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', e => { e.stopPropagation(); selectZone(item.dataset.zone); });
 });
 document.getElementById('panel-close-btn').addEventListener('click', clearAll);
+document.getElementById('panel-x').addEventListener('click', clearAll);
 document.addEventListener('click', e => {
   if (!e.target.closest('.left-col') && !e.target.closest('.card') &&
       !e.target.closest('.info-panel') && !e.target.closest('.body-region')) {
