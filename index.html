@@ -54,7 +54,7 @@
       padding: 28px 20px 24px;
     }
     .col-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.5rem;
       font-weight: 400;
       letter-spacing: 0.08em;
@@ -62,7 +62,7 @@
       margin-bottom: 3px;
     }
     .col-subtitle {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       font-weight: 300;
       font-style: italic;
@@ -70,7 +70,7 @@
       margin-bottom: 28px;
     }
     .col-section {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -79,7 +79,7 @@
     }
     .zone-list { list-style: none; }
     .zone-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.70rem;
       letter-spacing: 0.05em;
       color: rgba(0,0,0,0.45);
@@ -93,7 +93,7 @@
     .zone-item:hover { color: #000; }
     .zone-item.active { color: var(--accent); }
     .col-back {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -107,27 +107,33 @@
 
     .card {
       position: fixed;
-      left: 66%;
-      width: 210px;
+      right: 28px;
+      bottom: 28px;
+      left: auto;
+      top: auto;
+      width: 250px;
+      max-height: calc(100vh - 56px);
+      overflow-y: auto;
       background: #f5f2eb;
       border: 1px solid rgba(var(--accent-rgb),0.15);
-      padding: 16px 18px 12px;
+      padding: 18px 20px 14px;
       z-index: 100;
       pointer-events: none;
       opacity: 0;
-      transform: translateX(8px);
+      transform: translateY(8px);
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
+    .card::-webkit-scrollbar { width: 0; }
     .card.visible {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
       pointer-events: all;
     }
     body.panel-open .card { opacity: 0; pointer-events: none; }
 
     .card-label {
       display: none;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.60rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -136,7 +142,7 @@
       margin-bottom: 5px;
     }
     .card-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.55rem;
       font-weight: 300;
       font-style: italic;
@@ -145,7 +151,7 @@
       line-height: 1.15;
     }
     .card-summary {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(0,0,0,0.45);
@@ -158,7 +164,7 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.64rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -169,7 +175,7 @@
       transition: color 0.15s, padding-left 0.15s;
     }
     .card-topic-item:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
-    .card-topic-item::before { content: '→'; opacity: 0.35; font-size: 1.5rem; flex-shrink: 0; }
+    .card-topic-item::before { content: '+'; opacity: 0.4; font-size: 1.1rem; flex-shrink: 0; }
     .card-topic-item:hover { color: var(--accent); padding-left: 5px; }
 
     .info-panel {
@@ -196,7 +202,7 @@
 
     .panel-zone-label {
       display: none;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -206,7 +212,7 @@
       display: block;
     }
     .panel-zone-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.5rem;
       font-weight: 300;
       font-style: italic;
@@ -219,7 +225,7 @@
     }
     .panel-body-nav { list-style: none; margin-bottom: 14px; }
     .panel-body-nav-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.4rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -237,7 +243,7 @@
     }
     .panel-topic-list { list-style: none; flex: 1; }
     .panel-topic-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -262,7 +268,7 @@
       background: #f5f2eb;
       border: 0.5px solid rgba(var(--accent-rgb),0.3);
       color: var(--accent);
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.4rem;
       line-height: 1;
       cursor: pointer;
@@ -273,7 +279,7 @@
     .panel-close-btn {
       display: block;
       margin-top: 24px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -295,7 +301,7 @@
     .panel-content::-webkit-scrollbar { width: 0; }
 
     .content-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 2.4rem;
       font-weight: 300;
       font-style: italic;
@@ -304,7 +310,7 @@
       margin-bottom: 4px;
     }
     .content-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -314,7 +320,7 @@
     }
     .content-section { margin-bottom: 26px; }
     .content-section-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -324,7 +330,7 @@
       margin-bottom: 8px;
     }
     .content-text {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.5rem;
       line-height: 1.85;
       color: rgba(0,0,0,0.58);
@@ -343,7 +349,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 9px 0;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.60rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -352,9 +358,9 @@
       transition: color 0.15s, padding-left 0.15s;
     }
     .content-links a:hover { color: var(--accent); padding-left: 5px; }
-    .content-links a::after { content: '↗'; opacity: 0.35; }
+    .content-links a::after { content: '+'; opacity: 0.4; }
     .content-placeholder {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.15rem;
       line-height: 1.85;
       color: rgba(0,0,0,0.22);
@@ -415,7 +421,7 @@
       padding: 10px 12px;
     }
     .retest-col-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.48rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -439,7 +445,7 @@
     .retest-mini-val span.low { color: var(--accent); }
     .retest-mini-val span.normal { color: #2a6e3f; }
     .retest-pending {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1rem;
       color: rgba(0,0,0,0.2);
       font-style: italic;
@@ -466,14 +472,14 @@
     }
     .protocol-stage.transition .protocol-stage-head { margin-bottom: 0; }
     .protocol-stage-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
     }
     .protocol-stage-state {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.5rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -492,21 +498,21 @@
       align-items: baseline;
     }
     .protocol-item-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: rgba(0,0,0,0.6);
     }
     .protocol-item-dose {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.5);
       line-height: 1.4;
     }
     .protocol-item-note {
       grid-column: 1 / -1;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.46rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -525,13 +531,13 @@
       flex: 1;
       border: 0.5px solid rgba(0,0,0,0.08);
       padding: 10px 12px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.55);
     }
     .frp-meta-k {
       display: block;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.46rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -552,14 +558,14 @@
       flex-wrap: wrap;
     }
     .frp-phase-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
       color: #0a0a0a;
     }
     .frp-phase-meta {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.5rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -577,7 +583,7 @@
     }
     .frp-week-wk {
       display: block;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.46rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -586,13 +592,13 @@
       margin-bottom: 2px;
     }
     .frp-week-focus {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.03em;
       color: rgba(0,0,0,0.55);
     }
     .frp-checkpoint {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.95rem;
       font-style: italic;
       color: rgba(0,0,0,0.4);
@@ -601,7 +607,7 @@
     }
     .frp-includes { list-style: none; }
     .frp-inc-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.1rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
@@ -620,7 +626,7 @@
     /* notox method */
     .notox-mini-label {
       display: block;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.46rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -640,7 +646,7 @@
       margin-bottom: 14px;
     }
     .notox-ing {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       color: rgba(0,0,0,0.55);
       padding-left: 12px;
@@ -659,14 +665,14 @@
       margin-bottom: 14px;
     }
     .notox-step {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
       padding: 2px 0;
     }
     .notox-elixir-notes {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(0,0,0,0.4);
@@ -676,7 +682,7 @@
       margin-bottom: 12px;
     }
     .notox-elixir-ben {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1rem;
       line-height: 1.55;
       color: rgba(0,0,0,0.5);
@@ -696,7 +702,7 @@
       border: 0.5px solid rgba(var(--accent-rgb),0.3);
       color: var(--accent);
       opacity: 0.7;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.6rem;
       display: flex;
       align-items: center;
@@ -704,7 +710,7 @@
     }
     .notox-fstep-name {
       display: block;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -712,7 +718,7 @@
       margin-bottom: 3px;
     }
     .notox-fstep-desc {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       line-height: 1.45;
       color: rgba(0,0,0,0.5);
@@ -724,7 +730,7 @@
       margin-bottom: 14px;
     }
     .notox-habit {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.54rem;
       letter-spacing: 0.04em;
       color: rgba(0,0,0,0.55);
@@ -732,7 +738,7 @@
       padding: 5px 9px;
     }
     .notox-routine {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.05rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.55);
@@ -763,17 +769,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.8rem;
     }
     .pdf-dl-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.03em;
       color: rgba(0,0,0,0.6);
     }
     .pdf-dl-hint {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.95rem;
       font-style: italic;
       line-height: 1.5;
@@ -791,14 +797,14 @@
       flex-wrap: wrap;
     }
     .htma-panel-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(0,0,0,0.6);
     }
     .htma-panel-note {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.95rem;
       font-style: italic;
       color: rgba(0,0,0,0.35);
@@ -827,7 +833,7 @@
     .htma-v.high { color: var(--accent); }
     .htma-v.ok { color: #2a6e3f; }
     .htma-n {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1rem;
       line-height: 1.4;
       color: rgba(0,0,0,0.45);
@@ -839,7 +845,7 @@
     }
     .htma-mini-label {
       display: block;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.46rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -848,7 +854,7 @@
       margin-bottom: 4px;
     }
     .htma-ox-val {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.5rem;
       font-weight: 300;
       font-style: italic;
@@ -857,7 +863,7 @@
       margin-bottom: 6px;
     }
     .htma-ox-note {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1rem;
       line-height: 1.5;
       color: rgba(0,0,0,0.5);
@@ -876,7 +882,7 @@
       flex: 1;
       background: transparent;
       border: none;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.04em;
       color: #0a0a0a;
@@ -888,7 +894,7 @@
     .col-search-go {
       background: none;
       border: none;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.5rem;
       color: rgba(0,0,0,0.3);
       cursor: pointer;
@@ -898,7 +904,7 @@
     }
     .col-search-go:hover { color: var(--accent); }
     .col-result-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.60rem;
       letter-spacing: 0.04em;
       color: rgba(0,0,0,0.45);
@@ -920,7 +926,7 @@
       letter-spacing: 0.1em;
     }
     .col-no-results {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       color: rgba(0,0,0,0.28);
       padding: 6px 0;
@@ -931,7 +937,7 @@
       position: fixed;
       right: 28px;
       bottom: 24px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -942,7 +948,7 @@
       position: fixed;
       right: 28px;
       top: 24px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Fragment Mono', monospace;
       font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
@@ -951,6 +957,8 @@
       transition: opacity 0.3s;
     }
     body.panel-open .floating-tr { opacity: 0; pointer-events: none; }
+    body.zone-active .floating-tr,
+    body.zone-active .floating-br { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
   </style>
 </head>
 <body>
@@ -989,11 +997,11 @@
       <div class="col-section" style="margin-top:14px;">Symptom Search</div>
       <div class="col-search-row">
         <input class="col-search-input" id="symptom-input" type="text" placeholder="e.g. fatigue…"/>
-        <button class="col-search-go" id="symptom-submit">→</button>
+        <button class="col-search-go" id="symptom-submit">+</button>
       </div>
       <div id="symptom-results-inline"></div>
     </div>
-    <a class="col-back" href="https://becsdesigned.com">← becs designed</a>
+    <a class="col-back" href="https://becsdesigned.com">becs designed</a>
   </div>
 
   <div class="card" id="card">
@@ -1011,7 +1019,7 @@
       <ul class="panel-body-nav" id="panel-body-nav"></ul>
       <hr class="panel-nav-divider"/>
       <ul class="panel-topic-list" id="panel-topic-list"></ul>
-      <button class="panel-close-btn" id="panel-close-btn">← close</button>
+      <button class="panel-close-btn" id="panel-close-btn">close</button>
     </div>
     <div class="panel-content" id="panel-content"></div>
   </div>
@@ -1466,16 +1474,7 @@ function showCard(zone) {
       openPanel(item.dataset.zone, item.dataset.slug);
     });
   });
-  const c  = regionCenters[zone];
-  const sc = vbToScreen(c.vx, c.vy);
-  card.style.visibility = 'hidden';
-  card.style.display = 'block';
-  const cH = card.offsetHeight;
-  card.style.visibility = '';
-  card.style.display = '';
-  let cardTop = sc.y - cH / 2;
-  cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cH - 16));
-  card.style.top = cardTop + 'px';
+  document.body.classList.add('zone-active');
   card.classList.add('visible');
 }
 
@@ -1490,7 +1489,7 @@ function pdfDownloadHTML(topic) {
     <div class="content-section">
       <span class="content-section-label">Document</span>
       <a class="pdf-dl" href="${topic.pdf.file}" target="_blank" rel="noopener">
-        <span class="pdf-dl-icon">↗</span>
+        <span class="pdf-dl-icon">+</span>
         <span class="pdf-dl-name">${topic.pdf.filename}</span>
       </a>
       <p class="pdf-dl-hint">Opens the PDF from the <code>pdfs</code> folder. Keep that folder next to this file (or host both together) so the link works.</p>
@@ -1938,2084 +1937,7 @@ function buildTopicList(zone, activeSlug) {
 function clearAll() {
   clearCard();
   resetAccent();
-  infoPanel.classList.remove('open');
-  document.body.classList.remove('panel-open');
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  activeZone = null;
-}
-
-function selectZone(zone) {
-  if (document.body.classList.contains('panel-open')) { switchZone(zone); return; }
-  if (activeZone === zone) { clearAll(); return; }
-  activeZone = zone;
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-  document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
-  document.querySelector(`.body-region[data-zone="${zone}"]`)?.classList.add('active');
-  showCard(zone);
-}
-
-document.querySelectorAll('.body-region').forEach(region => {
-  region.addEventListener('click', e => { e.stopPropagation(); selectZone(region.dataset.zone); });
-});
-document.querySelectorAll('.zone-item').forEach(item => {
-  item.addEventListener('click', e => { e.stopPropagation(); selectZone(item.dataset.zone); });
-});
-document.getElementById('panel-close-btn').addEventListener('click', clearAll);
-document.getElementById('panel-x').addEventListener('click', clearAll);
-document.addEventListener('click', e => {
-  if (!e.target.closest('.left-col') && !e.target.closest('.card') &&
-      !e.target.closest('.info-panel') && !e.target.closest('.body-region')) {
-    clearAll();
-  }
-});
-card.addEventListener('click', e => e.stopPropagation());
-window.addEventListener('resize', () => { if (activeZone && !document.body.classList.contains('panel-open')) showCard(activeZone); });
-
-/* ── symptom search ── */
-const symptomInput   = document.getElementById('symptom-input');
-const symptomSubmit  = document.getElementById('symptom-submit');
-const symptomResults = document.getElementById('symptom-results-inline');
-
-const symptomMap = {
-  'itchy scalp':     [['scalp/trichology','trichologist findings'],['scalp/moisture','dryness causes itch'],['scalp/routine','shampoo may be cause']],
-  'itchy':           [['scalp/trichology','scalp irritation research'],['face/actives','actives cause sensitivity'],['scalp/moisture','moisture imbalance']],
-  'dry scalp':       [['scalp/moisture','moisture & porosity research'],['scalp/routine','shampoo stripping scalp'],['scalp/products','product recs']],
-  'hair loss':       [['scalp/trichology','trichology covers hair loss'],['adrenal/lab-findings','cortisol & hair loss link']],
-  'hair breakage':   [['scalp/moisture','protein-moisture balance'],['scalp/trichology','trichologist notes'],['scalp/products','products that reduce breakage']],
-  'frizz':           [['scalp/curly-method','curly method for frizz'],['scalp/moisture','porosity causes frizz'],['scalp/routine','wash day routine']],
-  'dandruff':        [['scalp/trichology','trichology covers dandruff'],['scalp/routine','shampoo for dandruff']],
-  'curl':            [['scalp/curly-method','curl method & techniques'],['scalp/moisture','moisture for curl pattern'],['scalp/products','styling product recs']],
-  'acne':            [['face/actives','actives targeting acne'],['face/pm','PM routine for acne'],['adrenal/lab-findings','high androgens & acne link']],
-  'breakout':        [['face/actives','blemish-control actives'],['face/pm','evening routine']],
-  'dark spots':      [['face/pigmentation','hyperpigmentation research'],['face/spf','SPF for dark spots'],['face/actives','vitamin C & AHAs']],
-  'pigmentation':    [['face/pigmentation','dedicated research'],['face/spf','sun protection'],['face/actives','brightening actives'],['face/notox','beauty elixir for melasma']],
-  'facial':          [['face/soulful-facial','Soulful Skin enzyme facial'],['face/notox','weekly NOtox facial'],['face/face-reality-peel','professional peel']],
-  'peel':            [['face/face-reality-peel','Face Reality chemical peel'],['face/soulful-facial','enzyme facial exfoliation']],
-  'exfoliate':       [['face/face-reality-peel','peel exfoliation'],['face/soulful-facial','enzyme exfoliant'],['face/notox','herbal scrub step']],
-  'enzyme':          [['face/soulful-facial','hydrating enzyme facial'],['face/face-reality-peel','enzyme treatment option']],
-  'glow':            [['face/notox','beauty elixir for glow'],['face/soulful-facial','facial for radiance']],
-  'ayurveda':        [['face/notox','NOtox ayurvedic method']],
-  'melasma':         [['face/pigmentation','hyperpigmentation research'],['face/notox','beauty elixir helps melasma'],['face/spf','SPF for melasma']],
-  'freckles':        [['face/notox','beauty elixir for freckles'],['face/spf','sun protection']],
-  'extractions':     [['face/soulful-facial','facial with extractions'],['face/face-reality-peel','peel preps extractions']],
-  'dry skin':        [['face/am','AM moisturising routine'],['face/pm','PM repair routine'],['legs/feet','foot dryness']],
-  'oily':            [['face/am','AM for oily skin'],['face/actives','oil-balancing ingredients'],['face/pm','PM routine']],
-  'sunscreen':       [['face/spf','SPF research & recs'],['face/am','daily SPF routine']],
-  'spf':             [['face/spf','UVA/UVB protection research'],['face/am','SPF in AM routine']],
-  'wrinkles':        [['face/actives','retinoids & anti-aging'],['face/pm','PM repair routine']],
-  'stiff':           [['legs/mobility','lower body mobility']],
-  'bumps':           [['face/actives','exfoliants for texture']],
-  'sore':            [['legs/workout','workout & recovery'],['legs/mobility','mobility & stretching'],['legs/frp','foot restoration for sore feet']],
-  'circulation':     [['legs/vascular','vascular & circulation'],['legs/mobility','movement & circulation']],
-  'feet':            [['legs/frp','12-week foot restoration program'],['legs/feet','foot care routine'],['legs/mobility','lower body mobility']],
-  'foot pain':       [['legs/frp','foot restoration program'],['legs/feet','foot care'],['legs/mobility','mobility work']],
-  'heels':           [['legs/frp','targeted track for sore heels'],['legs/feet','foot care routine']],
-  'arches':          [['legs/frp','targeted track for stiff arches'],['legs/mobility','foot mobility']],
-  'ankles':          [['legs/frp','restoration for weak ankles'],['legs/mobility','ankle stability']],
-  'balance':         [['legs/frp','balance training in FRP'],['legs/mobility','stability & mobility']],
-  'barefoot':        [['legs/frp','natural foot function program'],['legs/feet','foot care']],
-  'supplements':     [['scalp/trichology','supplements for hair'],['adrenal/protocol','adrenal support supplements']],
-  'vitamin d':       [['scalp/trichology','vitamin D & scalp health']],
-  'diet':            [['face/pigmentation','diet & skin']],
-  'fatigue':         [['adrenal/cortisol-results','low cortisol causes fatigue'],['adrenal/lab-findings','HPA axis dysfunction'],['adrenal/protocol','adrenal support protocol']],
-  'tired':           [['adrenal/cortisol-results','cortisol & energy levels'],['adrenal/lab-findings','adrenal reserve findings'],['adrenal/protocol','support protocol']],
-  'exhausted':       [['adrenal/cortisol-results','4-point cortisol results'],['adrenal/lab-findings','HPA axis dysfunction'],['adrenal/protocol','adrenal support']],
-  'cortisol':        [['adrenal/cortisol-results','ZRT 4-point test results'],['adrenal/lab-findings','lab interpretation'],['adrenal/retest','retest tracker']],
-  'adrenal':         [['adrenal/cortisol-results','cortisol test results'],['adrenal/lab-findings','lab findings & symptoms'],['adrenal/protocol','adrenal protocol']],
-  'stress':          [['adrenal/cortisol-results','cortisol & stress response'],['adrenal/lab-findings','HPA axis & chronic stress'],['adrenal/protocol','stress support protocol']],
-  'sugar cravings':  [['adrenal/lab-findings','low cortisol & sugar cravings']],
-  'sugar':           [['adrenal/lab-findings','cortisol & blood sugar']],
-  'allergies':       [['adrenal/lab-findings','low cortisol & immune dysfunction']],
-  'cold':            [['adrenal/lab-findings','cold body temp & cortisol'],['adrenal/protocol','adrenal support']],
-  'hpa':             [['adrenal/cortisol-results','diurnal cortisol pattern'],['adrenal/lab-findings','HPA axis notes']],
-  'hormones':        [['adrenal/cortisol-results','cortisol results'],['adrenal/lab-findings','symptom categories & hormone findings']],
-  'androgens':       [['adrenal/lab-findings','high androgens — 43% symptom score']],
-  'sleep':           [['adrenal/lab-findings','sleep deprivation & adrenal exhaustion'],['adrenal/protocol','sleep as adrenal support']],
-  'wired':           [['adrenal/lab-findings','"tired but wired" pattern notes']],
-  'minerals':        [['labs/htma-results','HTMA mineral analysis'],['labs/htma-protocol','mineral balancing protocol']],
-  'magnesium':       [['labs/htma-results','magnesium on HTMA'],['labs/htma-protocol','cal-mag balancing']],
-  'zinc':            [['labs/htma-results','zinc & Zn/Cu ratio'],['labs/htma-protocol','balanced zinc']],
-  'copper':          [['labs/htma-results','copper & Zn/Cu ratio'],['labs/htma-protocol','copper balance']],
-  'heavy metals':    [['labs/htma-results','toxic metals panel'],['labs/htma-protocol','heavy metal detox']],
-  'mercury':         [['labs/htma-results','elevated mercury'],['labs/htma-protocol','metal detox']],
-  'aluminum':        [['labs/htma-results','elevated aluminum'],['labs/htma-protocol','metal detox']],
-  'detox':           [['labs/htma-results','heavy metals to clear'],['labs/htma-protocol','detox protocol']],
-  'oxidizer':        [['labs/htma-results','slow oxidizer status']],
-  'omega':           [['omega3/omega3-results','omega-3 test results']],
-  'omega 3':         [['omega3/omega3-results','omega-3 status & index']],
-  'inflammation':    [['omega3/omega3-results','omega-6:3 ratio & inflammation'],['adrenal/lab-findings','cortisol & inflammation']],
-  'fish oil':        [['omega3/omega3-results','EPA/DHA targets']],
-  'thyroid':         [['labs/htma-results','minerals affecting thyroid'],['adrenal/lab-findings','cortisol & thyroid notes']],
-  'blood sugar':     [['labs/htma-results','chromium & blood sugar'],['adrenal/lab-findings','cortisol & blood sugar']],
-  'grinding':        [['oral/grinding','teeth grinding & TMJ'],['oral/palate','palate expansion to stop grinding'],['oral/myology','myology for bruxism']],
-  'teeth grinding':  [['oral/grinding','bruxism tracking'],['oral/palate','palate expansion'],['oral/myology','COFM for clenching']],
-  'bruxism':         [['oral/grinding','bruxism & TMJ notes'],['oral/myology','oral facial massage for clenching'],['oral/palate','palate expansion']],
-  'clenching':       [['oral/grinding','clenching & jaw tension'],['oral/myology','COFM for clenching'],['oral/palate','bite & palate']],
-  'tmj':             [['oral/myology','COFM balances the TMJ'],['oral/grinding','TMJ tension tracking']],
-  'jaw':             [['oral/myology','jaw tension & oral facial massage'],['oral/grinding','jaw pain & grinding'],['oral/palate','bite alignment']],
-  'jaw pain':        [['oral/myology','COFM for jaw pain'],['oral/grinding','TMJ & grinding']],
-  'tongue':          [['oral/oral-ties','tongue & lip ties'],['oral/myology','tongue posture & myology'],['oral/palate','room for the tongue']],
-  'tongue tie':      [['oral/oral-ties','releasing oral ties'],['oral/myology','myofunctional therapy']],
-  'lip tie':         [['oral/oral-ties','labial / lip tie release'],['oral/myology','orofacial myology']],
-  'oral ties':       [['oral/oral-ties','buccal & lip tie release'],['oral/myology','myology & frenectomy']],
-  'frenectomy':      [['oral/oral-ties','frenectomy & ties'],['oral/myology','pre/post frenectomy massage']],
-  'palate':          [['oral/palate','palate expansion with Dr. Claudia'],['oral/myology','remodeling the palate']],
-  'mouth breathing': [['oral/myology','mouth breathing & OMDs']],
-  'migraine':        [['oral/myology','COFM for migraines']],
-  'headaches':       [['oral/myology','oral facial massage for headaches'],['adrenal/lab-findings','cortisol & headaches']],
-  'oral':            [['oral/oral-ties','release oral ties'],['oral/myology','orofacial myology'],['oral/palate','palate expansion']],
-  'swallowing':      [['oral/myology','swallowing & tongue posture'],['oral/oral-ties','ties restrict swallowing']],
-  'facial tension':  [['oral/myology','COFM relieves facial tension']],
-};
-
-symptomInput.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
-symptomSubmit.addEventListener('click', runSearch);
-
-function runSearch() {
-  const query = symptomInput.value.trim().toLowerCase();
-  if (!query) { symptomResults.innerHTML = ''; return; }
-  const matched = new Map();
-  Object.entries(symptomMap).forEach(([keyword, results]) => {
-    if (query.includes(keyword) || keyword.includes(query) ||
-        keyword.split(' ').some(w => query.includes(w) && w.length > 3)) {
-      results.forEach(([path, reason]) => {
-        if (!matched.has(path)) {
-          const [zoneKey, slug] = path.split('/');
-          const zone  = zones[zoneKey];
-          const topic = zone?.topics.find(t => t.slug === slug);
-          if (zone && topic) matched.set(path, { zoneKey, zone, topic, reason });
-        }
-      });
-    }
-  });
-  if (!matched.size) {
-    symptomResults.innerHTML = '<div class="col-no-results">no results — try different terms</div>';
-    return;
-  }
-  symptomResults.innerHTML = '';
-  matched.forEach(({ zoneKey, zone, topic, reason }) => {
-    const el = document.createElement('div');
-    el.className = 'col-result-item';
-    el.innerHTML = '<span class="col-result-zone">' + zone.title + '</span>' + topic.name;
-    el.title = reason;
-    el.addEventListener('click', () => {
-      clearAll();
-      symptomInput.value = '';
-      symptomResults.innerHTML = '';
-      setTimeout(() => {
-        selectZone(zoneKey);
-        setTimeout(() => openPanel(zoneKey, topic.slug), 300);
-      }, 100);
-    });
-    symptomResults.appendChild(el);
-  });
-}
-</script>
-</body>
-</html>      fill-opacity: 0;
-      cursor: pointer;
-      transition: fill-opacity 0.2s;
-    }
-    .body-region:hover { fill-opacity: 0; }
-    .body-region.active { fill-opacity: 0; }
-    body.panel-open .body-region { pointer-events: none; }
-
-    .connector-line { display: none; }
-
-    .left-col {
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      width: 190px;
-      z-index: 30;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 20px 24px;
-    }
-    .col-title {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 1.5rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: #1a1a1a;
-      margin-bottom: 3px;
-    }
-    .col-subtitle {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(0,0,0,0.35);
-      margin-bottom: 28px;
-    }
-    .col-section {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.28);
-      margin-bottom: 8px;
-    }
-    .zone-list { list-style: none; }
-    .zone-item {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.70rem;
-      letter-spacing: 0.05em;
-      color: rgba(0,0,0,0.45);
-      padding: 6px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: color 0.15s;
-      user-select: none;
-    }
-    .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
-    .zone-item:hover { color: #000; }
-    .zone-item.active { color: var(--accent); }
-    .col-back {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.22);
-      text-decoration: none;
-      margin-top: auto;
-      padding-top: 20px;
-      transition: color 0.2s;
-    }
-    .col-back:hover { color: rgba(0,0,0,0.55); }
-
-    .card {
-      position: fixed;
-      left: 66%;
-      width: 210px;
-      background: #f5f2eb;
-      border: 1px solid rgba(var(--accent-rgb),0.15);
-      padding: 16px 18px 12px;
-      z-index: 100;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: all;
-    }
-    body.panel-open .card { opacity: 0; pointer-events: none; }
-
-    .card-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.60rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-bottom: 5px;
-    }
-    .card-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.55rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      margin-bottom: 4px;
-      line-height: 1.15;
-    }
-    .card-summary {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: rgba(0,0,0,0.45);
-      font-weight: 300;
-      font-style: italic;
-      margin-bottom: 12px;
-    }
-    .card-topic-list { list-style: none; }
-    .card-topic-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.64rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.6);
-      padding: 6px 0;
-      border-top: 0.5px solid rgba(0,0,0,0.07);
-      cursor: pointer;
-      transition: color 0.15s, padding-left 0.15s;
-    }
-    .card-topic-item:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
-    .card-topic-item::before { content: '→'; opacity: 0.35; font-size: 1.5rem; flex-shrink: 0; }
-    .card-topic-item:hover { color: var(--accent); padding-left: 5px; }
-
-    .info-panel {
-      position: fixed;
-      top: 0; right: 0;
-      width: 50vw;
-      height: 100vh;
-      z-index: 40;
-      transform: translateX(100%);
-      transition: transform 0.4s ease;
-      display: flex;
-    }
-    .info-panel.open { transform: translateX(0); }
-
-    .panel-topics {
-      width: 210px;
-      flex-shrink: 0;
-      padding: 32px 0 32px 28px;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-    .panel-topics::-webkit-scrollbar { width: 0; }
-
-    .panel-zone-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-bottom: 4px;
-      display: block;
-    }
-    .panel-zone-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      margin-bottom: 16px;
-      display: block;
-      line-height: 1.2;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      padding-bottom: 14px;
-    }
-    .panel-body-nav { list-style: none; margin-bottom: 14px; }
-    .panel-body-nav-item {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.4rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.28);
-      padding: 3px 0;
-      cursor: pointer;
-      transition: color 0.15s;
-    }
-    .panel-body-nav-item:hover { color: #000; }
-    .panel-body-nav-item.active { color: var(--accent); }
-    .panel-nav-divider {
-      border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.07);
-      margin-bottom: 12px;
-    }
-    .panel-topic-list { list-style: none; flex: 1; }
-    .panel-topic-item {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.4);
-      padding: 7px 0;
-      cursor: pointer;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      transition: color 0.15s, padding-left 0.15s;
-    }
-    .panel-topic-item:hover { color: #000; padding-left: 5px; }
-    .panel-topic-item.active { color: var(--accent); padding-left: 5px; }
-    .panel-x {
-      position: absolute;
-      top: 18px;
-      right: 22px;
-      z-index: 50;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f5f2eb;
-      border: 0.5px solid rgba(var(--accent-rgb),0.3);
-      color: var(--accent);
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.4rem;
-      line-height: 1;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
-    }
-    .panel-x:hover { background: var(--accent); color: #f5f2eb; transform: rotate(90deg); }
-    .panel-close-btn {
-      display: block;
-      margin-top: 24px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.22);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: color 0.2s;
-      text-align: left;
-    }
-    .panel-close-btn:hover { color: #000; }
-
-    .panel-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 32px 28px 60px 20px;
-    }
-    .panel-content::-webkit-scrollbar { width: 0; }
-
-    .content-title {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 2.4rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }
-    .content-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.22);
-      margin-bottom: 28px;
-      display: block;
-    }
-    .content-section { margin-bottom: 26px; }
-    .content-section-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.5;
-      display: block;
-      margin-bottom: 8px;
-    }
-    .content-text {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.5rem;
-      line-height: 1.85;
-      color: rgba(0,0,0,0.58);
-      font-weight: 300;
-    }
-    .content-divider {
-      border: none;
-      border-top: 0.5px solid rgba(0,0,0,0.07);
-      margin: 22px 0;
-    }
-    .content-links { list-style: none; }
-    .content-links li { border-top: 0.5px solid rgba(0,0,0,0.06); }
-    .content-links li:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.06); }
-    .content-links a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 9px 0;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.60rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.42);
-      text-decoration: none;
-      transition: color 0.15s, padding-left 0.15s;
-    }
-    .content-links a:hover { color: var(--accent); padding-left: 5px; }
-    .content-links a::after { content: '↗'; opacity: 0.35; }
-    .content-placeholder {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.15rem;
-      line-height: 1.85;
-      color: rgba(0,0,0,0.22);
-      font-style: italic;
-    }
-
-    /* cortisol result table */
-    .cortisol-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.04em;
-      margin-top: 8px;
-    }
-    .cortisol-table th {
-      text-align: left;
-      color: rgba(0,0,0,0.28);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      padding: 4px 0 6px;
-      border-bottom: 0.5px solid rgba(0,0,0,0.08);
-      font-weight: 400;
-    }
-    .cortisol-table td {
-      padding: 7px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      color: rgba(0,0,0,0.55);
-      vertical-align: top;
-    }
-    .cortisol-table td.time { color: rgba(0,0,0,0.35); }
-    .cortisol-table td.value { font-weight: 400; }
-    .cortisol-table td.value.low { color: var(--accent); }
-    .cortisol-table td.value.normal { color: #2a6e3f; }
-    .cortisol-table td.range { color: rgba(0,0,0,0.28); font-size: 0.52rem; }
-    .result-badge {
-      display: inline-block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 2px 5px;
-      margin-left: 5px;
-      vertical-align: middle;
-    }
-    .result-badge.low { background: rgba(var(--accent-rgb),0.07); color: var(--accent); }
-    .result-badge.normal { background: rgba(42,110,63,0.08); color: #2a6e3f; }
-
-    /* retest tracker */
-    .retest-row {
-      display: flex;
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .retest-col {
-      flex: 1;
-      border: 0.5px solid rgba(0,0,0,0.08);
-      padding: 10px 12px;
-    }
-    .retest-col-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.48rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .retest-col-date {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      color: rgba(0,0,0,0.55);
-      margin-bottom: 8px;
-      display: block;
-    }
-    .retest-mini-val {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.55rem;
-      color: rgba(0,0,0,0.35);
-      line-height: 2;
-    }
-    .retest-mini-val span.low { color: var(--accent); }
-    .retest-mini-val span.normal { color: #2a6e3f; }
-    .retest-pending {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      color: rgba(0,0,0,0.2);
-      font-style: italic;
-      line-height: 1.6;
-    }
-
-    /* protocol stages */
-    .protocol-stage {
-      margin-bottom: 18px;
-      border: 0.5px solid rgba(0,0,0,0.08);
-      padding: 14px 16px;
-    }
-    .protocol-stage.transition {
-      border-style: dashed;
-      opacity: 0.6;
-      padding: 10px 16px;
-    }
-    .protocol-stage-head {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .protocol-stage.transition .protocol-stage-head { margin-bottom: 0; }
-    .protocol-stage-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-    }
-    .protocol-stage-state {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.5rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 7px;
-    }
-    .protocol-stage-state.tone-high { background: rgba(var(--accent-rgb),0.07); color: var(--accent); }
-    .protocol-stage-state.tone-low  { background: rgba(42,110,63,0.08); color: #2a6e3f; }
-    .protocol-stage-state.tone-mid  { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.4); }
-    .protocol-items { display: flex; flex-direction: column; }
-    .protocol-item {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 4px 12px;
-      padding: 8px 0;
-      border-top: 0.5px solid rgba(0,0,0,0.05);
-      align-items: baseline;
-    }
-    .protocol-item-label {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.6);
-    }
-    .protocol-item-dose {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      color: rgba(0,0,0,0.5);
-      line-height: 1.4;
-    }
-    .protocol-item-note {
-      grid-column: 1 / -1;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.55;
-      margin-top: 2px;
-    }
-
-    /* foot restoration program */
-    .frp-meta-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .frp-meta-cell {
-      flex: 1;
-      border: 0.5px solid rgba(0,0,0,0.08);
-      padding: 10px 12px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      color: rgba(0,0,0,0.55);
-    }
-    .frp-meta-k {
-      display: block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
-      margin-bottom: 4px;
-    }
-    .frp-phase {
-      margin-bottom: 16px;
-      border: 0.5px solid rgba(0,0,0,0.08);
-      padding: 14px 16px;
-    }
-    .frp-phase-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .frp-phase-name {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-    }
-    .frp-phase-meta {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.5rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.35);
-    }
-    .frp-weeks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .frp-week {
-      border: 0.5px solid rgba(0,0,0,0.06);
-      padding: 7px 9px;
-    }
-    .frp-week-wk {
-      display: block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.55;
-      margin-bottom: 2px;
-    }
-    .frp-week-focus {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.03em;
-      color: rgba(0,0,0,0.55);
-    }
-    .frp-checkpoint {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.95rem;
-      font-style: italic;
-      color: rgba(0,0,0,0.4);
-      border-top: 0.5px solid rgba(0,0,0,0.06);
-      padding-top: 10px;
-    }
-    .frp-includes { list-style: none; }
-    .frp-inc-item {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.1rem;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.55);
-      padding: 7px 0 7px 16px;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      position: relative;
-    }
-    .frp-inc-item::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      opacity: 0.4;
-    }
-
-    /* notox method */
-    .notox-mini-label {
-      display: block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.5;
-      margin-bottom: 4px;
-    }
-    .notox-elixir {
-      border: 0.5px solid rgba(0,0,0,0.08);
-      padding: 14px 16px;
-    }
-    .notox-ings {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 14px;
-      margin-bottom: 14px;
-    }
-    .notox-ing {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      color: rgba(0,0,0,0.55);
-      padding-left: 12px;
-      position: relative;
-    }
-    .notox-ing::before {
-      content: '·';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      opacity: 0.5;
-    }
-    .notox-steps {
-      list-style: decimal;
-      padding-left: 18px;
-      margin-bottom: 14px;
-    }
-    .notox-step {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.55);
-      padding: 2px 0;
-    }
-    .notox-elixir-notes {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: rgba(0,0,0,0.4);
-      font-style: italic;
-      border-top: 0.5px solid rgba(0,0,0,0.06);
-      padding-top: 10px;
-      margin-bottom: 12px;
-    }
-    .notox-elixir-ben {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.55;
-      color: rgba(0,0,0,0.5);
-    }
-    .notox-facial { display: flex; flex-direction: column; }
-    .notox-fstep {
-      display: flex;
-      gap: 12px;
-      padding: 9px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      align-items: baseline;
-    }
-    .notox-fstep-n {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      border: 0.5px solid rgba(var(--accent-rgb),0.3);
-      color: var(--accent);
-      opacity: 0.7;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .notox-fstep-name {
-      display: block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.6);
-      margin-bottom: 3px;
-    }
-    .notox-fstep-desc {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.45;
-      color: rgba(0,0,0,0.5);
-    }
-    .notox-habits {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-    .notox-habit {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.54rem;
-      letter-spacing: 0.04em;
-      color: rgba(0,0,0,0.55);
-      border: 0.5px solid rgba(0,0,0,0.1);
-      padding: 5px 9px;
-    }
-    .notox-routine {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.55);
-      margin-bottom: 10px;
-    }
-
-    /* pdf download */
-    .pdf-dl {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      background: #f5f2eb;
-      border: 0.5px solid rgba(var(--accent-rgb),0.18);
-      padding: 12px 14px;
-      cursor: pointer;
-      text-align: left;
-      text-decoration: none;
-      transition: border-color 0.15s, padding-left 0.15s;
-    }
-    .pdf-dl:hover { border-color: rgba(var(--accent-rgb),0.4); padding-left: 18px; }
-    .pdf-dl-icon {
-      flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      border: 0.5px solid rgba(var(--accent-rgb),0.3);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.8rem;
-    }
-    .pdf-dl-name {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.03em;
-      color: rgba(0,0,0,0.6);
-    }
-    .pdf-dl-hint {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.95rem;
-      font-style: italic;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.35);
-      margin-top: 8px;
-    }
-
-    /* htma / omega lab panels */
-    .htma-panel { margin-bottom: 18px; }
-    .htma-panel-head {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 4px;
-      flex-wrap: wrap;
-    }
-    .htma-panel-name {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.6);
-    }
-    .htma-panel-note {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.95rem;
-      font-style: italic;
-      color: rgba(0,0,0,0.35);
-    }
-    .htma-table { width: 100%; border-collapse: collapse; }
-    .htma-table td {
-      padding: 7px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      vertical-align: top;
-    }
-    .htma-k {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.03em;
-      color: rgba(0,0,0,0.55);
-      width: 34%;
-    }
-    .htma-v {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      color: rgba(0,0,0,0.7);
-      width: 26%;
-      white-space: nowrap;
-    }
-    .htma-v.low { color: var(--accent); }
-    .htma-v.high { color: var(--accent); }
-    .htma-v.ok { color: #2a6e3f; }
-    .htma-n {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.4;
-      color: rgba(0,0,0,0.45);
-    }
-    .htma-oxidizer {
-      border: 0.5px solid rgba(var(--accent-rgb),0.18);
-      padding: 12px 14px;
-      margin-top: 6px;
-    }
-    .htma-mini-label {
-      display: block;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.46rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.5;
-      margin-bottom: 4px;
-    }
-    .htma-ox-val {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      font-style: italic;
-      color: #0a0a0a;
-      display: block;
-      margin-bottom: 6px;
-    }
-    .htma-ox-note {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.5;
-      color: rgba(0,0,0,0.5);
-    }
-
-    /* inline search */
-    .col-search { margin-bottom: 4px; }
-    .col-search-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border-bottom: 0.5px solid rgba(0,0,0,0.12);
-      margin-bottom: 10px;
-    }
-    .col-search-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.04em;
-      color: #0a0a0a;
-      padding: 6px 0;
-      outline: none;
-      min-width: 0;
-    }
-    .col-search-input::placeholder { color: rgba(0,0,0,0.25); }
-    .col-search-go {
-      background: none;
-      border: none;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 1.5rem;
-      color: rgba(0,0,0,0.3);
-      cursor: pointer;
-      padding: 4px 0;
-      flex-shrink: 0;
-      transition: color 0.15s;
-    }
-    .col-search-go:hover { color: var(--accent); }
-    .col-result-item {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.60rem;
-      letter-spacing: 0.04em;
-      color: rgba(0,0,0,0.45);
-      padding: 5px 0;
-      border-bottom: 0.5px solid rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: color 0.15s, padding-left 0.15s;
-      line-height: 1.5;
-    }
-    .col-result-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
-    .col-result-item:hover { color: var(--accent); padding-left: 4px; }
-    .col-result-zone {
-      font-size: 0.34rem;
-      color: var(--accent);
-      opacity: 0.55;
-      display: block;
-      margin-bottom: 1px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .col-no-results {
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      color: rgba(0,0,0,0.28);
-      padding: 6px 0;
-      line-height: 1.6;
-    }
-
-    .floating-br {
-      position: fixed;
-      right: 28px;
-      bottom: 24px;
-      font-family: 'Fragment Mono', monospace;
-      font-size: 0.56rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.18);
-      z-index: 30;
-    }
-    .floating-tr {
-      position: fixed;
-      right: 28px;
-      top: 24px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(0,0,0,0.22);
-      z-index: 30;
-      transition: opacity 0.3s;
-    }
-    body.panel-open .floating-tr { opacity: 0; pointer-events: none; }
-  </style>
-</head>
-<body>
-
-  <img class="photo" src="https://i.imgur.com/0VYkGrB.png" alt="body map"/>
-
-  <svg id="overlay-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <ellipse class="body-region" data-zone="scalp"    cx="960"  cy="112"  rx="115" ry="100"/>
-    <ellipse class="body-region" data-zone="face"     cx="968"  cy="248"  rx="90"  ry="100"/>
-    <ellipse class="body-region" data-zone="legs"     cx="942"  cy="840"  rx="125" ry="185"/>
-    <!-- adrenal region — sits just above the kidneys, mid-torso -->
-    <ellipse class="body-region" data-zone="adrenal"  cx="942"  cy="490"  rx="80"  ry="55"/>
-    <!-- oral region — mouth / jaw, lower face -->
-    <ellipse class="body-region" data-zone="oral"     cx="968"  cy="300"  rx="62"  ry="42"/>
-    <!-- labs region — lower abdomen, below the adrenal area -->
-    <ellipse class="body-region" data-zone="labs"     cx="942"  cy="640"  rx="95"  ry="58"/>
-    <!-- omega-3 region — chest / heart -->
-    <ellipse class="body-region" data-zone="omega3"   cx="905"  cy="430"  rx="60"  ry="48"/>
-    <line id="connector-line" class="connector-line" x1="0" y1="0" x2="0" y2="0"/>
-  </svg>
-
-  <div class="left-col">
-    <div class="col-title">Body Map.</div>
-    <div class="col-subtitle">a research index</div>
-    <div class="col-section">Zones</div>
-    <ul class="zone-list" id="zone-list">
-      <li class="zone-item" data-zone="scalp">Scalp &amp; Hair</li>
-      <li class="zone-item" data-zone="face">Face &amp; Skin</li>
-      <li class="zone-item" data-zone="legs">Legs &amp; Feet</li>
-      <li class="zone-item" data-zone="adrenal">Adrenal Health</li>
-      <li class="zone-item" data-zone="oral">Oral Health</li>
-      <li class="zone-item" data-zone="labs">Minerals &amp; Metals</li>
-      <li class="zone-item" data-zone="omega3">Omega-3 &amp; Inflammation</li>
-    </ul>
-    <div class="col-search">
-      <div class="col-section" style="margin-top:14px;">Symptom Search</div>
-      <div class="col-search-row">
-        <input class="col-search-input" id="symptom-input" type="text" placeholder="e.g. fatigue…"/>
-        <button class="col-search-go" id="symptom-submit">→</button>
-      </div>
-      <div id="symptom-results-inline"></div>
-    </div>
-    <a class="col-back" href="https://becsdesigned.com">← becs designed</a>
-  </div>
-
-  <div class="card" id="card">
-    <div class="card-label" id="card-label"></div>
-    <div class="card-title" id="card-title"></div>
-    <div class="card-summary" id="card-summary"></div>
-    <ul class="card-topic-list" id="card-topic-list"></ul>
-  </div>
-
-  <div class="info-panel" id="info-panel">
-    <button class="panel-x" id="panel-x" aria-label="Close">×</button>
-    <div class="panel-topics">
-      <span class="panel-zone-label" id="panel-zone-label"></span>
-      <span class="panel-zone-title" id="panel-zone-title"></span>
-      <ul class="panel-body-nav" id="panel-body-nav"></ul>
-      <hr class="panel-nav-divider"/>
-      <ul class="panel-topic-list" id="panel-topic-list"></ul>
-      <button class="panel-close-btn" id="panel-close-btn">← close</button>
-    </div>
-    <div class="panel-content" id="panel-content"></div>
-  </div>
-
-  <div class="floating-tr">click any zone to explore</div>
-  <div class="floating-br">broward, fl</div>
-
-<script>
-const zones = {
-  scalp: { label:'01 — scalp', title:'Scalp & Hair', summary:'', topics:[
-    { name:'Trichology research', slug:'trichology', notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.', links:[{text:'Trichological Society',href:'https://www.trichological.com'}]},
-    {
-      name:'Sophia Trichology',
-      slug:'sophia',
-      notes:'Sophia Trichoholistic Hair Spa — Dr. Prophida Bien Aime (Pembroke Pines, FL).\n\nA natural, holistic approach to hair and scalp conditions that blends Traditional Chinese Medicine with modern trichology to address the root causes of hair loss. Dr. Bien Aime is a Licensed Acupuncture Physician (DAcCHM/DAOM), Certified Holistic Trichologist, herbalist, and master cosmetologist with 30+ years in hair restoration. Services are for women ages 18–65.\n\nWhat they treat: hair loss, alopecia, postpartum shedding, dandruff, seborrheic dermatitis, psoriasis, and scalp dermatitis.\n\nKey treatments:\n— Hair loss & regrowth: mesotherapy (microinjections of amino acids, vitamins, vasodilators, and minerals into the scalp), scalp needling, and herbal therapy to nourish follicles and activate growth.\n— Scalp health & detox: scalp peeling to exfoliate buildup, treat fungal issues / tinea capitis, calm inflammation, and restore the scalp microbiome.\n— Holistic healing: acupuncture and TCM herbal support to balance hormones, improve digestion and circulation, and restore energy flow.\n\nContact: text 954-934-4976 · booking 804-781-3981 · hairloss@sophiatrichoholistic.com\n\nMy notes: consultation findings, treatment plan, sessions, and regrowth progress over time.',
-      links:[
-        {text:'Sophia Trichoholistic', href:'https://sophiatrichoholistic.com'},
-        {text:'Book a service', href:'https://app.acuityscheduling.com/schedule/00b65e5c'},
-      ],
-    },
-    { name:'Scalp photos & progress', slug:'photos', notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.', links:[]},
-    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.', links:[{text:'Curly Girl Method',href:'https://www.naturallycurly.com'}]},
-    { name:'Shampoo & co-wash', slug:'routine', notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.', links:[]},
-    { name:'Porosity & moisture', slug:'moisture', notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything.', links:[]},
-    { name:'Products', slug:'products', notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.', links:[{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
-  ]},
-  face: { label:'02 — face', title:'Face & Skin', summary:'', topics:[
-    { name:'AM routine', slug:'am', notes:'Your morning skincare routine — every step, product, and why it\'s there.', links:[]},
-    { name:'PM routine', slug:'pm', notes:'Evening routine — cleansing, treatments, actives, and overnight products.', links:[]},
-    { name:'Active ingredients', slug:'actives', notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide.', links:[{text:'INCIDecoder',href:'https://incidecoder.com'}]},
-    { name:'SPF research', slug:'spf', notes:'SPF research, what you\'ve tested, and what works for your skin tone.', links:[]},
-    { name:'Hyperpigmentation', slug:'pigmentation', notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t.', links:[]},
-    {
-      name:'Soulful Skin — enzyme facial',
-      slug:'soulful-facial',
-      notes:'Hydrating Enzyme Facial with Claudia at Soulful Skin — 1 hour · $99.\n\nA great starting-point facial. It includes a double cleansing technique with high-frequency bacterial removal, an enzyme exfoliant treatment, extractions, a moisturizing face mask, and ice globe cryotherapy.\n\nOptional add-ons to take it further: LED light therapy, dermaplaning, and more.\n\nMy notes: appointment dates, add-ons chosen, how my skin reacted, and how it looks in the days after.',
-      links:[],
-    },
-    {
-      name:'Face Reality chemical peel',
-      slug:'face-reality-peel',
-      notes:'Face Reality professional peel — Claudia used the #1 on me.\n\nFace Reality is an acne-safe professional skincare line. Their peels come in two lines, each with a "#1" / "1" strength (the gentlest, used to introduce skin to peeling):\n\n— Clear Skin Peel #1: a self-neutralizing treatment peel that exfoliates, resurfaces, and brightens.\n— Clear Synergy Peel 1: a non-TCA peel powered by HydroxyMatrix (a blend of alpha and beta hydroxy acids) that preps skin for easier extractions and supports age-management.\n\nThere\'s also a non-acid Hydrating Enzyme Treatment for when skin needs gentler exfoliation.\n\nThese are professional (back-bar) treatments applied by a certified acne expert, not at-home products. Results generally build over 3–6 weeks of a consistent routine.\n\nMy notes: which exact peel was used, strength/layers, date, downtime, peeling/flaking, and skin results. Confirm with Claudia whether it was the Clear Skin or Clear Synergy line.',
-      links:[
-        { text:'Face Reality peels', href:'https://facerealityskincare.com/collections/peels' },
-        { text:'Clear Skin Peel #1', href:'https://facerealityskincare.com/products/acne-peel-1' },
-        { text:'Clear Synergy Peel 1', href:'https://facerealityskincare.com/products/clear-synergy-peel-1' },
-      ],
-    },
-    {
-      name:'The NOtox Skincare Method',
-      slug:'notox',
-      notes:'A chemical-free, holistic anti-aging approach by Ayurveda doctor Julie Bernier (True Ayurveda). It trades expensive, chemical-heavy products for simple kitchen ingredients (honey, milk, plant oils), conscious facial movements, and consistent gut + sleep habits. Routines are customized by dosha / skin type. Full daily + weekly matrices, the Beauty Elixir recipe, and the facial cheat sheet are in the downloadable PDF below.\n\nMy summary — Kapha (oily / combination) skin:\n\nDaily routine:\n— Cleanse: honey\n— Tone: rosewater\n— Serum: optional, to your skin type\n— Oil & massage: eladi tailam, grapeseed, jojoba, or rosehip oil\n— Finishing: wash face with ¼ tsp moong dal powder, pat dry\n— Nighttime eye cream: ghee or coconut oil\n\nWeekly facial:\n— Cleanse: honey\n— Massage: eladi tailam, grapeseed, jojoba, or rosehip oil\n— Steam: 3 bay leaves, 1 tsp licorice powder, 1 tbsp mint, 1 tbsp tulsi\n— Exfoliate: mung bean or chickpea flour + rosewater; or rice flour + rosewater\n— Mask: rose petal powder + rosewater · sandalwood + rosewater/honey · Fuller\'s earth (multani mitti) + rosewater or honey · pureed papaya (patch test) · mashed banana or avocado\n— Tone & moisturize: rosewater\n\nDaily habits: sleep by 10, oil pulling, hydrate, and drink The Beauty Elixir.',
-      pdf:{ file:'pdfs/NOtox-Skincare-Method.pdf', filename:'The NOtox Skincare Method' },
-      links:[
-        { text:'True Ayurveda', href:'https://www.trueayurveda.com' },
-      ],
-    },
-  ]},
-  legs: { label:'06 — legs', title:'Legs & Feet', summary:'', topics:[
-    { name:'Mobility & stretching', slug:'mobility', notes:'Lower body mobility research — hip flexors, hamstrings, glutes.', links:[]},
-    { name:'Foot care routine', slug:'feet', notes:'Foot care — exfoliation, moisturising, nail care, and any issues like calluses or dryness.', links:[]},
-    {
-      name:'Foot Restoration Program',
-      slug:'frp',
-      type:'frp',
-      provider:'The Foot Collective',
-      designedBy:'Jim Dooner (physiotherapist, Head of TFC Training), with Tom Williams (physiotherapist) & Andy Bryant (podiatrist)',
-      length:'12 weeks · from 10 min/day',
-      price:'$199 · lifetime access',
-      summary:'A 12-week guided system to rebuild how the feet move — daily follow-along video sessions, weekly audio education, and a structured progression from foundations to circuit training. No equipment needed.',
-      phases:[
-        {
-          name:'Phase I — Foundations',
-          meta:'Weeks 1–6 · 5 training days/week',
-          weeks:[
-            {wk:'Week 1', focus:'Fundamentals'},
-            {wk:'Week 2', focus:'Mindset'},
-            {wk:'Week 3', focus:'Feet'},
-            {wk:'Week 4', focus:'Balance'},
-            {wk:'Week 5', focus:'Squat'},
-            {wk:'Week 6', focus:'Ground'},
-          ],
-          checkpoint:'Halfway checkpoint — self-assessments + FADI survey',
-        },
-        {
-          name:'Phase II — Build',
-          meta:'Weeks 7–12 · 3 circuit days with rest between',
-          weeks:[
-            {wk:'Wk 7–8',   focus:'Circuits: 1–2 sets'},
-            {wk:'Wk 9–10',  focus:'Circuits: 2–3 sets'},
-            {wk:'Wk 11–12', focus:'Circuits: 3–4 sets'},
-          ],
-          checkpoint:'Final checkpoint — FADI survey + self-assessments',
-        },
-      ],
-      includes:[
-        '12 weeks of guided video training, Jim coaching every rep',
-        'Weekly audio lessons (listen on a walk)',
-        'Printable Restoration Manual with progress journal + QR codes',
-        'Targeted tracks for sore heels, stiff arches, weak ankles, aching forefeet',
-        'Bonus masterclasses: breathwork, natural footwear, gait, ground living, temperature exposure, plyometrics, play',
-        'Daily walk built in (5–10 min building to 30)',
-        'Lifetime access via TFC app or desktop',
-      ],
-      forYou:'Targets sore/aching heels, stiff tired feet, weak or unstable ankles, forefoot or toe discomfort, feet that ache after a long day, and balance you want to improve.',
-      notes:'My progress notes go here — start date, which week I\'m on, how my feet feel, daily walk distance, and any targeted tracks I\'m focusing on.',
-      links:[
-        {text:'Foot Restoration Program', href:'https://thefootcollective.us/collections/online-programs/products/foot-restoration-program'},
-        {text:'TFC free balance assessment', href:'https://thefootcollective.us/pages/tfc-balance-screen'},
-      ],
-    },
-    { name:'Workout & recovery', slug:'workout', notes:'Leg day workouts, recovery protocols, and notes on soreness and progression.', links:[]},
-    { name:'Vascular health', slug:'vascular', notes:'Research on vascular health — circulation, spider veins, and how movement affects your legs.', links:[]},
-  ]},
-
-  adrenal: {
-    label: '07 — adrenal',
-    title: 'Adrenal Health',
-    summary: 'Morning cortisol normal. Noon + evening low — HPA axis dysfunction confirmed. ZRT saliva test 05/18/26.',
-    topics: [
-      {
-        name: '4-point cortisol test',
-        slug: 'cortisol-results',
-        type: 'cortisol',
-        testDate: '05/18/2026',
-        lab: 'ZRT Laboratory',
-        method: 'Salivary Steroids — LC-MS/ECLIA',
-        results: [
-          { time: 'Morning (07:17)', value: '4.8', unit: 'ng/mL', range: '2.88–7.12', status: 'normal' },
-          { time: 'Noon (14:10)',    value: '0.6', unit: 'ng/mL', range: '1.11–2.74', status: 'low' },
-          { time: 'Evening (20:11)',  value: '<0.2', unit: 'ng/mL', range: '0.61–1.33', status: 'low' },
-          { time: 'Night (22:19)',   value: '0.3', unit: 'ng/mL', range: '0.25–0.64', status: 'normal' },
-        ],
-        notes: 'Morning cortisol within range — good cortisol awakening response. Noon and evening significantly below range, indicating low adrenal reserve and HPA axis dysfunction. Night value normal.',
-        pdf: { file: 'pdfs/ZRT-Cortisol-Saliva-Test-2026-05-18.pdf', filename: 'ZRT Cortisol Saliva Test' },
-        links: [{ text: 'ZRT Laboratory', href: 'https://www.zrtlab.com' }, { text: 'ZRT reference ranges', href: 'https://www.zrtlab.com/reference-ranges' }],
-      },
-      {
-        name: 'Lab findings & interpretation',
-        slug: 'lab-findings',
-        notes: 'ZRT lab comment (05/22/2026): Cortisol is normal in the morning but drops to low levels the remainder of the day, indicating low adrenal reserve and HPA axis dysfunction.\n\nThis is typically caused by:\n— Chronic stressors (psychological, sleep deprivation, physical insults, chemical exposure, pathogenic infections)\n— Cortisol precursor deficiency (pregnenolone and progesterone)\n— Nutritional deficiencies (low vitamins C and B5, low protein intake)\n\nDepleted cortisol leads to symptoms including: fatigue, allergies and immune dysfunction, chemical sensitivity, cold body temperature, and sugar cravings.\n\nNote on thyroid: cortisol must be within physiological range before attempting thyroid therapy. Thyroid medication increases hepatic clearance of cortisol, which can further lower already-low cortisol. Individuals with weak adrenals on thyroid therapy often report feeling "tired but wired" in the evening.\n\nSymptom categories self-reported (from ZRT checklist):\n— High Androgens (DHEA/Testosterone): 43%\n— Estrogen/Progesterone Deficiency: 15%\n— Estrogen Dominance: 10%\n— Hypometabolism: 9%\n— Low Androgens: 7%\n— Low/High Cortisol: 5% each\n— Metabolic Syndrome: 4%',
-        links: [
-          { text: 'Adrenal Fatigue — James L. Wilson', href: 'https://www.amazon.com/dp/1890572217' },
-          { text: 'The Cortisol Connection — Shawn Talbott', href: 'https://www.amazon.com/dp/0897934148' },
-        ],
-      },
-      {
-        name: 'Protocol',
-        slug: 'protocol',
-        type: 'protocol',
-        principle: 'Higher cortisol → more DHEA + less Preg. Lower cortisol → less DHEA + more Preg. Middle cortisol → middle DHEA. Take licorice or phosphatidylserine depending on the cortisol level shown on the test — never both.',
-        stages: [
-          {
-            name: 'Stage 1',
-            state: 'High cortisol · low DHEA',
-            tone: 'high',
-            items: [
-              { label: 'DHEA', dose: '4 drops / 10mg · 3x a day', note: 'helps cortisol lower' },
-              { label: 'Pregnenolone', dose: '8 drops / 25mg · 3x a day', note: 'helps cortisol lower' },
-              { label: 'Phosphatidylserine', dose: 'given near time of high cortisol', note: 'high-cortisol only' },
-              { label: 'Blood sugar support', dose: 'inositol — 2g myo-inositol + 50mg D-chiro-inositol', note: '' },
-              { label: 'Adaptogenic herbs', dose: '', note: '' },
-              { label: 'Vitamin C', dose: '1000mg · 3x a day', note: '' },
-              { label: 'Multi-pack / vitamin', dose: '', note: '' },
-            ]
-          },
-          {
-            name: 'Stage 2',
-            state: 'Dropping',
-            tone: 'mid',
-            items: [],
-            transition: true,
-          },
-          {
-            name: 'Stage 3',
-            state: 'Low cortisol · low DHEA',
-            tone: 'low',
-            items: [
-              { label: 'DHEA', dose: '2 drops / 5mg · 3x a day', note: '' },
-              { label: 'Pregnenolone', dose: '15 drops / 50mg · 3x a day', note: '' },
-              { label: 'Licorice root', dose: '10 drops, given near time of low cortisol', note: 'low-cortisol only' },
-              { label: 'Inositol', dose: 'blood sugar support', note: '' },
-              { label: 'Adaptogenic herbs', dose: '', note: '' },
-              { label: 'Vitamin C', dose: '1000mg · 3x a day', note: '' },
-              { label: 'Multi-pack / vitamin', dose: '', note: '' },
-            ]
-          },
-        ],
-        notes: '',
-        links: [],
-      },
-      {
-        name: 'Retest tracker',
-        slug: 'retest',
-        type: 'retest',
-        tests: [
-          {
-            date: '05/18/2026',
-            label: 'Baseline',
-            values: [
-              { time: 'AM', value: '4.8', status: 'normal' },
-              { time: 'Noon', value: '0.6', status: 'low' },
-              { time: 'Eve', value: '<0.2', status: 'low' },
-              { time: 'Night', value: '0.3', status: 'normal' },
-            ]
-          }
-        ],
-        notes: 'Track each ZRT retest here to see how your cortisol pattern changes over time as you implement your protocol.',
-        links: [],
-      },
-    ]
-  },
-
-  oral: {
-    label: '08 — oral',
-    title: 'Oral Health',
-    summary: 'Releasing oral ties + orofacial myology, and palate expansion with Dr. Claudia — more room for the tongue, less grinding.',
-    topics: [
-      {
-        name: 'Release oral ties',
-        slug: 'oral-ties',
-        notes: 'Releasing the buccal (cheek) and labial (lip) ties.\n\nFrenums are bands of connective tissue inside the vestibules of the lips and under the tongue — they can be as taut as a guitar string, restricting the surrounding muscles from moving freely. A frenectomy releases them.\n\nTwo basic types of frenums:\n— Lingual frenum: located underneath the tongue\n— Labial frenum: found in the upper and lower lips (cheek/buccal and lip ties)\n\nMassaging the sides of the mouth is the ideal way to prepare for the release. Clinical Oral Facial Massage is used pre- and post-frenectomy to support faster healing and longer-lasting effects.\n\nMy notes: which ties I\'m releasing, provider, dates, prep and aftercare, and how it feels through healing.',
-        links: [
-          { text: 'Frenectomy — Oral Myology', href: 'https://oralmyology.com/frenectomy/' },
-          { text: 'Tongue-Tie Functional Release', href: 'https://www.lightscalpel.com/publications/tongue-tie-functional-release/' },
-        ],
-      },
-      {
-        name: 'Orofacial myology',
-        slug: 'myology',
-        notes: 'Orofacial myology (Heidi Widoff, West Palm Beach) — a non-invasive holistic approach that works with the muscles of the face, tongue, mouth and jaw to create symmetry, balance and proper oral habits.\n\nIt addresses Orofacial Myofunctional Disorders (OMDs): mouth breathing, tongue and lip ties, tongue thrust, low tongue rest posture, improper chewing/swallowing, lip incompetence, and habits like nail biting or lip sucking. These OMDs are linked to migraines, TMJD, facial asymmetry, and poor breathing/sleep.\n\nClinical Oral Facial Massage (COFM): a myofascial-release modality that opens the fascia under the tongue, relieves facial tension, balances the TMJ, and opens the sinuses — intra- and extra-orally — combined with nasal breathing techniques. Used for clenching/bruxism, jaw clicking, lockjaw, limited mouth opening, migraines, and pre/post frenectomy.\n\nKey benefits: remodels the palate to give the tongue more space, relieves the fascia under the tongue for easier breathing and swallowing, balances the TMJ, and promotes lymphatic drainage — no injections needed.\n\nMy notes: sessions booked, exercises, breathing work, and progress.',
-        links: [
-          { text: 'Oral Myology — Heidi Widoff', href: 'https://oralmyology.com' },
-          { text: 'Clinical Oral Facial Massage', href: 'https://oralmyology.com/clinical-oral-facial-massage/' },
-          { text: 'Myofunctional therapy', href: 'https://oralmyology.com/myofunctional-therapy/' },
-          { text: 'IAOM', href: 'https://www.iaom.com/' },
-        ],
-      },
-      {
-        name: 'Palate expansion — Dr. Claudia',
-        slug: 'palate',
-        notes: 'Palate expansion with Dr. Claudia Nieves (Wise Willow Consulting) — using an appliance to expand the palate so my tongue can fit better and I stop grinding my teeth.\n\nThe goal: more room across the upper arch means the tongue can rest properly against the roof of the mouth, which supports nasal breathing, better swallowing, and reduces the clenching/bruxism that comes from a crowded mouth and an unbalanced bite.\n\nDr. Claudia is a dentist and orthodontist offering dental coaching — guiding patients through pre-dental preparation, treatment decisions, and a holistic approach that connects dental health to overall well-being.\n\nGetting started: (1) book a 30-min discovery call, (2) consultation + needs assessment, (3) establish a plan and begin.\n\nMy notes: appliance type, turn/activation schedule, expansion progress, how my bite and tongue space change, and grinding/clenching over time.',
-        links: [
-          { text: 'Wise Willow Consulting', href: 'https://www.wisewillowconsulting.com' },
-          { text: 'Dental coaching', href: 'https://www.wisewillowconsulting.com/dental-coaching' },
-          { text: 'Book a consultation', href: 'https://www.wisewillowconsulting.com/treatments' },
-        ],
-      },
-      {
-        name: 'Teeth grinding & TMJ',
-        slug: 'grinding',
-        notes: 'Tracking the grinding/clenching (bruxism) and TMJ tension that the palate expansion and myology work are meant to resolve.\n\nThe through-line: a palate that\'s too narrow leaves the tongue no room to rest up against the roof of the mouth. A low/crowded tongue posture and an unbalanced bite drive clenching and grinding, which feeds TMJ pain, headaches, and jaw tension. Expanding the palate (Dr. Claudia) plus releasing the fascia and ties (orofacial myology) targets the root cause rather than just the symptom.\n\nMy notes: when grinding happens (day vs night), jaw pain/clicking, headaches, night guard use, and whether it eases as the palate expands and the tongue gains space.',
-        links: [
-          { text: 'COFM for TMJ & grinding', href: 'https://oralmyology.com/clinical-oral-facial-massage/' },
-        ],
-      },
-    ]
-  },
-  labs: {
-    label: '09 — minerals',
-    title: 'Minerals & Metals',
-    summary: 'HTMA hair mineral analysis. Slow oxidizer, mineral imbalances, elevated heavy metals (mercury, aluminum).',
-    topics: [
-      {
-        name: 'HTMA — hair mineral analysis',
-        slug: 'htma-results',
-        type: 'htma',
-        lab: 'EquiLife · Minerals & Metals',
-        practitioner: 'Chris Seitz',
-        testDate: 'Results 09-04-2025',
-        overview: 'A hair tissue mineral analysis (HTMA) based on mineral balancing. It takes a comprehensive look at adrenal function and the stress response, essential mineral reserves, electrolyte balance, and toxic metal exposure. Hair reveals longer-term metabolic patterns that blood can mask.',
-        panels: [
-          {
-            name: 'Electrolyte minerals',
-            note: 'Stress and the stress response over ~3 months.',
-            rows: [
-              { k:'Calcium',   v:'135', status:'high', note:'elevated — higher stress' },
-              { k:'Magnesium', v:'48',  status:'high', note:'high — lost via hair; overwhelm, irritability' },
-              { k:'Sodium',    v:'11',  status:'low',  note:'low — weak stress response' },
-              { k:'Potassium', v:'3',   status:'low',  note:'low — stress, exhaustion, cravings' },
-            ]
-          },
-          {
-            name: 'Nutrient minerals',
-            note: '',
-            rows: [
-              { k:'Iron',       v:'0.7',   status:'',    note:'low on hair = no action (test via blood)' },
-              { k:'Copper',     v:'1',     status:'low', note:'low — fatigue, hair, thyroid (see Zn/Cu)' },
-              { k:'Manganese',  v:'0.012', status:'low', note:'low — stress, fatigue, apathy' },
-              { k:'Zinc',       v:'15',    status:'low', note:'low — thyroid, immune, appetite' },
-              { k:'Chromium',   v:'0.024', status:'low', note:'low — blood sugar balance' },
-              { k:'Selenium',   v:'0.053', status:'low', note:'low — thyroid stress' },
-              { k:'Phosphorus', v:'18',    status:'ok',  note:'optimal' },
-            ]
-          },
-          {
-            name: 'Toxic metals',
-            note: 'Exposure or excretion. Often present on a first test.',
-            rows: [
-              { k:'Lead',     v:'0.007', status:'ok',   note:'' },
-              { k:'Mercury',  v:'0.032', status:'high', note:'elevated — diet, fillings' },
-              { k:'Cadmium',  v:'0.001', status:'ok',   note:'' },
-              { k:'Arsenic',  v:'0.007', status:'ok',   note:'' },
-              { k:'Aluminum', v:'0.71',  status:'high', note:'elevated — cookware, antiperspirant, dry shampoo' },
-            ]
-          },
-          {
-            name: 'Mineral ratios',
-            note: 'Minerals balance each other in pairs.',
-            rows: [
-              { k:'Ca/Mg', v:'2.8', status:'low',  note:'low — immunity, energy, overwhelm' },
-              { k:'Ca/K',  v:'45',  status:'high', note:'elevated — stress, sleep, dry skin/hair' },
-              { k:'Na/Mg', v:'0.2', status:'low',  note:'low — fatigue, low blood sugar' },
-              { k:'Na/K',  v:'3.7', status:'high', note:'high — high-stress state' },
-              { k:'Zn/Cu', v:'15',  status:'high', note:'elevated — hormones, thyroid, skin' },
-              { k:'Ca/P',  v:'7.5', status:'high', note:'high — parasympathetic, worn out' },
-            ]
-          },
-        ],
-        oxidizer: 'Slow oxidizer',
-        oxidizerNote: 'Based on the Ca/K (thyroid) and Na/Mg (adrenal) ratios. Slow oxidizer is linked to dry skin, slower digestion/bowels, less sweating, sweet cravings, and blood sugar swings — usually higher stress with a weakened stress response and mineral/vitamin depletion.',
-        notes: 'Big picture: elevated calcium + high Na/K point to a high-stress state; sodium and potassium are low (weak stress response, exhaustion). Most nutrient minerals run low (copper, manganese, zinc, chromium, selenium). Mercury and aluminum are elevated. Zn/Cu and Ca/P ratios are high. EquiLife suggests rebalancing minerals, a heavy metal detox, and retesting every 6–12 months.',
-        pdf: { file:'pdfs/EquiLife-Minerals-Metals-HTMA-2025-09-04.pdf', filename:'EquiLife Minerals & Metals (HTMA)' },
-        links: [
-          { text:'Minerals & Metals Test', href:'https://equi.life/products/hair-tissue-mineral-analysis-test' },
-        ],
-      },
-      {
-        name: 'HTMA protocol',
-        slug: 'htma-protocol',
-        notes: 'My mineral-balancing protocol will live here. Add when ready — the supplements, dosages, and timing your practitioner recommends (e.g. Cal-Mag, Balanced Zinc, heavy metal detox), plus how I respond over time and retest comparisons.',
-        links: [],
-      },
-    ]
-  },
-  omega3: {
-    label: '10 — omega-3',
-    title: 'Omega-3 & Inflammation',
-    summary: 'Omega-3 blood test. Low omega-3 across the board, high omega-6:3 ratio — an inflammatory tilt.',
-    topics: [
-      {
-        name: 'Omega-3 test',
-        slug: 'omega3-results',
-        type: 'omega3',
-        lab: 'Omega3Test · Lipid Technologies',
-        testDate: 'Sample 8/25/25 · Report 8/30/25',
-        overview: 'An at-home blood-spot test of omega-3 and omega-6 fatty acid status — a marker of inflammation balance and cardiovascular health. Higher omega-3 (and a lower omega-6:3 ratio) is anti-inflammatory.',
-        markers: [
-          { k:'Total Omega-3 Score', v:'4.5%',  target:'> 9%',  status:'low'  },
-          { k:'Omega-3 in HUFA',     v:'21%',   target:'> 50%', status:'low'  },
-          { k:'Omega-6 in HUFA',     v:'79%',   target:'< 50%', status:'high' },
-          { k:'Omega-3 Index',       v:'4.5%',  target:'> 8%',  status:'low'  },
-          { k:'Omega-6 / Omega-3',   v:'8.5:1', target:'< 5:1', status:'high' },
-          { k:'AA / EPA Ratio',      v:'22.7',  target:'< 5:1', status:'high' },
-        ],
-        family: [
-          { k:'ALA (plant ω-3)',  v:'0.4%', target:'' },
-          { k:'EPA (marine ω-3)', v:'0.6%', target:'> 3%' },
-          { k:'DPA (marine ω-3)', v:'0.9%', target:'> 1%' },
-          { k:'DHA (marine ω-3)', v:'2.6%', target:'> 4%' },
-          { k:'Total Omega-6',    v:'38.6%', target:'' },
-          { k:'AA (ω-6)',         v:'13.1%', target:'' },
-        ],
-        notes: 'Omega-3 status is low across the board — total score 4.5% (target >9%), omega-3 index 4.5% (target >8%), and only 21% omega-3 in HUFA (target >50%). The omega-6:3 ratio (8.5:1) and AA/EPA (22.7) are both high, an inflammatory tilt. EPA and DHA sit below target. Experts suggest ~1000–2000mg EPA+DHA daily (fatty fish / fish oil) and reducing omega-6 oils (soybean, corn, safflower).',
-        pdf: { file:'pdfs/Omega-3-Test-2025-08-25.pdf', filename:'Omega-3 Test' },
-        links: [
-          { text:'Omega-3 Test', href:'https://equi.life/products/omega-3-test' },
-        ],
-      },
-      {
-        name: 'Supplementation & retest',
-        slug: 'omega3-notes',
-        notes: 'My omega-3 plan and tracking. Add the EPA/DHA dose I take (target ~1000–2000mg combined daily), the fish-oil or algae brand, dietary changes (more fatty fish + greens, fewer omega-6 oils like soybean/corn/safflower), and how the numbers move when I retest.',
-        links: [],
-      },
-    ]
-  },
-
-};
-
-const zoneOrder = ['scalp','face','legs','adrenal','oral','labs','omega3'];
-
-const regionCenters = {
-  scalp:   { vx: 960,  vy: 112 },
-  face:    { vx: 968,  vy: 248 },
-  legs:    { vx: 942,  vy: 840 },
-  adrenal: { vx: 942,  vy: 490 },
-  oral:    { vx: 968,  vy: 300 },
-  labs:    { vx: 942,  vy: 640 },
-  omega3:  { vx: 905,  vy: 430 },
-};
-
-const card           = document.getElementById('card');
-const connectorLine  = document.getElementById('connector-line');
-const infoPanel      = document.getElementById('info-panel');
-const panelZoneLabel = document.getElementById('panel-zone-label');
-const panelZoneTitle = document.getElementById('panel-zone-title');
-const panelBodyNav   = document.getElementById('panel-body-nav');
-const panelTopicList = document.getElementById('panel-topic-list');
-const panelContent   = document.getElementById('panel-content');
-let activeZone = null;
-
-// per-zone accent colors
-const zoneAccents = {
-  scalp:   { hex:'#b8443c', rgb:'184,68,60'  },
-  face:    { hex:'#c0497a', rgb:'192,73,122' },
-  legs:    { hex:'#3f7d5c', rgb:'63,125,92'  },
-  adrenal: { hex:'#c2762f', rgb:'194,118,47' },
-  oral:    { hex:'#7b5ea7', rgb:'123,94,167' },
-  labs:    { hex:'#3a6ea5', rgb:'58,110,165' },
-  omega3:  { hex:'#2f8f8a', rgb:'47,143,138' },
-};
-const DEFAULT_ACCENT = { hex:'#b8443c', rgb:'184,68,60' };
-
-function applyAccent(zone) {
-  const a = zoneAccents[zone] || DEFAULT_ACCENT;
-  document.documentElement.style.setProperty('--accent', a.hex);
-  document.documentElement.style.setProperty('--accent-rgb', a.rgb);
-}
-function resetAccent() {
-  document.documentElement.style.setProperty('--accent', DEFAULT_ACCENT.hex);
-  document.documentElement.style.setProperty('--accent-rgb', DEFAULT_ACCENT.rgb);
-}
-
-function vbToScreen(vx, vy) {
-  const W = window.innerWidth, H = window.innerHeight;
-  const vbW = 1920, vbH = 1080;
-  const scale  = Math.max(W / vbW, H / vbH);
-  const offsetX = (W - vbW * scale) / 2;
-  const offsetY = (H - vbH * scale) / 2;
-  return { x: offsetX + vx * scale, y: offsetY + vy * scale };
-}
-
-function showCard(zone) {
-  const z = zones[zone];
-  applyAccent(zone);
-  document.getElementById('card-label').textContent = z.label;
-  document.getElementById('card-title').textContent = z.title;
-  const summaryEl = document.getElementById('card-summary');
-  if (z.summary) {
-    summaryEl.textContent = z.summary;
-    summaryEl.style.display = 'block';
-  } else {
-    summaryEl.style.display = 'none';
-  }
-  document.getElementById('card-topic-list').innerHTML = z.topics.map(t =>
-    `<li class="card-topic-item" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`
-  ).join('');
-  document.querySelectorAll('.card-topic-item').forEach(item => {
-    item.addEventListener('click', e => {
-      e.stopPropagation();
-      openPanel(item.dataset.zone, item.dataset.slug);
-    });
-  });
-  const c  = regionCenters[zone];
-  const sc = vbToScreen(c.vx, c.vy);
-  card.style.visibility = 'hidden';
-  card.style.display = 'block';
-  const cH = card.offsetHeight;
-  card.style.visibility = '';
-  card.style.display = '';
-  let cardTop = sc.y - cH / 2;
-  cardTop = Math.max(16, Math.min(cardTop, window.innerHeight - cH - 16));
-  card.style.top = cardTop + 'px';
-  card.classList.add('visible');
-}
-
-function clearCard() {
-  card.classList.remove('visible');
-  document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
-}
-
-function pdfDownloadHTML(topic) {
-  if (!topic.pdf) return '';
-  return `<hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Document</span>
-      <a class="pdf-dl" href="${topic.pdf.file}" target="_blank" rel="noopener">
-        <span class="pdf-dl-icon">↗</span>
-        <span class="pdf-dl-name">${topic.pdf.filename}</span>
-      </a>
-      <p class="pdf-dl-hint">Opens the PDF from the <code>pdfs</code> folder. Keep that folder next to this file (or host both together) so the link works.</p>
-    </div>`;
-}
-
-function renderCortisolTopic(topic, z) {
-  const rows = topic.results.map(r => `
-    <tr>
-      <td class="time">${r.time}</td>
-      <td class="value ${r.status}">${r.value} ${r.unit}<span class="result-badge ${r.status}">${r.status}</span></td>
-      <td class="range">${r.range}</td>
-    </tr>`).join('');
-
-  const linksHTML = topic.links.length > 0
-    ? `<hr class="content-divider"/>
-       <div class="content-section">
-         <span class="content-section-label">Links &amp; resources</span>
-         <ul class="content-links">${topic.links.map(l =>
-           `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-         </ul>
-       </div>` : '';
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ${topic.lab} · ${topic.testDate}</span>
-    <div class="content-section">
-      <span class="content-section-label">Method</span>
-      <p class="content-text" style="font-size:1.1rem">${topic.method}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Results — 4-point diurnal</span>
-      <table class="cortisol-table">
-        <thead><tr><th>Time</th><th>Value</th><th>Reference range</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Summary</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>
-    ${linksHTML}
-    ${pdfDownloadHTML(topic)}`;
-}
-
-function renderProtocolTopic(topic, z) {
-  const stageHTML = topic.stages.map(s => {
-    if (s.transition) {
-      return `
-        <div class="protocol-stage transition">
-          <div class="protocol-stage-head">
-            <span class="protocol-stage-name">${s.name}</span>
-            <span class="protocol-stage-state tone-${s.tone}">${s.state}</span>
-          </div>
-        </div>`;
-    }
-    const items = s.items.map(it => `
-      <div class="protocol-item">
-        <span class="protocol-item-label">${it.label}</span>
-        <span class="protocol-item-dose">${it.dose || '—'}</span>
-        ${it.note ? `<span class="protocol-item-note">${it.note}</span>` : ''}
-      </div>`).join('');
-    return `
-      <div class="protocol-stage">
-        <div class="protocol-stage-head">
-          <span class="protocol-stage-name">${s.name}</span>
-          <span class="protocol-stage-state tone-${s.tone}">${s.state}</span>
-        </div>
-        <div class="protocol-items">${items}</div>
-      </div>`;
-  }).join('');
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · adrenal support</span>
-    <div class="content-section">
-      <span class="content-section-label">Dosing principle</span>
-      <p class="content-text" style="font-size:1.2rem">${topic.principle}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Staged protocol</span>
-      ${stageHTML}
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Your content</span>
-      <p class="content-placeholder">Add timing notes, brand names, practitioner adjustments, and how you respond to each stage as you go.</p>
-    </div>`;
-}
-
-function renderFrpTopic(topic, z) {
-  const phaseHTML = topic.phases.map(p => {
-    const weeks = p.weeks.map(w => `
-      <div class="frp-week">
-        <span class="frp-week-wk">${w.wk}</span>
-        <span class="frp-week-focus">${w.focus}</span>
-      </div>`).join('');
-    return `
-      <div class="frp-phase">
-        <div class="frp-phase-head">
-          <span class="frp-phase-name">${p.name}</span>
-          <span class="frp-phase-meta">${p.meta}</span>
-        </div>
-        <div class="frp-weeks">${weeks}</div>
-        <div class="frp-checkpoint">${p.checkpoint}</div>
-      </div>`;
-  }).join('');
-
-  const includesHTML = topic.includes.map(i => `<li class="frp-inc-item">${i}</li>`).join('');
-
-  const linksHTML = topic.links.length > 0
-    ? `<hr class="content-divider"/>
-       <div class="content-section">
-         <span class="content-section-label">Links &amp; resources</span>
-         <ul class="content-links">${topic.links.map(l =>
-           `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-         </ul>
-       </div>` : '';
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ${topic.provider}</span>
-    <div class="frp-meta-row">
-      <div class="frp-meta-cell"><span class="frp-meta-k">Length</span>${topic.length}</div>
-      <div class="frp-meta-cell"><span class="frp-meta-k">Cost</span>${topic.price}</div>
-    </div>
-    <div class="content-section">
-      <span class="content-section-label">Overview</span>
-      <p class="content-text">${topic.summary}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">12-week roadmap</span>
-      ${phaseHTML}
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">What's included</span>
-      <ul class="frp-includes">${includesHTML}</ul>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Who it's for</span>
-      <p class="content-text" style="font-size:1.2rem">${topic.forYou}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Designed by</span>
-      <p class="content-text" style="font-size:1.1rem">${topic.designedBy}</p>
-    </div>
-    ${linksHTML}
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">My progress</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>`;
-}
-
-function renderNotoxTopic(topic, z) {
-  const e = topic.elixir;
-  const ing = e.ingredients.map(i => `<li class="notox-ing">${i}</li>`).join('');
-  const est = e.steps.map(s => `<li class="notox-step">${s}</li>`).join('');
-  const facial = topic.facialSteps.map(s => `
-    <div class="notox-fstep">
-      <span class="notox-fstep-n">${s.n}</span>
-      <div>
-        <span class="notox-fstep-name">${s.name}</span>
-        <span class="notox-fstep-desc">${s.desc}</span>
-      </div>
-    </div>`).join('');
-  const habits = topic.daily.habits.map(h => `<span class="notox-habit">${h}</span>`).join('');
-  const linksHTML = topic.links.length > 0
-    ? `<hr class="content-divider"/>
-       <div class="content-section">
-         <span class="content-section-label">Links &amp; resources</span>
-         <ul class="content-links">${topic.links.map(l =>
-           `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-         </ul>
-       </div>` : '';
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ${topic.author}</span>
-    <div class="content-section">
-      <span class="content-section-label">The method</span>
-      <p class="content-text">${topic.overview}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">${e.name}</span>
-      <div class="notox-elixir">
-        <ul class="notox-ings">${ing}</ul>
-        <ol class="notox-steps">${est}</ol>
-        <p class="notox-elixir-notes">${e.notes}</p>
-        <p class="notox-elixir-ben"><span class="notox-mini-label">Benefits</span>${e.benefits}</p>
-      </div>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Weekly facial — 6 steps</span>
-      <div class="notox-facial">${facial}</div>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Daily habits</span>
-      <div class="notox-habits">${habits}</div>
-      <p class="notox-routine"><span class="notox-mini-label">Morning</span>${topic.daily.morning}</p>
-      <p class="notox-routine"><span class="notox-mini-label">Bedtime</span>${topic.daily.bedtime}</p>
-    </div>
-    ${linksHTML}
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">My notes</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>`;
-}
-
-function renderHtmaTopic(topic, z) {
-  const panels = topic.panels.map(p => {
-    const rows = p.rows.map(r => `
-      <tr>
-        <td class="htma-k">${r.k}</td>
-        <td class="htma-v ${r.status}">${r.v}${r.status && r.status!=='ok' ? `<span class="result-badge ${r.status==='high'?'low':r.status==='low'?'low':'normal'}">${r.status}</span>` : (r.status==='ok'?'<span class="result-badge normal">ok</span>':'')}</td>
-        <td class="htma-n">${r.note}</td>
-      </tr>`).join('');
-    return `
-      <div class="htma-panel">
-        <div class="htma-panel-head">
-          <span class="htma-panel-name">${p.name}</span>
-          ${p.note ? `<span class="htma-panel-note">${p.note}</span>` : ''}
-        </div>
-        <table class="htma-table"><tbody>${rows}</tbody></table>
-      </div>`;
-  }).join('');
-
-  const linksHTML = topic.links.length > 0
-    ? `<hr class="content-divider"/>
-       <div class="content-section">
-         <span class="content-section-label">Links &amp; resources</span>
-         <ul class="content-links">${topic.links.map(l =>
-           `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-         </ul>
-       </div>` : '';
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ${topic.lab} · ${topic.testDate}</span>
-    <div class="content-section">
-      <span class="content-section-label">About this test</span>
-      <p class="content-text" style="font-size:1.2rem">${topic.overview}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Results</span>
-      ${panels}
-    </div>
-    <div class="htma-oxidizer">
-      <span class="htma-mini-label">Oxidizer status</span>
-      <span class="htma-ox-val">${topic.oxidizer}</span>
-      <p class="htma-ox-note">${topic.oxidizerNote}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Summary</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>
-    ${linksHTML}
-    ${pdfDownloadHTML(topic)}`;
-}
-
-function renderOmega3Topic(topic, z) {
-  const markers = topic.markers.map(m => `
-    <tr>
-      <td class="htma-k">${m.k}</td>
-      <td class="htma-v ${m.status}">${m.v}<span class="result-badge ${m.status==='high'?'low':'low'}">${m.status}</span></td>
-      <td class="htma-n">target ${m.target}</td>
-    </tr>`).join('');
-  const fam = topic.family.map(f => `
-    <tr>
-      <td class="htma-k">${f.k}</td>
-      <td class="htma-v">${f.v}</td>
-      <td class="htma-n">${f.target ? 'target '+f.target : ''}</td>
-    </tr>`).join('');
-
-  const linksHTML = topic.links.length > 0
-    ? `<hr class="content-divider"/>
-       <div class="content-section">
-         <span class="content-section-label">Links &amp; resources</span>
-         <ul class="content-links">${topic.links.map(l =>
-           `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-         </ul>
-       </div>` : '';
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ${topic.lab} · ${topic.testDate}</span>
-    <div class="content-section">
-      <span class="content-section-label">About this test</span>
-      <p class="content-text" style="font-size:1.2rem">${topic.overview}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Key markers</span>
-      <table class="htma-table"><tbody>${markers}</tbody></table>
-    </div>
-    <div class="content-section">
-      <span class="content-section-label">Fatty acid breakdown</span>
-      <table class="htma-table"><tbody>${fam}</tbody></table>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Summary</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>
-    ${linksHTML}
-    ${pdfDownloadHTML(topic)}`;
-}
-
-function renderRetestTopic(topic, z) {
-  const cols = topic.tests.map(t => `
-    <div class="retest-col">
-      <span class="retest-col-label">${t.label}</span>
-      <span class="retest-col-date">${t.date}</span>
-      <div class="retest-mini-val">
-        ${t.values.map(v => `${v.time}: <span class="${v.status}">${v.value}</span><br/>`).join('')}
-      </div>
-    </div>`).join('');
-
-  const pending = `
-    <div class="retest-col" style="border-style:dashed;opacity:0.5">
-      <span class="retest-col-label">Retest 1</span>
-      <span class="retest-col-date">— pending —</span>
-      <div class="retest-pending">Add results after next ZRT test.</div>
-    </div>`;
-
-  return `
-    <div class="content-title">${topic.name}</div>
-    <span class="content-label">${z.label} · ZRT Laboratory</span>
-    <div class="content-section">
-      <span class="content-section-label">Cortisol over time (ng/mL)</span>
-      <div class="retest-row">${cols}${pending}</div>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Notes</span>
-      <p class="content-text">${topic.notes}</p>
-    </div>
-    <hr class="content-divider"/>
-    <div class="content-section">
-      <span class="content-section-label">Your content</span>
-      <p class="content-placeholder">Add retest results here as you go. Each column represents one test date, letting you track your pattern over time.</p>
-    </div>`;
-}
-
-function loadTopic(zone, slug) {
-  const z     = zones[zone];
-  const topic = z.topics.find(t => t.slug === slug);
-  if (!topic) return;
-  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item =>
-    item.classList.toggle('active', item.dataset.slug === slug));
-
-  if (topic.type === 'cortisol') {
-    panelContent.innerHTML = renderCortisolTopic(topic, z);
-  } else if (topic.type === 'htma') {
-    panelContent.innerHTML = renderHtmaTopic(topic, z);
-  } else if (topic.type === 'omega3') {
-    panelContent.innerHTML = renderOmega3Topic(topic, z);
-  } else if (topic.type === 'protocol') {
-    panelContent.innerHTML = renderProtocolTopic(topic, z);
-  } else if (topic.type === 'frp') {
-    panelContent.innerHTML = renderFrpTopic(topic, z);
-  } else if (topic.type === 'notox') {
-    panelContent.innerHTML = renderNotoxTopic(topic, z);
-  } else if (topic.type === 'retest') {
-    panelContent.innerHTML = renderRetestTopic(topic, z);
-  } else {
-    const notesFormatted = topic.notes.replace(/\n/g, '<br/>');
-    const linksHTML = topic.links.length > 0
-      ? `<hr class="content-divider"/>
-         <div class="content-section">
-           <span class="content-section-label">Links &amp; resources</span>
-           <ul class="content-links">${topic.links.map(l =>
-             `<li><a href="${l.href}" target="_blank" rel="noopener">${l.text}</a></li>`).join('')}
-           </ul>
-         </div>` : '';
-    panelContent.innerHTML = `
-      <div class="content-title">${topic.name}</div>
-      <span class="content-label">${z.label}</span>
-      <div class="content-section">
-        <span class="content-section-label">Notes</span>
-        <p class="content-text">${notesFormatted}</p>
-      </div>
-      ${linksHTML}
-      ${pdfDownloadHTML(topic)}
-      <hr class="content-divider"/>
-      <div class="content-section">
-        <span class="content-section-label">Your content</span>
-        <p class="content-placeholder">Photos, videos, product lists, journal entries, and links will live here as you build out this section.</p>
-      </div>`;
-  }
-  panelContent.scrollTop = 0;
-}
-
-function openPanel(zone, slug) {
-  activeZone = zone;
-  applyAccent(zone);
-  const z = zones[zone];
-  panelZoneLabel.textContent = z.label;
-  panelZoneTitle.textContent = z.title;
-  panelBodyNav.innerHTML = zoneOrder.map(zk =>
-    `<li class="panel-body-nav-item${zk === zone ? ' active' : ''}" data-zone="${zk}">${zones[zk].title}</li>`
-  ).join('');
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
-    item.addEventListener('click', () => switchZone(item.dataset.zone)));
-  buildTopicList(zone, slug || z.topics[0].slug);
-  loadTopic(zone, slug || z.topics[0].slug);
-  infoPanel.classList.add('open');
-  document.body.classList.add('panel-open');
-}
-
-function switchZone(zone) {
-  activeZone = zone;
-  applyAccent(zone);
-  const z = zones[zone];
-  panelZoneLabel.textContent = z.label;
-  panelZoneTitle.textContent = z.title;
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
-    item.classList.toggle('active', item.dataset.zone === zone));
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-  buildTopicList(zone, z.topics[0].slug);
-  loadTopic(zone, z.topics[0].slug);
-}
-
-function buildTopicList(zone, activeSlug) {
-  panelTopicList.innerHTML = zones[zone].topics.map(t =>
-    `<li class="panel-topic-item${t.slug === activeSlug ? ' active' : ''}" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`
-  ).join('');
-  panelTopicList.querySelectorAll('.panel-topic-item').forEach(item =>
-    item.addEventListener('click', () => loadTopic(item.dataset.zone, item.dataset.slug)));
-}
-
-function clearAll() {
-  clearCard();
-  resetAccent();
+  document.body.classList.remove('zone-active');
   infoPanel.classList.remove('open');
   document.body.classList.remove('panel-open');
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
