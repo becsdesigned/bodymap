@@ -308,9 +308,9 @@
     .panel-topic-item.active { color: var(--accent); padding-left: 5px; }
     .panel-x {
       position: absolute;
-      bottom: 22px;
+      top: 18px;
       right: 22px;
-      top: auto;
+      bottom: auto;
       z-index: 50;
       width: 34px;
       height: 34px;
@@ -1062,8 +1062,6 @@
     <div class="panel-topics">
       <span class="panel-zone-label" id="panel-zone-label"></span>
       <span class="panel-zone-title" id="panel-zone-title"></span>
-      <ul class="panel-body-nav" id="panel-body-nav"></ul>
-      <hr class="panel-nav-divider"/>
       <ul class="panel-topic-list" id="panel-topic-list"></ul>
       <button class="panel-close-btn" id="panel-close-btn">close</button>
     </div>
@@ -1524,8 +1522,8 @@ function collapseZone() {
   if (old) old.remove();
   document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
-  resetAccent();
   activeZone = null;
+  if (!document.body.classList.contains('panel-open')) resetAccent();
 }
 
 function closePanel() {
@@ -1951,28 +1949,12 @@ function openPanel(zone, slug) {
   const z = zones[zone];
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
-  panelBodyNav.innerHTML = zoneOrder.map(zk =>
-    `<li class="panel-body-nav-item${zk === zone ? ' active' : ''}" data-zone="${zk}">${zones[zk].title}</li>`
-  ).join('');
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
-    item.addEventListener('click', () => switchZone(item.dataset.zone)));
   buildTopicList(zone, slug || z.topics[0].slug);
   loadTopic(zone, slug || z.topics[0].slug);
   infoPanel.classList.add('open');
   document.body.classList.add('panel-open');
 }
 
-function switchZone(zone) {
-  applyAccent(zone);
-  const z = zones[zone];
-  panelZoneLabel.textContent = z.label;
-  panelZoneTitle.textContent = z.title;
-  panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
-    item.classList.toggle('active', item.dataset.zone === zone));
-  expandZone(zone);
-  buildTopicList(zone, z.topics[0].slug);
-  loadTopic(zone, z.topics[0].slug);
-}
 
 function buildTopicList(zone, activeSlug) {
   panelTopicList.innerHTML = zones[zone].topics.map(t =>
@@ -1983,14 +1965,13 @@ function buildTopicList(zone, activeSlug) {
 }
 
 function clearAll() {
-  collapseZone();
   closePanel();
+  collapseZone();
+  resetAccent();
 }
 
 function selectZone(zone) {
-  const panelOpen = document.body.classList.contains('panel-open');
-  if (activeZone === zone && !panelOpen) { collapseZone(); return; }
-  closePanel();
+  if (activeZone === zone) { collapseZone(); return; }
   expandZone(zone);
 }
 
