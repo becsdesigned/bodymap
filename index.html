@@ -93,6 +93,43 @@
     .zone-item:first-child { border-top: 0.5px solid rgba(0,0,0,0.05); }
     .zone-item:hover { color: #000; }
     .zone-item.active { color: var(--accent); }
+    .zone-expand {
+      list-style: none;
+      padding: 6px 0 12px 12px;
+      margin: 2px 0 6px 1px;
+      border-left: 2px solid var(--accent);
+      animation: expandIn 0.18s ease;
+    }
+    @keyframes expandIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .zone-expand-summary {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.58rem;
+      line-height: 1.65;
+      color: rgba(0,0,0,0.42);
+      margin-bottom: 10px;
+    }
+    .zone-expand-list { list-style: none; }
+    .zone-expand-item {
+      position: relative;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.03em;
+      color: rgba(0,0,0,0.55);
+      padding: 6px 0 6px 14px;
+      cursor: pointer;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+    .zone-expand-item::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+    .zone-expand-item:hover { color: var(--accent); padding-left: 18px; }
     .col-back {
       font-family: 'Fragment Mono', monospace;
       font-size: 0.56rem;
@@ -271,8 +308,9 @@
     .panel-topic-item.active { color: var(--accent); padding-left: 5px; }
     .panel-x {
       position: absolute;
-      top: 18px;
+      bottom: 22px;
       right: 22px;
+      top: auto;
       z-index: 50;
       width: 34px;
       height: 34px;
@@ -1016,15 +1054,6 @@
       <div id="symptom-results-inline"></div>
     </div>
     <a class="col-back" href="https://becsdesigned.com">becs designed</a>
-  </div>
-
-  <div class="card" id="card">
-    <div class="col-section" id="card-eyebrow">Selected</div>
-    <div class="card-label" id="card-label"></div>
-    <div class="card-title" id="card-title"></div>
-    <div class="card-summary" id="card-summary"></div>
-    <ul class="card-topic-list" id="card-topic-list"></ul>
-    <div class="card-placeholder" id="card-placeholder">click any zone to explore</div>
     <div class="col-foot">broward, fl</div>
   </div>
 
@@ -1426,7 +1455,6 @@ const regionCenters = {
   omega3:  { vx: 905,  vy: 430 },
 };
 
-const card           = document.getElementById('card');
 const connectorLine  = document.getElementById('connector-line');
 const infoPanel      = document.getElementById('info-panel');
 const panelZoneLabel = document.getElementById('panel-zone-label');
@@ -1467,41 +1495,42 @@ function vbToScreen(vx, vy) {
   return { x: offsetX + vx * scale, y: offsetY + vy * scale };
 }
 
-function showCard(zone) {
+function expandZone(zone) {
   const z = zones[zone];
+  const old = document.querySelector('.zone-expand');
+  if (old) old.remove();
+  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
+  activeZone = zone;
   applyAccent(zone);
-  document.getElementById('card-label').textContent = z.label;
-  document.getElementById('card-title').textContent = z.title;
-  const summaryEl = document.getElementById('card-summary');
-  if (z.summary) {
-    summaryEl.textContent = z.summary;
-    summaryEl.style.display = 'block';
-  } else {
-    summaryEl.style.display = 'none';
-  }
-  document.getElementById('card-topic-list').innerHTML = z.topics.map(t =>
-    `<li class="card-topic-item" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`
-  ).join('');
-  document.querySelectorAll('.card-topic-item').forEach(item => {
-    item.addEventListener('click', e => {
-      e.stopPropagation();
-      openPanel(item.dataset.zone, item.dataset.slug);
-    });
-  });
-  document.getElementById('card-eyebrow').style.display = 'block';
-  document.getElementById('card-placeholder').style.display = 'none';
-  document.body.classList.add('zone-active');
-  card.classList.add('visible');
+  const zoneItem = document.querySelector(`.zone-item[data-zone="${zone}"]`);
+  zoneItem?.classList.add('active');
+  document.querySelector(`.body-region[data-zone="${zone}"]`)?.classList.add('active');
+  if (!zoneItem) return;
+
+  const li = document.createElement('li');
+  li.className = 'zone-expand';
+  const summaryHTML = z.summary ? `<div class="zone-expand-summary">${z.summary}</div>` : '';
+  const itemsHTML = z.topics.map(t =>
+    `<li class="zone-expand-item" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`).join('');
+  li.innerHTML = summaryHTML + `<ul class="zone-expand-list">${itemsHTML}</ul>`;
+  zoneItem.insertAdjacentElement('afterend', li);
+  li.querySelectorAll('.zone-expand-item').forEach(item =>
+    item.addEventListener('click', e => { e.stopPropagation(); openPanel(item.dataset.zone, item.dataset.slug); }));
 }
 
-function clearCard() {
-  document.getElementById('card-title').textContent = '';
-  document.getElementById('card-summary').textContent = '';
-  document.getElementById('card-summary').style.display = 'none';
-  document.getElementById('card-topic-list').innerHTML = '';
-  document.getElementById('card-eyebrow').style.display = 'none';
-  document.getElementById('card-placeholder').style.display = 'block';
+function collapseZone() {
+  const old = document.querySelector('.zone-expand');
+  if (old) old.remove();
+  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
   document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
+  resetAccent();
+  activeZone = null;
+}
+
+function closePanel() {
+  infoPanel.classList.remove('open');
+  document.body.classList.remove('panel-open');
 }
 
 function pdfDownloadHTML(topic) {
@@ -1934,15 +1963,13 @@ function openPanel(zone, slug) {
 }
 
 function switchZone(zone) {
-  activeZone = zone;
   applyAccent(zone);
   const z = zones[zone];
   panelZoneLabel.textContent = z.label;
   panelZoneTitle.textContent = z.title;
   panelBodyNav.querySelectorAll('.panel-body-nav-item').forEach(item =>
     item.classList.toggle('active', item.dataset.zone === zone));
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
+  expandZone(zone);
   buildTopicList(zone, z.topics[0].slug);
   loadTopic(zone, z.topics[0].slug);
 }
@@ -1956,24 +1983,15 @@ function buildTopicList(zone, activeSlug) {
 }
 
 function clearAll() {
-  clearCard();
-  resetAccent();
-  document.body.classList.remove('zone-active');
-  infoPanel.classList.remove('open');
-  document.body.classList.remove('panel-open');
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  activeZone = null;
+  collapseZone();
+  closePanel();
 }
 
 function selectZone(zone) {
-  if (document.body.classList.contains('panel-open')) { switchZone(zone); return; }
-  if (activeZone === zone) { clearAll(); return; }
-  activeZone = zone;
-  document.querySelectorAll('.zone-item').forEach(l => l.classList.remove('active'));
-  document.querySelector(`.zone-item[data-zone="${zone}"]`)?.classList.add('active');
-  document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
-  document.querySelector(`.body-region[data-zone="${zone}"]`)?.classList.add('active');
-  showCard(zone);
+  const panelOpen = document.body.classList.contains('panel-open');
+  if (activeZone === zone && !panelOpen) { collapseZone(); return; }
+  closePanel();
+  expandZone(zone);
 }
 
 document.querySelectorAll('.body-region').forEach(region => {
@@ -1982,16 +2000,14 @@ document.querySelectorAll('.body-region').forEach(region => {
 document.querySelectorAll('.zone-item').forEach(item => {
   item.addEventListener('click', e => { e.stopPropagation(); selectZone(item.dataset.zone); });
 });
-document.getElementById('panel-close-btn').addEventListener('click', clearAll);
-document.getElementById('panel-x').addEventListener('click', clearAll);
+document.getElementById('panel-close-btn').addEventListener('click', closePanel);
+document.getElementById('panel-x').addEventListener('click', closePanel);
 document.addEventListener('click', e => {
-  if (!e.target.closest('.left-col') && !e.target.closest('.card') &&
+  if (!e.target.closest('.left-col') &&
       !e.target.closest('.info-panel') && !e.target.closest('.body-region')) {
     clearAll();
   }
 });
-card.addEventListener('click', e => e.stopPropagation());
-window.addEventListener('resize', () => { if (activeZone && !document.body.classList.contains('panel-open')) showCard(activeZone); });
 
 /* ── symptom search ── */
 const symptomInput   = document.getElementById('symptom-input');
