@@ -1973,6 +1973,9 @@ function clearAll() {
 function selectZone(zone) {
   if (activeZone === zone) { collapseZone(); return; }
   expandZone(zone);
+  if (document.body.classList.contains('panel-open')) {
+    openPanel(zone, zones[zone].topics[0].slug);
+  }
 }
 
 document.querySelectorAll('.body-region').forEach(region => {
