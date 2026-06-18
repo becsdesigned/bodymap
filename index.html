@@ -1071,7 +1071,6 @@
 <script>
 const zones = {
   scalp: { label:'01 — scalp', title:'Scalp & Hair', summary:'', topics:[
-    { name:'Trichology research', slug:'trichology', notes:'Your trichology research notes go here. Add what you\'ve learned about scalp health, hair loss, hair growth cycles, and what you\'ve discussed with specialists.', links:[{text:'Trichological Society',href:'https://www.trichological.com'}]},
     {
       name:'Sophia Trichology',
       slug:'sophia',
@@ -1082,33 +1081,10 @@ const zones = {
       ],
     },
     { name:'Scalp photos & progress', slug:'photos', notes:'Document your scalp health over time. Add before/after photos, progress notes, and observations about changes in density, texture, and scalp condition.', links:[]},
-    { name:'Curly hair method', slug:'curly-method', notes:'Your curly hair method notes — what works, what doesn\'t, your curl pattern, porosity results, and the techniques that suit your hair best.', links:[{text:'Curly Girl Method',href:'https://www.naturallycurly.com'}]},
-    { name:'Shampoo & co-wash', slug:'routine', notes:'Wash day routine, frequency, products used, and observations. Include your shampoo, conditioner, co-wash, and how your scalp responds.', links:[]},
-    { name:'Porosity & moisture', slug:'moisture', notes:'Porosity test results, moisture-protein balance findings, and what your hair responds to. High, low, or medium porosity changes everything.', links:[]},
     { name:'Products', slug:'products', notes:'A running list of products you\'ve tried, what you\'re currently using, and what to avoid. Rate them, note ingredients to watch for.', links:[{text:'Ingredient checker',href:'https://www.cosdna.com'}]},
   ]},
   face: { label:'02 — face', title:'Face & Skin', summary:'', topics:[
-    { name:'AM routine', slug:'am', notes:'Your morning skincare routine — every step, product, and why it\'s there.', links:[]},
-    { name:'PM routine', slug:'pm', notes:'Evening routine — cleansing, treatments, actives, and overnight products.', links:[]},
-    { name:'Active ingredients', slug:'actives', notes:'Deep dive into the actives you use or are researching — retinoids, acids, vitamin C, niacinamide.', links:[{text:'INCIDecoder',href:'https://incidecoder.com'}]},
-    { name:'SPF research', slug:'spf', notes:'SPF research, what you\'ve tested, and what works for your skin tone.', links:[]},
-    { name:'Hyperpigmentation', slug:'pigmentation', notes:'Research and personal notes on treating hyperpigmentation — what\'s worked, what hasn\'t.', links:[]},
-    {
-      name:'Soulful Skin — enzyme facial',
-      slug:'soulful-facial',
-      notes:'Hydrating Enzyme Facial with Claudia at Soulful Skin — 1 hour · $99.\n\nA great starting-point facial. It includes a double cleansing technique with high-frequency bacterial removal, an enzyme exfoliant treatment, extractions, a moisturizing face mask, and ice globe cryotherapy.\n\nOptional add-ons to take it further: LED light therapy, dermaplaning, and more.\n\nMy notes: appointment dates, add-ons chosen, how my skin reacted, and how it looks in the days after.',
-      links:[],
-    },
-    {
-      name:'Face Reality chemical peel',
-      slug:'face-reality-peel',
-      notes:'Face Reality professional peel — Claudia used the #1 on me.\n\nFace Reality is an acne-safe professional skincare line. Their peels come in two lines, each with a "#1" / "1" strength (the gentlest, used to introduce skin to peeling):\n\n— Clear Skin Peel #1: a self-neutralizing treatment peel that exfoliates, resurfaces, and brightens.\n— Clear Synergy Peel 1: a non-TCA peel powered by HydroxyMatrix (a blend of alpha and beta hydroxy acids) that preps skin for easier extractions and supports age-management.\n\nThere\'s also a non-acid Hydrating Enzyme Treatment for when skin needs gentler exfoliation.\n\nThese are professional (back-bar) treatments applied by a certified acne expert, not at-home products. Results generally build over 3–6 weeks of a consistent routine.\n\nMy notes: which exact peel was used, strength/layers, date, downtime, peeling/flaking, and skin results. Confirm with Claudia whether it was the Clear Skin or Clear Synergy line.',
-      links:[
-        { text:'Face Reality peels', href:'https://facerealityskincare.com/collections/peels' },
-        { text:'Clear Skin Peel #1', href:'https://facerealityskincare.com/products/acne-peel-1' },
-        { text:'Clear Synergy Peel 1', href:'https://facerealityskincare.com/products/clear-synergy-peel-1' },
-      ],
-    },
+    { name:'Facials', slug:'facials', notes:'Two professional facials I rotate, both with Claudia.\n\nHydrating Enzyme Facial — Soulful Skin · 1 hr · $99: a double cleanse with high-frequency, an enzyme exfoliant, extractions, a moisturizing mask, and ice globe cryotherapy. Optional add-ons: LED light therapy, dermaplaning, and more.\n\nChemical peel — Face Reality (the #1 was used on me): an acne-safe professional line. The "#1" peels are the gentlest, used to introduce skin to peeling — either the Clear Skin Peel #1 (self-neutralizing, brightening) or the Clear Synergy Peel 1 (a non-TCA HydroxyMatrix peel that preps for extractions). Back-bar treatments by a certified provider; results build over 3–6 weeks.\n\nMy notes: dates, which facial or peel, add-ons, downtime, and how my skin responds.', links:[{text:'Face Reality peels',href:'https://facerealityskincare.com/collections/peels'},{text:'Clear Skin Peel #1',href:'https://facerealityskincare.com/products/acne-peel-1'},{text:'Clear Synergy Peel 1',href:'https://facerealityskincare.com/products/clear-synergy-peel-1'}]},
     {
       name:'The NOtox Skincare Method',
       slug:'notox',
@@ -1118,10 +1094,10 @@ const zones = {
         { text:'True Ayurveda', href:'https://www.trueayurveda.com' },
       ],
     },
+    { name:'Dry brushing', slug:'dry-brushing', notes:'Dry brushing — sweeping a natural-bristle brush over dry skin before showering to exfoliate, boost circulation, and support lymphatic drainage, leaving skin smoother.\n\nHow: long strokes toward the heart, starting at the feet and moving up; lighter pressure on sensitive areas; 2–5 minutes, then shower and moisturize. A few times a week. Skip broken or irritated skin.\n\nMy notes: brush used, frequency, and how my skin and any puffiness respond.', links:[]},
+    { name:'Malezia products', slug:'malezia', notes:'Malezia — a microbiology-based skincare brand where everything is safe for "fungal acne" (malassezia), though all skin types are welcome. It grew out of the Simple Skincare Science community and is environmentally friendly.\n\nThe Core Regimen is a simple 3-step system: Hyaluronic Acid Cleanser, Urea Moisturizer (5% urea in a fungal-acne-safe base with hyaluronic acid, glycerin, and allantoin), and the Acne Treatment Gel (2.5% micronized benzoyl peroxide). Other products include an azelaic acid cream, a BHA/PHA solution, a cleansing balm, and purified MCT oil.\n\nMy notes: which products I use, my routine order, and how my skin responds over time.', links:[{text:'Malezia',href:'https://malezia.com'},{text:'Regimen guide',href:'https://malezia.com/pages/regimen-guide'},{text:'Find your routine',href:'https://malezia.com/pages/quiz'}]},
   ]},
   legs: { label:'06 — legs', title:'Legs & Feet', summary:'', topics:[
-    { name:'Mobility & stretching', slug:'mobility', notes:'Lower body mobility research — hip flexors, hamstrings, glutes.', links:[]},
-    { name:'Foot care routine', slug:'feet', notes:'Foot care — exfoliation, moisturising, nail care, and any issues like calluses or dryness.', links:[]},
     {
       name:'Foot Restoration Program',
       slug:'frp',
@@ -1172,8 +1148,7 @@ const zones = {
         {text:'TFC free balance assessment', href:'https://thefootcollective.us/pages/tfc-balance-screen'},
       ],
     },
-    { name:'Workout & recovery', slug:'workout', notes:'Leg day workouts, recovery protocols, and notes on soreness and progression.', links:[]},
-    { name:'Vascular health', slug:'vascular', notes:'Research on vascular health — circulation, spider veins, and how movement affects your legs.', links:[]},
+    { name:'Foot soaks', slug:'foot-soaks', notes:'Foot soaks — warm water with Epsom salt (magnesium sulfate) or other add-ins to relax muscles, soften skin, and ease tired feet.\n\nOptional add-ins: Epsom or magnesium flakes, baking soda, a splash of apple cider vinegar, or a few drops of essential oil; finish by drying well and moisturizing.\n\nMy notes: recipe and add-ins I use, how often, water temp and time, and how my feet and sleep respond.', links:[]},
   ]},
 
   adrenal: {
@@ -1182,7 +1157,7 @@ const zones = {
     summary: 'Morning cortisol normal. Noon + evening low — HPA axis dysfunction confirmed. ZRT saliva test 05/18/26.',
     topics: [
       {
-        name: '4-point cortisol test',
+        name: 'Test',
         slug: 'cortisol-results',
         type: 'cortisol',
         testDate: '05/18/2026',
@@ -1197,15 +1172,6 @@ const zones = {
         notes: 'Morning cortisol within range — good cortisol awakening response. Noon and evening significantly below range, indicating low adrenal reserve and HPA axis dysfunction. Night value normal.',
         pdf: { file: 'pdfs/ZRT-Cortisol-Saliva-Test-2026-05-18.pdf', filename: 'ZRT Cortisol Saliva Test' },
         links: [{ text: 'ZRT Laboratory', href: 'https://www.zrtlab.com' }, { text: 'ZRT reference ranges', href: 'https://www.zrtlab.com/reference-ranges' }],
-      },
-      {
-        name: 'Lab findings & interpretation',
-        slug: 'lab-findings',
-        notes: 'ZRT lab comment (05/22/2026): Cortisol is normal in the morning but drops to low levels the remainder of the day, indicating low adrenal reserve and HPA axis dysfunction.\n\nThis is typically caused by:\n— Chronic stressors (psychological, sleep deprivation, physical insults, chemical exposure, pathogenic infections)\n— Cortisol precursor deficiency (pregnenolone and progesterone)\n— Nutritional deficiencies (low vitamins C and B5, low protein intake)\n\nDepleted cortisol leads to symptoms including: fatigue, allergies and immune dysfunction, chemical sensitivity, cold body temperature, and sugar cravings.\n\nNote on thyroid: cortisol must be within physiological range before attempting thyroid therapy. Thyroid medication increases hepatic clearance of cortisol, which can further lower already-low cortisol. Individuals with weak adrenals on thyroid therapy often report feeling "tired but wired" in the evening.\n\nSymptom categories self-reported (from ZRT checklist):\n— High Androgens (DHEA/Testosterone): 43%\n— Estrogen/Progesterone Deficiency: 15%\n— Estrogen Dominance: 10%\n— Hypometabolism: 9%\n— Low Androgens: 7%\n— Low/High Cortisol: 5% each\n— Metabolic Syndrome: 4%',
-        links: [
-          { text: 'Adrenal Fatigue — James L. Wilson', href: 'https://www.amazon.com/dp/1890572217' },
-          { text: 'The Cortisol Connection — Shawn Talbott', href: 'https://www.amazon.com/dp/0897934148' },
-        ],
       },
       {
         name: 'Protocol',
@@ -1250,25 +1216,6 @@ const zones = {
           },
         ],
         notes: '',
-        links: [],
-      },
-      {
-        name: 'Retest tracker',
-        slug: 'retest',
-        type: 'retest',
-        tests: [
-          {
-            date: '05/18/2026',
-            label: 'Baseline',
-            values: [
-              { time: 'AM', value: '4.8', status: 'normal' },
-              { time: 'Noon', value: '0.6', status: 'low' },
-              { time: 'Eve', value: '<0.2', status: 'low' },
-              { time: 'Night', value: '0.3', status: 'normal' },
-            ]
-          }
-        ],
-        notes: 'Track each ZRT retest here to see how your cortisol pattern changes over time as you implement your protocol.',
         links: [],
       },
     ]
@@ -1325,7 +1272,7 @@ const zones = {
     summary: 'HTMA hair mineral analysis. Slow oxidizer, mineral imbalances, elevated heavy metals (mercury, aluminum).',
     topics: [
       {
-        name: 'HTMA — hair mineral analysis',
+        name: 'Test',
         slug: 'htma-results',
         type: 'htma',
         lab: 'EquiLife · Minerals & Metals',
@@ -1389,7 +1336,7 @@ const zones = {
         ],
       },
       {
-        name: 'HTMA protocol',
+        name: 'Protocol',
         slug: 'htma-protocol',
         notes: 'My mineral-balancing protocol will live here. Add when ready — the supplements, dosages, and timing your practitioner recommends (e.g. Cal-Mag, Balanced Zinc, heavy metal detox), plus how I respond over time and retest comparisons.',
         links: [],
@@ -1402,7 +1349,7 @@ const zones = {
     summary: 'Omega-3 blood test. Low omega-3 across the board, high omega-6:3 ratio — an inflammatory tilt.',
     topics: [
       {
-        name: 'Omega-3 test',
+        name: 'Test',
         slug: 'omega3-results',
         type: 'omega3',
         lab: 'Omega3Test · Lipid Technologies',
@@ -1431,7 +1378,7 @@ const zones = {
         ],
       },
       {
-        name: 'Supplementation & retest',
+        name: 'Protocol',
         slug: 'omega3-notes',
         notes: 'My omega-3 plan and tracking. Add the EPA/DHA dose I take (target ~1000–2000mg combined daily), the fish-oil or algae brand, dietary changes (more fatty fish + greens, fewer omega-6 oils like soybean/corn/safflower), and how the numbers move when I retest.',
         links: [],
@@ -1508,10 +1455,9 @@ function expandZone(zone) {
 
   const li = document.createElement('li');
   li.className = 'zone-expand';
-  const summaryHTML = z.summary ? `<div class="zone-expand-summary">${z.summary}</div>` : '';
   const itemsHTML = z.topics.map(t =>
     `<li class="zone-expand-item" data-zone="${zone}" data-slug="${t.slug}">${t.name}</li>`).join('');
-  li.innerHTML = summaryHTML + `<ul class="zone-expand-list">${itemsHTML}</ul>`;
+  li.innerHTML = `<ul class="zone-expand-list">${itemsHTML}</ul>`;
   zoneItem.insertAdjacentElement('afterend', li);
   li.querySelectorAll('.zone-expand-item').forEach(item =>
     item.addEventListener('click', e => { e.stopPropagation(); openPanel(item.dataset.zone, item.dataset.slug); }));
@@ -1999,61 +1945,35 @@ const symptomSubmit  = document.getElementById('symptom-submit');
 const symptomResults = document.getElementById('symptom-results-inline');
 
 const symptomMap = {
-  'itchy scalp':     [['scalp/trichology','trichologist findings'],['scalp/moisture','dryness causes itch'],['scalp/routine','shampoo may be cause']],
-  'itchy':           [['scalp/trichology','scalp irritation research'],['face/actives','actives cause sensitivity'],['scalp/moisture','moisture imbalance']],
-  'dry scalp':       [['scalp/moisture','moisture & porosity research'],['scalp/routine','shampoo stripping scalp'],['scalp/products','product recs']],
-  'hair loss':       [['scalp/trichology','trichology covers hair loss'],['adrenal/lab-findings','cortisol & hair loss link']],
-  'hair breakage':   [['scalp/moisture','protein-moisture balance'],['scalp/trichology','trichologist notes'],['scalp/products','products that reduce breakage']],
-  'frizz':           [['scalp/curly-method','curly method for frizz'],['scalp/moisture','porosity causes frizz'],['scalp/routine','wash day routine']],
-  'dandruff':        [['scalp/trichology','trichology covers dandruff'],['scalp/routine','shampoo for dandruff']],
-  'curl':            [['scalp/curly-method','curl method & techniques'],['scalp/moisture','moisture for curl pattern'],['scalp/products','styling product recs']],
-  'acne':            [['face/actives','actives targeting acne'],['face/pm','PM routine for acne'],['adrenal/lab-findings','high androgens & acne link']],
-  'breakout':        [['face/actives','blemish-control actives'],['face/pm','evening routine']],
-  'dark spots':      [['face/pigmentation','hyperpigmentation research'],['face/spf','SPF for dark spots'],['face/actives','vitamin C & AHAs']],
-  'pigmentation':    [['face/pigmentation','dedicated research'],['face/spf','sun protection'],['face/actives','brightening actives'],['face/notox','beauty elixir for melasma']],
-  'facial':          [['face/soulful-facial','Soulful Skin enzyme facial'],['face/notox','weekly NOtox facial'],['face/face-reality-peel','professional peel']],
-  'peel':            [['face/face-reality-peel','Face Reality chemical peel'],['face/soulful-facial','enzyme facial exfoliation']],
-  'exfoliate':       [['face/face-reality-peel','peel exfoliation'],['face/soulful-facial','enzyme exfoliant'],['face/notox','herbal scrub step']],
-  'enzyme':          [['face/soulful-facial','hydrating enzyme facial'],['face/face-reality-peel','enzyme treatment option']],
-  'glow':            [['face/notox','beauty elixir for glow'],['face/soulful-facial','facial for radiance']],
+  'dry scalp':       [['scalp/products','product recs']],
+  'hair breakage':   [['scalp/products','products that reduce breakage']],
+  'curl':            [['scalp/products','styling product recs']],
+  'pigmentation':    [['face/notox','beauty elixir for melasma']],
+  'facial':          [['face/notox','weekly NOtox facial']],
+  'exfoliate':       [['face/notox','herbal scrub step']],
+  'glow':            [['face/notox','beauty elixir for glow']],
   'ayurveda':        [['face/notox','NOtox ayurvedic method']],
-  'melasma':         [['face/pigmentation','hyperpigmentation research'],['face/notox','beauty elixir helps melasma'],['face/spf','SPF for melasma']],
-  'freckles':        [['face/notox','beauty elixir for freckles'],['face/spf','sun protection']],
-  'extractions':     [['face/soulful-facial','facial with extractions'],['face/face-reality-peel','peel preps extractions']],
-  'dry skin':        [['face/am','AM moisturising routine'],['face/pm','PM repair routine'],['legs/feet','foot dryness']],
-  'oily':            [['face/am','AM for oily skin'],['face/actives','oil-balancing ingredients'],['face/pm','PM routine']],
-  'sunscreen':       [['face/spf','SPF research & recs'],['face/am','daily SPF routine']],
-  'spf':             [['face/spf','UVA/UVB protection research'],['face/am','SPF in AM routine']],
-  'wrinkles':        [['face/actives','retinoids & anti-aging'],['face/pm','PM repair routine']],
-  'stiff':           [['legs/mobility','lower body mobility']],
-  'bumps':           [['face/actives','exfoliants for texture']],
-  'sore':            [['legs/workout','workout & recovery'],['legs/mobility','mobility & stretching'],['legs/frp','foot restoration for sore feet']],
-  'circulation':     [['legs/vascular','vascular & circulation'],['legs/mobility','movement & circulation']],
-  'feet':            [['legs/frp','12-week foot restoration program'],['legs/feet','foot care routine'],['legs/mobility','lower body mobility']],
-  'foot pain':       [['legs/frp','foot restoration program'],['legs/feet','foot care'],['legs/mobility','mobility work']],
-  'heels':           [['legs/frp','targeted track for sore heels'],['legs/feet','foot care routine']],
-  'arches':          [['legs/frp','targeted track for stiff arches'],['legs/mobility','foot mobility']],
-  'ankles':          [['legs/frp','restoration for weak ankles'],['legs/mobility','ankle stability']],
-  'balance':         [['legs/frp','balance training in FRP'],['legs/mobility','stability & mobility']],
-  'barefoot':        [['legs/frp','natural foot function program'],['legs/feet','foot care']],
-  'supplements':     [['scalp/trichology','supplements for hair'],['adrenal/protocol','adrenal support supplements']],
-  'vitamin d':       [['scalp/trichology','vitamin D & scalp health']],
-  'diet':            [['face/pigmentation','diet & skin']],
-  'fatigue':         [['adrenal/cortisol-results','low cortisol causes fatigue'],['adrenal/lab-findings','HPA axis dysfunction'],['adrenal/protocol','adrenal support protocol']],
-  'tired':           [['adrenal/cortisol-results','cortisol & energy levels'],['adrenal/lab-findings','adrenal reserve findings'],['adrenal/protocol','support protocol']],
-  'exhausted':       [['adrenal/cortisol-results','4-point cortisol results'],['adrenal/lab-findings','HPA axis dysfunction'],['adrenal/protocol','adrenal support']],
-  'cortisol':        [['adrenal/cortisol-results','ZRT 4-point test results'],['adrenal/lab-findings','lab interpretation'],['adrenal/retest','retest tracker']],
-  'adrenal':         [['adrenal/cortisol-results','cortisol test results'],['adrenal/lab-findings','lab findings & symptoms'],['adrenal/protocol','adrenal protocol']],
-  'stress':          [['adrenal/cortisol-results','cortisol & stress response'],['adrenal/lab-findings','HPA axis & chronic stress'],['adrenal/protocol','stress support protocol']],
-  'sugar cravings':  [['adrenal/lab-findings','low cortisol & sugar cravings']],
-  'sugar':           [['adrenal/lab-findings','cortisol & blood sugar']],
-  'allergies':       [['adrenal/lab-findings','low cortisol & immune dysfunction']],
-  'cold':            [['adrenal/lab-findings','cold body temp & cortisol'],['adrenal/protocol','adrenal support']],
-  'hpa':             [['adrenal/cortisol-results','diurnal cortisol pattern'],['adrenal/lab-findings','HPA axis notes']],
-  'hormones':        [['adrenal/cortisol-results','cortisol results'],['adrenal/lab-findings','symptom categories & hormone findings']],
-  'androgens':       [['adrenal/lab-findings','high androgens — 43% symptom score']],
-  'sleep':           [['adrenal/lab-findings','sleep deprivation & adrenal exhaustion'],['adrenal/protocol','sleep as adrenal support']],
-  'wired':           [['adrenal/lab-findings','"tired but wired" pattern notes']],
+  'melasma':         [['face/notox','beauty elixir helps melasma']],
+  'freckles':        [['face/notox','beauty elixir for freckles']],
+  'sore':            [['legs/frp','foot restoration for sore feet']],
+  'feet':            [['legs/frp','12-week foot restoration program']],
+  'foot pain':       [['legs/frp','foot restoration program']],
+  'heels':           [['legs/frp','targeted track for sore heels']],
+  'arches':          [['legs/frp','targeted track for stiff arches']],
+  'ankles':          [['legs/frp','restoration for weak ankles']],
+  'balance':         [['legs/frp','balance training in FRP']],
+  'barefoot':        [['legs/frp','natural foot function program']],
+  'supplements':     [['adrenal/protocol','adrenal support supplements']],
+  'fatigue':         [['adrenal/cortisol-results','low cortisol causes fatigue'],['adrenal/protocol','adrenal support protocol']],
+  'tired':           [['adrenal/cortisol-results','cortisol & energy levels'],['adrenal/protocol','support protocol']],
+  'exhausted':       [['adrenal/cortisol-results','4-point cortisol results'],['adrenal/protocol','adrenal support']],
+  'cortisol':        [['adrenal/cortisol-results','ZRT 4-point test results']],
+  'adrenal':         [['adrenal/cortisol-results','cortisol test results'],['adrenal/protocol','adrenal protocol']],
+  'stress':          [['adrenal/cortisol-results','cortisol & stress response'],['adrenal/protocol','stress support protocol']],
+  'cold':            [['adrenal/protocol','adrenal support']],
+  'hpa':             [['adrenal/cortisol-results','diurnal cortisol pattern']],
+  'hormones':        [['adrenal/cortisol-results','cortisol results']],
+  'sleep':           [['adrenal/protocol','sleep as adrenal support']],
   'minerals':        [['labs/htma-results','HTMA mineral analysis'],['labs/htma-protocol','mineral balancing protocol']],
   'magnesium':       [['labs/htma-results','magnesium on HTMA'],['labs/htma-protocol','cal-mag balancing']],
   'zinc':            [['labs/htma-results','zinc & Zn/Cu ratio'],['labs/htma-protocol','balanced zinc']],
@@ -2065,10 +1985,10 @@ const symptomMap = {
   'oxidizer':        [['labs/htma-results','slow oxidizer status']],
   'omega':           [['omega3/omega3-results','omega-3 test results']],
   'omega 3':         [['omega3/omega3-results','omega-3 status & index']],
-  'inflammation':    [['omega3/omega3-results','omega-6:3 ratio & inflammation'],['adrenal/lab-findings','cortisol & inflammation']],
+  'inflammation':    [['omega3/omega3-results','omega-6:3 ratio & inflammation']],
   'fish oil':        [['omega3/omega3-results','EPA/DHA targets']],
-  'thyroid':         [['labs/htma-results','minerals affecting thyroid'],['adrenal/lab-findings','cortisol & thyroid notes']],
-  'blood sugar':     [['labs/htma-results','chromium & blood sugar'],['adrenal/lab-findings','cortisol & blood sugar']],
+  'thyroid':         [['labs/htma-results','minerals affecting thyroid']],
+  'blood sugar':     [['labs/htma-results','chromium & blood sugar']],
   'grinding':        [['oral/grinding','teeth grinding & TMJ'],['oral/palate','palate expansion to stop grinding'],['oral/myology','myology for bruxism']],
   'teeth grinding':  [['oral/grinding','bruxism tracking'],['oral/palate','palate expansion'],['oral/myology','COFM for clenching']],
   'bruxism':         [['oral/grinding','bruxism & TMJ notes'],['oral/myology','oral facial massage for clenching'],['oral/palate','palate expansion']],
@@ -2084,10 +2004,21 @@ const symptomMap = {
   'palate':          [['oral/palate','palate expansion with Dr. Claudia'],['oral/myology','remodeling the palate']],
   'mouth breathing': [['oral/myology','mouth breathing & OMDs']],
   'migraine':        [['oral/myology','COFM for migraines']],
-  'headaches':       [['oral/myology','oral facial massage for headaches'],['adrenal/lab-findings','cortisol & headaches']],
+  'headaches':       [['oral/myology','oral facial massage for headaches']],
   'oral':            [['oral/oral-ties','release oral ties'],['oral/myology','orofacial myology'],['oral/palate','palate expansion']],
   'swallowing':      [['oral/myology','swallowing & tongue posture'],['oral/oral-ties','ties restrict swallowing']],
   'facial tension':  [['oral/myology','COFM relieves facial tension']],
+  'facial':          [['face/facials','enzyme facial + chemical peel']],
+  'peel':            [['face/facials','Face Reality chemical peel']],
+  'enzyme':          [['face/facials','hydrating enzyme facial']],
+  'fungal acne':     [['face/malezia','malassezia-safe products']],
+  'malassezia':      [['face/malezia','fungal-acne-safe skincare']],
+  'malezia':         [['face/malezia','Malezia products']],
+  'benzoyl peroxide':[['face/malezia','acne treatment gel']],
+  'dry brushing':    [['face/dry-brushing','circulation & lymph']],
+  'lymphatic':       [['face/dry-brushing','dry brushing & lymph']],
+  'foot soak':       [['legs/foot-soaks','epsom foot soaks']],
+  'epsom':           [['legs/foot-soaks','epsom salt soaks']],
 };
 
 symptomInput.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
@@ -2134,4 +2065,4 @@ function runSearch() {
 }
 </script>
 </body>
-</html>v
+</html>
